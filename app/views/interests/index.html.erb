@@ -1,0 +1,20 @@
+This is the Interest Index page
+- main page -
+
+
+
+<% @interests.each do |interest| %>
+  <%= interest.name %>
+  <%= link_to "Interest Show", interest_path(interest) %>
+<% end %>
+
+
+<%= simple_form_for(@interest) do |f| %>
+<%= f.input :name %>
+<%= f.submit %>
+<% end %>
+
+
+<%= simple_form_for(@quiz) do |f| %>
+<%= f.submit %>
+<% end %>
