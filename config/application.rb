@@ -1,5 +1,4 @@
 require_relative "boot"
-import 'flowbite';
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
