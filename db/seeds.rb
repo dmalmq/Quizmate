@@ -26,8 +26,8 @@ puts "1"
 
 quiz1 = Quiz.create!(number_of_question: 2, user_id: user1.id)
 quiz2 = Quiz.create!(number_of_question: 2, user_id: user2.id)
-# quiz3 = Quiz.create!(number_of_questios: 1, user_id: user2.id)
-# quiz4 = Quiz.create!(number_of_questios: 1, user_id: user2.id)
+# quiz3 = Quiz.create!(number_of_question: 1, user_id: user2.id)
+# quiz4 = Quiz.create!(number_of_question: 1, user_id: user2.id)
 
 question1 = Question.create!(
   title: "Key characteristics of architectural modernism",
