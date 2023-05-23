@@ -58,7 +58,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_085829) do
     t.datetime "updated_at", null: false
     t.integer "corrected_times"
     t.integer "total_points"
-    t.integer "corrected_times"
     t.index ["user_id"], name: "index_quizzes_on_user_id"
   end
 
