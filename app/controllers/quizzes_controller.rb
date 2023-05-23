@@ -14,7 +14,7 @@ class QuizzesController < ApplicationController
   def create
     @quiz = Quiz.new(quiz_params)
     @quiz.number_of_question.times do
-      question = Question.order(:score).first # Retrieve a random question from the database
+      question = Question.order(:Question.score).reverse # Retrieve a random question from the database
       question.quiz_id = @quiz.id  # Assign the question to the quiz
     end
   end
