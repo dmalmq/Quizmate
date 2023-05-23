@@ -5,7 +5,6 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = Quiz.find(params[:id])
-    @quiz.result
   end
 
   def new
@@ -17,7 +16,7 @@ class QuizzesController < ApplicationController
     @quiz.number_of_question.times do
       question = Question.order(:Question.score).reverse # Retrieve a reverse order by question score from the database
       question.score -= 1
-      question.quiz_id = @quiz.id  # Reassign the question to the quiz
+      question.quiz_id = @quiz.id # Reassign the question to the quiz
     end
   end
 
@@ -29,6 +28,6 @@ class QuizzesController < ApplicationController
 
   def result
     @quiz = Quiz.find(params[:id])
-    @quiz.total_points = @quiz.question.where(correct: true).count
+    @quiz.total_points = @quiz.question.where(corrected: true).count
   end
 end
