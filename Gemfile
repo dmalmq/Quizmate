@@ -30,6 +30,7 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
 
+# gem 'faker'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -76,3 +77,11 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+
+# Tailwind gems:
+gem "tailwindcss-rails", "~> 2.0"
+gem 'simple_form-tailwind'
+
+# OpenAI
+gem "ruby-openai"
