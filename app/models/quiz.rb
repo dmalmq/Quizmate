@@ -1,4 +1,4 @@
 class Quiz < ApplicationRecord
   belongs_to :user
-  attribute :corrected_times, :integer, default: 0
+  attribute :total_points, :integer, default: 0
 end

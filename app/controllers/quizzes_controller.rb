@@ -5,6 +5,7 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = Quiz.find(params[:id])
+    @quiz.result
   end
 
   def new
@@ -27,6 +28,7 @@ class QuizzesController < ApplicationController
   end
 
   def result
-
+    @quiz = Quiz.find(params[:id])
+    @quiz.total_points = @quiz.question.where(correct: true).count
   end
 end
