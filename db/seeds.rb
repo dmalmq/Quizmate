@@ -8,26 +8,26 @@ user2 = User.create!(
   password: "123456"
 )
 
-user3 = User.create!(
-  email: "daniel@test.com",
-  password: "123456"
-)
+# user3 = User.create!(
+#   email: "daniel@test.com",
+#   password: "123456"
+# )
 
-user4 = User.create!(
-  email: "ameesha@test.com",
-  password: "123456"
-)
+# user4 = User.create!(
+#   email: "ameesha@test.com",
+#   password: "123456"
+# )
 
 interest1 = Interest.create!(name: "architecture", user_id: user1.id)
-interest2 = Interest.create!(name: "anime", user_id: user2.id)
-interest3 = Interest.create!(name: "books", user_id: user3.id)
-interest4 = Interest.create!(name: "sports", user_id: user4.id)
+interest2 = Interest.create!(name: "anime", user_id: user1.id)
+interest3 = Interest.create!(name: "books", user_id: user2.id)
+interest4 = Interest.create!(name: "sports", user_id: user2.id)
 puts "1"
 
-quiz1 = Quiz.create!(number_of_questios: 1, user_id: user1.id)
-quiz2 = Quiz.create!(number_of_questios: 1, user_id: user2.id)
-quiz3 = Quiz.create!(number_of_questios: 1, user_id: user3.id)
-quiz4 = Quiz.create!(number_of_questios: 1, user_id: user4.id)
+quiz1 = Quiz.create!(number_of_question: 2, user_id: user1.id)
+quiz2 = Quiz.create!(number_of_question: 2, user_id: user2.id)
+# quiz3 = Quiz.create!(number_of_question: 1, user_id: user2.id)
+# quiz4 = Quiz.create!(number_of_question: 1, user_id: user2.id)
 
 question1 = Question.create!(
   title: "Key characteristics of architectural modernism",
@@ -40,21 +40,21 @@ question2 = Question.create!(
   title: "History and impact of anime on popular culture",
   content: "Can you provide an overview of the history and impact of anime on popular culture?",
   interest_id: interest2.id,
-  quiz_id: quiz2.id
+  quiz_id: quiz1.id
 )
 
 question3 = Question.create!(
   title: "Exploring different genres in literature",
   content: "What are some different genres in literature, and how do they differ from each other?",
   interest_id: interest3.id,
-  quiz_id: quiz3.id
+  quiz_id: quiz2.id
 )
 
 question4 = Question.create!(
   title: "Understanding the rules and strategies of basketball",
   content: "What are the fundamental rules and strategies one should know when playing basketball?",
   interest_id: interest4.id,
-  quiz_id: quiz4.id
+  quiz_id: quiz2.id
 )
 
 correct = Option.create!(

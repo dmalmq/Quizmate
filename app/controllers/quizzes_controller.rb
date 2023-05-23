@@ -1,24 +1,39 @@
 class QuizzesController < ApplicationController
 
+
+  def index
+    @quizzes = Quiz.all
+  end
+
   def show
-    @quizzes = Quiz.find(params[:id])
+    @quiz = Quiz.find(params[:id])
+  end
+
+  def new
+    @quiz = Quiz.new
+
   end
 
   def create
     @quiz = Quiz.new(quiz_params)
-    @quiz.user = current_user
-    if @quiz.save
-      redirect_to quiz_path(@quiz)
-    else
-      @quizzes = Quiz.all
-      render :index, status: :unprocessable_entity
+
+    @quiz.number_of_question.times do
+      question = Question.order(:Question.score).reverse # Retrieve a reverse order by question score from the database
+      question.score -= 1
+      question.quiz_id = @quiz.id # Reassign the question to the quiz
     end
   end
 
   private
 
   def quiz_params
-    params.require(:quiz).permit(:user)
+
+    params.require(:quiz).permit(:number_of_question) # Number of quizzes each day
+  end
+
+  def result
+    @quiz = Quiz.find(params[:id])
+    @quiz.total_points = @quiz.question.where(corrected: true).count
   end
 
 end
