@@ -14,14 +14,19 @@ class QuizzesController < ApplicationController
   def create
     @quiz = Quiz.new(quiz_params)
     @quiz.number_of_question.times do
-      question = Question.order(:Question.score).reverse # Retrieve a random question from the database
-      question.quiz_id = @quiz.id  # Assign the question to the quiz
+      question = Question.order(:Question.score).reverse # Retrieve a reverse order by question score from the database
+      question.score -= 1
+      question.quiz_id = @quiz.id  # Reassign the question to the quiz
     end
   end
 
   private
 
   def quiz_params
-    params.require(:quiz).permit(:number_of_question)
+    params.require(:quiz).permit(:number_of_question) # Number of quizzes each day
+  end
+
+  def result
+
   end
 end
