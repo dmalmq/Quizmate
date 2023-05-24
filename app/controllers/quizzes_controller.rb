@@ -18,7 +18,6 @@ class QuizzesController < ApplicationController
     @quiz.questions = questions # Assign the questions to the quiz
     @quiz.number_of_question = 10
     @quiz.corrected_times = 0
-    @quiz.questions.title = Question.interests
     @quiz.user = current_user
     @quiz.save
     questions.each do |question|

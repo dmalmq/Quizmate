@@ -31,15 +31,15 @@ class Quizzes::QuestionsController < ApplicationController
   def perform(question)
     if question.user_option_id == question.correct_option_id
       question.streak += 1
-      question.total_ask += 1
-      question.last_ask = Time.now.strftime("%d/%m/%Y %H:%M")
+      question.total_asked += 1
+      question.last_asked = Time.now.strftime("%d/%m/%Y %H:%M")
       question.score += 1
       question.corrected = true
     else
       question.streak = 0
       question.corrected = false
-      question.total_ask += 1
-      question.last_ask = Time.now.strftime("%d/%m/%Y %H:%M")
+      question.total_asked += 1
+      question.last_asked = Time.now.strftime("%d/%m/%Y %H:%M")
     end
     question.answer = true
   end
