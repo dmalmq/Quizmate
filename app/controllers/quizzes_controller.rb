@@ -21,6 +21,7 @@ class QuizzesController < ApplicationController
     @quiz.user = current_user
     @quiz.save
     questions.each do |question|
+      question.answered = false
       question.score -= 1
       @quiz.questions << question # Reassign the question to the quiz
     end

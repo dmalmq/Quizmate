@@ -4,5 +4,6 @@ Quiz Index Page
   <p>Number of question<%= quiz.number_of_question %></p>
   <p>Corrected:<%= quiz.corrected_times %></p>
   <p>Total points:<%= quiz.total_points %></p>
+  <%= link_to "Show", quiz_path(quiz) %>
 <% end %>
 <%= link_to "Interest Index", interests_path %>
