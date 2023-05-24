@@ -14,6 +14,7 @@ class InterestsController < ApplicationController
     @interest = Interest.new(interest_params)
     @interest.user = current_user
     if @interest.save
+      @interest.generate_questions
       redirect_to interests_path
     else
       @interests = Interest.all
@@ -24,7 +25,6 @@ class InterestsController < ApplicationController
   private
 
   def interest_params
-    raise
     params.require(:interest).permit(:user, :name, :priority)
   end
 

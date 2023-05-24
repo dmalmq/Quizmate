@@ -89,4 +89,3 @@ gem 'simple_form-tailwind'
 # OpenAI
 gem "ruby-openai"
 
-gem "importmap-rails", "~> 1.1"
