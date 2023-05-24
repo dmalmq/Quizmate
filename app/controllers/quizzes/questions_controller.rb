@@ -3,7 +3,9 @@ class Quizzes::QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @quiz = Quiz.find(params[:quiz_id])
-    @next_question = @quiz.questions.where(answered: false).second
+    questions = @quiz.questions
+    index = questions.index(@question)
+    @next_question = questions[index + 1]
   end
 
   def update
@@ -22,7 +24,7 @@ class Quizzes::QuestionsController < ApplicationController
     end
   end
 
-private
+  private
 
   def question_params
     params.require(:question).permit(:user_option_id)
