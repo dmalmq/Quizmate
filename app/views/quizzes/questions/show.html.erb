@@ -1,38 +1,23 @@
-<div class="grid w-screen mt-10 place-items-center">
-
-<div class="mt-10"> 
-<h5>Title: <%= @question.content %></h5>
-<h5 class="mt-10">Question: <%= @question.title %></h5>
-
-
-
-<form action="/save-option" method="PATCH">
-  <div class="flex flex-col">
-    <ul class="w-96 gap-3 flex flex-col">
-      <% @question.options.each do |option| %>
-        <li>
-          <input type="radio" id="<%= option.id %>" name="hosting" value="<%= option.id %>" class="hidden peer" required>
-          <label for="<%= option.id %>" class="inline-flex justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
-            <div class="block items-center">
-              <div class="w-full text-sm font-semibold items-center"><%= option.content %></div>
-            </div>
-          </label>
-        </li>
-      <% end %>
-    </ul>
+<p><%= @question.title %></p>
+<p><%= @question.content %></p>
+<%= simple_form_for [@quiz, @question], url: quiz_quizzes_question_path(@quiz) do |f| %>
+  <%= f.error_notification %>
+  <div class="form-inputs">
+    <% @question.options.each do |option| %>
+      <%= f.radio_button :user_option_id, option.id %>
+      <%= f.label :user_option_id, option.content %><br>
+    <% end %>
   </div>
-
-  <button type="submit">See Answer</button>
-</form>
-
-
-
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
+  </div>
+<% end %>
 <% if @next_question %>
   <%= link_to 'next_question', quiz_quizzes_question_path(@quiz, @next_question)%>
 <% else %>
   <p>
-  "Should display the result of the Quiz when button is clicked. The path is random in the code. please change it :)!!"
-  <%= link_to 'end quiz', quiz_quizzes_question_path(@quiz) %>
+    "Should display the result of the Quiz when button is clicked. The path is random in the code. please change it :)!!"
+    <%= link_to 'end quiz', quiz_quizzes_question_path(@quiz) %>
   </p>
 <% end %>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_24_020918) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_24_060613) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,7 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_24_020918) do
     t.string "title"
     t.text "content"
     t.integer "streak"
-    t.integer "total_asked"
+    t.integer "total_asked", default: 0
     t.datetime "last_asked"
     t.bigint "correct_option_id"
     t.bigint "user_option_id"
