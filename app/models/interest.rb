@@ -10,7 +10,7 @@ class Interest < ApplicationRecord
     interest = self.name
     prompt = <<~PROMPT
 
-    Generate 2 multiple-choice questions for the interest "#{interest}" as a JSON, where content is a description of the question and the first option is always the correct answer:
+    Generate 2 multiple-choice questions for the interest "#{interest}" as a JSON, where content is a description of the answer and the first option is always the correct answer:
     [{
       title: "title",
       content: "content",

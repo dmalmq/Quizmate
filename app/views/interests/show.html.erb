@@ -1,4 +1,17 @@
-This is the interest show page
-<%= @interest.name %>
+<div>
+  <h1 class="text-2xl font-bold"><%= @interest.name %></h1>
+</div>
+
+<ol>
+  <% @questions.each do |question| %>
+  <li><%= question.title %></li>
+  <li><%= question.content %></li>
+  <ul>
+    <% question.options.each do |option| %>
+    <li><%= option.content %></li>
+    <% end %>
+  </ul><hr>
+  <% end %>
+</ol>
 
 <%= link_to "Interest Index", interests_path %>
