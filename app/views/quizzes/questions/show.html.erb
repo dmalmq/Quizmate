@@ -1,8 +1,5 @@
 <h5>Title: <%= @question.content %></h2>
 <h5>Question: <%= @question.title %></h2>
-
-
-
 <form action="/save-option" method="PATCH">
   <div class="flex flex-col">
     <ul class="w-96 gap-3 flex flex-col">
@@ -18,17 +15,13 @@
       <% end %>
     </ul>
   </div>
-
   <button type="submit">See Answer</button>
 </form>
-
-
-
 <% if @next_question %>
   <%= link_to 'next_question', quiz_quizzes_question_path(@quiz, @next_question)%>
 <% else %>
   <p>
-  "Should display the result of the Quiz when button is clicked. The path is random in the code. please change it :)!!"
-  <%= link_to 'end quiz', quiz_quizzes_question_path(@quiz) %>
+    "Should display the result of the Quiz when button is clicked. The path is random in the code. please change it :)!!"
+    <%= link_to 'end quiz', quiz_quizzes_question_path(@quiz) %>
   </p>
 <% end %>
