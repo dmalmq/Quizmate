@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   resources :interests, only: [:index, :show, :create]
   resources :quizzes, only: [:index, :show, :create] do
     resources :questions, only: [:show]
+    namespace :quizzes do
+      resources :questions
+    end
   end
+
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

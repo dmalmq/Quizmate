@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_23_075944) do
+
+ActiveRecord::Schema[7.0].define(version: 2023_05_23_085829) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_075944) do
     t.integer "score"
     t.boolean "corrected"
     t.bigint "quiz_id"
+    t.boolean "answered", default: false
     t.index ["correct_option_id"], name: "index_questions_on_correct_option_id"
     t.index ["interest_id"], name: "index_questions_on_interest_id"
     t.index ["quiz_id"], name: "index_questions_on_quiz_id"
