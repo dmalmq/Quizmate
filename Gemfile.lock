@@ -132,6 +132,9 @@ GEM
       domain_name (~> 0.5)
     i18n (1.13.0)
       concurrent-ruby (~> 1.0)
+    importmap-rails (1.1.6)
+      actionpack (>= 6.0.0)
+      railties (>= 6.0.0)
     io-console (0.6.0)
     irb (1.6.4)
       reline (>= 0.3.0)
@@ -305,6 +308,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   font-awesome-sass (~> 6.1)
+  importmap-rails (~> 1.1)
   jbuilder
   jsbundling-rails
   pg (~> 1.1)

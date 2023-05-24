@@ -1,0 +1,9 @@
+<h1>Title: <%= @question.content %></h1>
+<h2>Question: <%= @question.title %></h2>
+
+<p><% @question.options.each do |option|%></p>
+<%= option.content %>
+<% end %>
+
+
+<%= link_to 'next_question', quiz_quizzes_question_path(@quiz, @next_question)%>
