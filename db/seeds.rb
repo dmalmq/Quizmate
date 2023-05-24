@@ -1,9 +1,9 @@
 
-User.destroy_all
+Option.destroy_all
+Question.destroy_all
 Interest.destroy_all
 Quiz.destroy_all
-Question.destroy_all
-Option.destroy_all
+User.destroy_all
 
 
 user1 = User.create!(

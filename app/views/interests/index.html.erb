@@ -1,7 +1,7 @@
 <div class="grid w-full mt-10 place-items-center">
 
 <div class="w-2/3">
-  
+
 <div class="flex items-center gap-4">
   <div>
     <h1>Welcome Lisa</h1>
@@ -10,7 +10,7 @@
 </div>
 
 <%= simple_form_for(@interest) do |f| %>
-  <div class="md:flex gap-4 pt-10">
+  <div class="flex overflow-x-auto gap-4 pt-10 ">
     <%= f.input :name, label: false %>
     <%= f.submit class: "focus:outline-none text-white h-10 bg-violet-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
   </div>
@@ -19,8 +19,8 @@
 <div class="flex flex-wrap gap-4 pt-10">
 
   <% @interests.each do |interest| %>
-    <%= link_to interests_path(interest) do %>
-      <div class="max-w-sm bg-white border w-32 border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">  
+    <%= link_to interest_path(interest) do %>
+      <div class="max-w-sm bg-white border w-32 border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <%= image_tag "architecture.jpg" %>
       <div class="p-2">
       <h5 class="text-center text-xl font-bold tracking-tight text-gray-900 dark:text-white"><%= interest.name %></h5>
@@ -37,3 +37,5 @@
 
 </div>
 </div>
+
+

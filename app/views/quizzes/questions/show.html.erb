@@ -1,24 +1,31 @@
-<p><%= @question.title %></p>
-<p><%= @question.content %></p>
-<%= simple_form_for [@quiz, @question], url: quiz_quizzes_question_path(@quiz) do |f| %>
-  <%= f.error_notification %>
-  <div class="form-inputs">
-    <% @question.options.each do |option| %>
-      <%= f.radio_button :user_option_id, option.id %>
-      <%= f.label :user_option_id, option.content %><br>
-    <% end %>
+<h5>Title: <%= @question.content %></h2>
+<h5>Question: <%= @question.title %></h2>
+
+
+<%= simple_form_for @question, wrapper: :default do |f| %>
+  <div class="flex flex-col">
+    <ul class="w-96 gap-3 flex flex-col">
+      <% @question.options.each do |option| %>
+        <li>
+          <%= f.radio_button :user_option_id, option.id, class: "hidden peer", required: true, id: option.id %>
+          <label for="<%= option.id %>" class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-slate-50 border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:bg-blue-500 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <div class="block items-center">
+              <div class="w-full text-sm font-semibold items-center"><%= option.content %></div>
+            </div>
+          </label>
+        </li>
+      <% end %>
+    </ul>
   </div>
-  <div class="form-actions">
-    <%= f.button :submit, class: "btn btn-primary" %>
-  </div>
-<% end %>
-<% if @next_question %>
-  <%= link_to 'next_question', quiz_quizzes_question_path(@quiz, @next_question)%>
-<% else %>
+<% if @next_question && @question.user_option %>
+  <%= link_to 'next_question', quiz_question_path(@quiz, @next_question)%>
+<% elsif @question.user_option %>
   <p>
-    "Should display the result of the Quiz when button is clicked. The path is random in the code. please change it :)!!"
-    <%= link_to 'end quiz', quiz_quizzes_question_path(@quiz) %>
+  "Should display the result of the Quiz when button is clicked. The path is random in the code. please change it :)!!"
+  <%= link_to 'end quiz', quiz_question_path(@quiz) %>
   </p>
+<% else %>
+  <%= f.button :submit, "See Answer", class: "bg-blue-500 hover:bg-blue-700 text-blue font-bold py-2 px-4 rounded text-gray-900" %>
 <% end %>
-</div>
-</div>
+<% end %>
+

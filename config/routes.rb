@@ -3,11 +3,9 @@ Rails.application.routes.draw do
   root to: "pages#home"
   resources :interests, only: [:index, :show, :create]
   resources :quizzes, only: [:index, :show, :create, :new] do
-    resources :questions, only: [:show]
-    namespace :quizzes do
-      resources :questions
-    end
+    resources :questions, only: [:show], controller: "quizzes/questions"
   end
+  resources :questions
 
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
