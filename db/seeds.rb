@@ -1,8 +1,10 @@
+
 User.destroy_all
 Interest.destroy_all
 Quiz.destroy_all
 Question.destroy_all
 Option.destroy_all
+
 
 user1 = User.create!(
   email: "pooh@test.com",
@@ -13,9 +15,11 @@ interest1 = Interest.create!(name: "architecture", user_id: user1.id)
 
 Quiz.create!(number_of_question: 2, user_id: user1.id)
 
+
 question1 = Question.create!(
   title: "Key characteristics of architectural modernism",
   content: "What are the key characteristics of architectural modernism?",
+
   interest_id: interest1.id
 )
 
