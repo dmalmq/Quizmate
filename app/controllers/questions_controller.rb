@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
     @questions = Question.all
   end
 
+
   def show
   end
 
@@ -18,12 +19,8 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     if @question.update(question_params)
       perform(@question)
-      @next_question = @quiz.questions.where(answered: false).first # question not answred
-      if @next_question
-        redirect_to quiz_question_path(@question.quiz, @next_question)
-      else
-        redirect_to quiz_path(@question.quiz)
-      end
+      @next_question = @question.quiz.questions.where(answered: false).first # question not answred
+      redirect_to quiz_question_path(@question.quiz, @question)
     else
       render :show, status: :unprocessable_entity
     end
