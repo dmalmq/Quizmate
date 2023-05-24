@@ -1,20 +1,37 @@
-This is the Interest Index page
-- main page -
+<div class="grid h-screen place-items-center">
 
-
-
-<% @interests.each do |interest| %>
-  <%= interest.name %>
-  <%= link_to "Interest Show", interest_path(interest) %>
-<% end %>
-
+<div class="flex gap-4">
+  <div>
+    <h1>Welcome Lisa</h1>
+  </div>
+  <%= image_tag "avatar.jpg", class: "w-24 h-24 rounded-full" %>
+</div>
 
 <%= simple_form_for(@interest) do |f| %>
-<%= f.input :name %>
-<%= f.submit %>
+  <div class="flex gap-4">
+    <%= f.input :name, label: false %>
+    <%= f.submit class: "focus:outline-none text-white h-10 bg-violet-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
+  </div>
 <% end %>
 
+<div class="flex flex-wrap gap-4">
+   <% @interests.each do |interest| %>
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <a href="#">
+        <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="">
+    </a>
+    <div class="p-4">
+        <a href="#">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= interest.name %></h5>
+          <%= link_to "Interest Show", interest_path(interest) %>
+</div>
 
-<%= simple_form_for(@quiz) do |f| %>
-<%= f.submit %>
+  </div>
+  <% end %>
+</div>
+
+ <%= simple_form_for(@quiz) do |f| %>
+<%= f.submit class: "focus:outline-none text-white h-10 bg-violet-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
 <% end %>
+
+</div>
