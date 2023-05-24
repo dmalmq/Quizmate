@@ -25,7 +25,7 @@ class QuizzesController < ApplicationController
       @quiz.questions << question # Reassign the question to the quiz
     end
 
-    redirect_to quiz_quizzes_question_path(@quiz, @quiz.questions.first)
+    redirect_to quiz_question_path(@quiz, @quiz.questions.first)
   end
 
   private
