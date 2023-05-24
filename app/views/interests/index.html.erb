@@ -10,7 +10,7 @@
 </div>
 
 <%= simple_form_for(@interest) do |f| %>
-  <div class="md:flex gap-4 pt-10">
+  <div class="flex overflow-x-auto gap-4 pt-10 ">
     <%= f.input :name, label: false %>
     <%= f.submit class: "focus:outline-none text-white h-10 bg-violet-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
   </div>
@@ -37,3 +37,5 @@
 
 </div>
 </div>
+
+

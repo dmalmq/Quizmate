@@ -6,3 +6,6 @@ class Question < ApplicationRecord
   has_many :options
   validates :score, numericality: { greater_than_or_equal_to: 0 }
 end
+
+LETTERS = ["A. ", "B. ", "C. ", "D. "]
+
