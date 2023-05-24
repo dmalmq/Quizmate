@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
   resources :interests, only: [:index, :show, :create]
-  resources :quizzes, only: [:index, :show, :create] do
+  resources :quizzes, only: [:index, :show, :create, :new] do
     resources :questions, only: [:show], controller: "quizzes/questions"
   end
   resources :questions

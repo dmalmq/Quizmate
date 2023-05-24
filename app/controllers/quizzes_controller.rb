@@ -1,6 +1,5 @@
 class QuizzesController < ApplicationController
 
-
   def index
     @quizzes = Quiz.all
   end
@@ -11,23 +10,27 @@ class QuizzesController < ApplicationController
 
   def new
     @quiz = Quiz.new
-
   end
 
   def create
-    @quiz = Quiz.new(quiz_params)
-
-    @quiz.number_of_question.times do
-      question = Question.order(:Question.score).reverse # Retrieve a reverse order by question score from the database
+    @quiz = Quiz.new
+    questions = Question.order(score: :desc).limit(10) # Retrieve 10 questions in descending order of score
+    @quiz.questions = questions # Assign the questions to the quiz
+    @quiz.number_of_question = 10
+    @quiz.corrected_times = 0
+    @quiz.user = current_user
+    @quiz.save
+    questions.each do |question|
       question.score -= 1
-      question.quiz_id = @quiz.id # Reassign the question to the quiz
+      @quiz.questions << question # Reassign the question to the quiz
     end
+
+    redirect_to quiz_quizzes_question_path(@quiz, @quiz.questions.first)
   end
 
   private
 
   def quiz_params
-
     params.require(:quiz).permit(:number_of_question) # Number of quizzes each day
   end
 
@@ -35,5 +38,4 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.find(params[:id])
     @quiz.total_points = @quiz.question.where(corrected: true).count
   end
-
 end

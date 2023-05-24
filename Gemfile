@@ -27,6 +27,9 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'cloudinary', '~> 1.16.0'
+
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
 
@@ -85,3 +88,4 @@ gem 'simple_form-tailwind'
 
 # OpenAI
 gem "ruby-openai"
+

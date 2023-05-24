@@ -13,8 +13,89 @@
     dark:border-gray-600
   ">
   <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
-  <%= link_to root_path do %>
+    <%= link_to interests_path do %>
 
+      <button
+        type="button"
+        class="
+          inline-flex
+          flex-col
+          items-center
+          justify-center
+          px-5
+          h-full
+          hover:bg-gray-50
+          dark:hover:bg-gray-800
+          group
+        ">
+
+        <svg
+          class="
+            w-6
+            h-6
+            mb-1
+            text-gray-500
+            dark:text-gray-400
+            group-hover:text-blue-600
+            dark:group-hover:text-blue-500
+          "
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true">
+          <path
+            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+        </svg>
+        <span
+          class="
+            text-sm
+            text-gray-500
+            dark:text-gray-400
+            group-hover:text-blue-600
+            dark:group-hover:text-blue-500
+          ">Home</span>
+
+      </button>
+    <% end %>
+
+    <button
+      type="button"
+      class="
+        inline-flex
+        flex-col
+        items-center
+        justify-center
+        h-full
+        px-5
+        hover:bg-gray-50
+        dark:hover:bg-gray-800
+        group
+      ">
+      <svg
+          class="          
+          w-6
+          h-6
+          mb-1
+          text-gray-500
+          dark:text-gray-400
+          group-hover:text-blue-600
+          dark:group-hover:text-blue-500"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true">
+        <path
+          d="M15.5 2A1.5 1.5 0 0014 3.5v13a1.5 1.5 0 001.5 1.5h1a1.5 1.5 0 001.5-1.5v-13A1.5 1.5 0 0016.5 2h-1zM9.5 6A1.5 1.5 0 008 7.5v9A1.5 1.5 0 009.5 18h1a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0010.5 6h-1zM3.5 10A1.5 1.5 0 002 11.5v5A1.5 1.5 0 003.5 18h1A1.5 1.5 0 006 16.5v-5A1.5 1.5 0 004.5 10h-1z"></path>
+      </svg>
+      <span
+        class="
+          text-sm
+          text-gray-500
+          dark:text-gray-400
+          group-hover:text-blue-600
+          dark:group-hover:text-blue-500
+        ">Stats</span>
+    </button>
     <button
       type="button"
       class="
@@ -24,89 +105,6 @@
         justify-center
         px-5
         h-full
-        hover:bg-gray-50
-        dark:hover:bg-gray-800
-        group
-        ">
-
-      <svg
-        class="
-          w-6
-          h-6
-          mb-1
-          text-gray-500
-          dark:text-gray-400
-          group-hover:text-blue-600
-          dark:group-hover:text-blue-500
-        "
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true">
-        <path
-          d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-      </svg>
-      <span
-        class="
-          text-sm
-          text-gray-500
-          dark:text-gray-400
-          group-hover:text-blue-600
-          dark:group-hover:text-blue-500
-          ">Home</span>
-
-    </button>
-  <% end %>
-
-    <button
-      type="button"
-      class="
-        inline-flex
-        flex-col
-        items-center
-        justify-center
-        px-5
-        hover:bg-gray-50
-        dark:hover:bg-gray-800
-        group
-      ">
-      <svg
-        class="
-          w-6
-          h-6
-          mb-1
-          text-gray-500
-          dark:text-gray-400
-          group-hover:text-blue-600
-          dark:group-hover:text-blue-500
-        "
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true">
-        <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"></path>
-        <path
-          clip-rule="evenodd"
-          fill-rule="evenodd"
-          d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"></path>
-      </svg>
-      <span
-        class="
-          text-sm
-          text-gray-500
-          dark:text-gray-400
-          group-hover:text-blue-600
-          dark:group-hover:text-blue-500
-        ">Wallet</span>
-    </button>
-    <button
-      type="button"
-      class="
-        inline-flex
-        flex-col
-        items-center
-        justify-center
-        px-5
         hover:bg-gray-50
         dark:hover:bg-gray-800
         group
@@ -137,6 +135,8 @@
           dark:group-hover:text-blue-500
         ">Settings</span>
     </button>
+    <%= link_to destroy_user_session_path do %>
+
     <button
       type="button"
       class="
@@ -145,6 +145,7 @@
         items-center
         justify-center
         px-5
+        h-full
         hover:bg-gray-50
         dark:hover:bg-gray-800
         group
@@ -177,5 +178,6 @@
           dark:group-hover:text-blue-500
         ">Profile</span>
     </button>
+  <% end %>
   </div>
 </div>
