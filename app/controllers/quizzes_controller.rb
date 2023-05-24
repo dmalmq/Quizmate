@@ -14,8 +14,7 @@ class QuizzesController < ApplicationController
 
   def create
     @quiz = Quiz.new
-    questions = Question.where(quiz: nil).order(score: :desc).limit(params["quiz"]["number_of_question"]) # Retrieve 10 questions in descending order of score
-
+    questions = Question.order(score: :desc).limit(10) # Retrieve 10 questions in descending order of score
     @quiz.questions = questions # Assign the questions to the quiz
     @quiz.user = current_user
     @quiz.save
