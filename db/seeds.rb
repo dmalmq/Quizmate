@@ -11,7 +11,7 @@ user1 = User.create!(
 
 interest1 = Interest.create!(name: "architecture", user_id: user1.id)
 
-quiz1 = Quiz.create!(number_of_question: 2, user_id: user1.id)
+Quiz.create!(number_of_question: 2, user_id: user1.id)
 
 question1 = Question.create!(
   title: "Key characteristics of architectural modernism",
