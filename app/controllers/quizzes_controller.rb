@@ -16,6 +16,8 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.new
     questions = Question.order(score: :desc).limit(10) # Retrieve 10 questions in descending order of score
     @quiz.questions = questions # Assign the questions to the quiz
+    @quiz.number_of_question = 10
+    @quiz.corrected_times = 0
     @quiz.user = current_user
     @quiz.save
     questions.each do |question|
