@@ -3,15 +3,15 @@ class Quizzes::QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @quiz = Quiz.find(params[:quiz_id])
-    @next_question = @quiz.questions.where(answered: false).second
+    @next_question = @quiz.questions.where(answered: false).first
   end
 
   def update
     @question = Question.find(params[:id])
     @quiz = Quiz.find(params[:quiz_id])
     if @question.update(question_params)
-      perform(@question)
       @next_question = @quiz.questions.where(answered: false).first # question not answred
+      perform(@question)
       if @next_question
         redirect_to quiz_quizzes_question_path(@quiz, @next_question)
       else
@@ -22,7 +22,7 @@ class Quizzes::QuestionsController < ApplicationController
     end
   end
 
-private
+  private
 
   def question_params
     params.require(:question).permit(:user_option_id)
@@ -41,5 +41,6 @@ private
       question.total_ask += 1
       question.last_ask = Time.now.strftime("%d/%m/%Y %H:%M")
     end
+    question.answer = true
   end
 end
