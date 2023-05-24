@@ -9,19 +9,16 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.find(params[:id])
   end
 
-  def new
-    @quiz = Quiz.new
-
-  end
-
   def create
-    @quiz = Quiz.new(quiz_params)
+    @quiz = Quiz.new
+    number_of_question.times do
+      question = Question.order(:score).reverse # Retrieve a reverse order by question score from the database
 
-    @quiz.number_of_question.times do
-      question = Question.order(:Question.score).reverse # Retrieve a reverse order by question score from the database
       question.score -= 1
-      question.quiz_id = @quiz.id # Reassign the question to the quiz
+      question.quiz = @quiz # Reassign the question to the quiz
     end
+    @quiz.save
+    redirect_to quiz_question_path(@quiz, @quiz.questions.first)
   end
 
   private
