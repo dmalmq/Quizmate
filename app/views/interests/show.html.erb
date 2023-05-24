@@ -6,7 +6,7 @@
   <% @questions.each do |question| %>
   <li><%= question.title %></li>
   <ul>
-    <% question.options.each do |option| %>
+    <% question.options.shuffle.each do |option| %>
     <li><%= option.content %></li>
     <% end %>
   </ul><br>
