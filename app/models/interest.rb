@@ -8,18 +8,44 @@ class Interest < ApplicationRecord
   def generate_questions
     # create question
     interest = self.name
-    question_prompt = "Generate a question with a title and content, which will be the question, for #{interest} in the form of {title: , content: , interest_id: #{self.id}} as a json. The interest is hard coded"
-    question_response = OpenaiService.new(question_prompt).call
-    question_hash = JSON.parse(question_response)
-    question = Question.create(question_hash)
+    prompt = <<~PROMPT
 
-    # create options
-    options_prompt = "Generate a suitable amount of multiple choice answers for this question: #{question.title} in the form of {content: , question_id: #{question.id}} as a JSON. The first option should be the only correct one. The question_id is hard coded."
-    options_response = OpenaiService.new(options_prompt).call # returns this: [{ content: "A", question_id: @question.id }, { content: "A", question_id: @question.id }]
-    options_hashes = JSON.parse(options_response)
-    Option.create(options_hashes) # array of option instances
-    question.correct_option = question.options.first
-    question.save
-    raise
+    Generate 2 multiple-choice questions for the interest "#{interest}" as a JSON, where content is a description of the question and the first option is always the correct answer:
+    [{
+      title: "title",
+      content: "content",
+      options: ["option 1", "option 2", "option 3", "option 4"]
+    }]
+    PROMPT
+
+    response = OpenaiService.new(prompt).call
+    formatted_response = JSON.parse(response)
+    # Iterate over the array of hashes
+    formatted_response.each do |hash|
+      # Create a new Question instance using the title and content
+      question = Question.create(title: hash["title"], content: hash["content"], interest_id: self.id)
+      # Create Option instances for each option in the options array
+      hash["options"].each do |option_content|
+        Option.create(content: option_content, question_id: question.id)
+      end
+      question.correct_option = question.options.first
+      question.save
+    end
   end
 end
+
+
+
+# openai response:
+# data = [
+#   {
+#     title: "title",
+#     content: "content",
+#     options: ["option 1", "option 2", "option 3", "option 4"]
+#   },
+#   {
+#     title: "title",
+#     content: "content",
+#     options: ["option 1", "option 2", "option 3", "option 4"]
+#   }
+# ]
