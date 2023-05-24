@@ -1,3 +1,8 @@
 Quiz Index Page
-
+<% @quizzes.each do |quiz| %>
+  <%= quiz.id %>
+  <%= quiz.number_of_question %>
+  <%= quiz.corrected_time %>
+  <%= quiz.total_points %>
+<% end %>
 <%= link_to "Interest Index", interests_path %>
