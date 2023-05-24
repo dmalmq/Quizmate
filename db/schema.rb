@@ -70,7 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_085829) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "score"
-    t.boolean "corrected"
+    t.boolean "corrected", default: false
     t.bigint "quiz_id"
     t.boolean "answered", default: false
     t.index ["correct_option_id"], name: "index_questions_on_correct_option_id"
