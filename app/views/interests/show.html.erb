@@ -3,15 +3,15 @@
 </div>
 <ol>
   <% @questions.each do |question| %>
-    <li><%= question.title %></li>
-    <ul>
-      <% question.options.each do |option| %>
-        <li><%= option.content %></li>
-      <% end %>
-    </ul>
-    <br>
-    <li><%= question.content %></li>
-    <hr>
+
+  <li><%= question.title %></li>
+  <ul>
+    <% question.options.shuffle.each do |option| %>
+    <li><%= option.content %></li>
+    <% end %>
+  </ul><br>
+  <li><%= question.content %></li><hr>
+
   <% end %>
 </ol>
 <%= link_to "Interest Index", interests_path %>
