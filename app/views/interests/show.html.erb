@@ -1,17 +1,39 @@
-<div>
-  <h1 class="text-2xl font-bold"><%= @interest.name %></h1>
+<div class="m-2">
+  <h1 class="text-2xl font-bold uppercase"><%= @interest.name %></h1>
 </div>
 
-<ol>
-  <% @questions.each do |question| %>
-  <li><%= question.title %></li>
-  <ul>
-    <% question.options.shuffle.each do |option| %>
-    <li><%= option.content %></li>
-    <% end %>
-  </ul><br>
-  <li><%= question.content %></li><hr>
-  <% end %>
-</ol>
+<% @questions.each do |question| %>
+<div class="h-42 mx-3 pb-0">
+  <div id="accordion-color" data-accordion="collapse" data-active-classes="bg-blue-100 dark:bg-gray-800 text-blue-600 dark:text-white">
+    <h6 id="accordion-color-heading-1-<%= question.id%>" class="mb-0">
+        <p class="flex items-center justify-between mb-2 w-full p-2 font-bold text-left text-slate-50 border border-b-0 border-gray-200 rounded-t-xl bg-indigo-700"><%= question.title %></p>
+    </h6>
+    <div id="accordion-color-body-1-<%= question.id%>" class="hidden" aria-labelledby="accordion-color-heading-1-<%= question.id%>">
+    </div>
+    <h6 id="accordion-color-heading-2-<%= question.id%>">
+      <button type="button" class="flex items-center justify-between w-full p-2 font-bold text-left text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-800 dark:border-gray-700 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-color-body-2-<%= question.id%>" aria-expanded="false" aria-controls="accordion-color-body-2-<%= question.id%>">
+        <span>Answer</span>
+        <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+      </button>
+    </h6>
+    <div id="accordion-color-body-2-<%= question.id%>" class="hidden" aria-labelledby="accordion-color-heading-2-<%= question.id%>">
+      <div class="p-2 border border-b-0 border-gray-200 dark:border-gray-700">
+        <p class="mb-2 text-gray-500 dark:text-gray-400"><%= question.correct_option.content %></p>
+      </div>
+    </div>
+    <h6 id="accordion-color-heading-3-<%= question.id%>">
+      <button type="button" class="flex items-center justify-between w-full p-2 font-bold text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-800 dark:border-gray-700 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-color-body-3-<%= question.id%>" aria-expanded="false" aria-controls="accordion-color-body-3-<%= question.id%>">
+        <span>Description</span>
+        <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+      </button>
+    </h6>
+    <div id="accordion-color-body-3-<%= question.id%>" class="hidden" aria-labelledby="accordion-color-heading-3-<%= question.id%>">
+      <div class="p-2 border border-t-0 border-gray-200 dark:border-gray-700">
+        <p class="mb-2 text-gray-500 dark:text-gray-400"><%= question.content %></p>
+      </div>
+    </div> <hr style="height:0.5px">
+  </div>
+</div>
+<% end %>
 
-<%= link_to "Interest Index", interests_path %>
+<%= link_to "Interest Index", interests_path, class: "mx-3 focus:outline-none text-slate-50 no-underline h-10 bg-violet-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
