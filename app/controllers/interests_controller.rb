@@ -12,6 +12,7 @@ class InterestsController < ApplicationController
   end
 
   def create
+    @quiz = Quiz.new
     @interest = Interest.new(interest_params)
     @interest.user = current_user
     if @interest.save
