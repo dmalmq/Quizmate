@@ -22,8 +22,7 @@
     </div>
 <% elsif @question.user_option %>
   <p>
-  "Should display the result of the Quiz when button is clicked. The path is random in the code. please change it :)!!"
-  <%= link_to 'end quiz', quiz_question_path(@quiz) %>
+  <%= link_to 'end quiz', quiz_path(@quiz) %>
   </p>
 <% else %>
   <div class="mt-12 mb-12">
@@ -33,4 +32,3 @@
 <% end %>
   </div>
 </div>
-
