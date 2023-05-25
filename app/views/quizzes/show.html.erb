@@ -1,1 +1,1 @@
-<h1><%= @quiz.corrected_times %>/<%= @quiz.questions.count %></h1>
+<h1><%= @quiz.questions.where(corrected: true).count %>/<%= @quiz.questions.count %></h1>
