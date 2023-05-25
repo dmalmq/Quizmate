@@ -1,10 +1,9 @@
-
+Challenge.destroy_all
 Option.destroy_all
 Question.destroy_all
 Interest.destroy_all
 Quiz.destroy_all
 User.destroy_all
-
 
 user1 = User.create!(
   email: "pooh@test.com",
@@ -13,13 +12,11 @@ user1 = User.create!(
 
 interest1 = Interest.create!(name: "architecture", user_id: user1.id)
 
-Quiz.create!(number_of_question: 2, user_id: user1.id)
-
+#Quiz.create!(number_of_question: 2, user_id: user1.id)
 
 question1 = Question.create!(
   title: "Key characteristics of architectural modernism",
   content: "What are the key characteristics of architectural modernism?",
-
   interest_id: interest1.id
 )
 
@@ -45,6 +42,7 @@ correct = Option.create!(
   content: "Simplicity and minimalism",
   question_id: question1.id
 )
+
 Option.create!(
   content: "Emphasis on functionality",
   question_id: question1.id
@@ -59,6 +57,7 @@ Option.create!(
 )
 
 question1.correct_option_id = correct.id
+question1.save
 
 correct2 = Option.create!(
   content: "Originated in Japan in the early 20th century",
@@ -78,6 +77,7 @@ Option.create!(
 )
 
 question2.correct_option_id = correct2.id
+question2.save
 
 correct3 = Option.create!(
   content: "Fiction and non-fiction",
@@ -97,6 +97,7 @@ Option.create!(
 )
 
 question3.correct_option_id = correct3.id
+question3.save
 
 correct4 = Option.create!(
   content: "Dribbling, passing, and shooting techniques",
@@ -116,6 +117,7 @@ Option.create!(
 )
 
 question4.correct_option_id = correct4.id
+question4.save
 
 question5 = Question.create!(
   title: "architecture",
@@ -144,6 +146,7 @@ Option.create!(
 )
 
 question5.correct_option_id = correct5.id
+question5.save
 
 question6 = Question.create!(
   title: "architecture",
@@ -172,6 +175,7 @@ Option.create!(
 )
 
 question6.correct_option_id = correct6.id
+question6.save
 
 question7 = Question.create!(
   title: "architecture",
@@ -200,6 +204,7 @@ Option.create!(
 )
 
 question7.correct_option_id = correct7.id
+question7.save
 
 question8 = Question.create!(
   title: "architecture",
@@ -228,6 +233,7 @@ Option.create!(
 )
 
 question8.correct_option_id = correct8.id
+question8.save
 
 question9 = Question.create!(
   title: "architecture",
@@ -256,6 +262,7 @@ Option.create!(
 )
 
 question9.correct_option_id = correct9.id
+question9.save
 
 question10 = Question.create!(
   title: "architecture",
@@ -265,22 +272,23 @@ question10 = Question.create!(
 
 correct10 = Option.create!(
   content: "Rococo architecture",
-  question_id: question9.id
+  question_id: question10.id
 )
 
 Option.create!(
   content: "Art Deco architecture",
-  question_id: question9.id
+  question_id: question10.id
 )
 
 Option.create!(
   content: "Baroque architecture",
-  question_id: question9.id
+  question_id: question10.id
 )
 
 Option.create!(
   content: "Gothic architecture",
-  question_id: question9.id
+  question_id: question10.id
 )
 
 question10.correct_option_id = correct10.id
+question10.save
