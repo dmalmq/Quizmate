@@ -11,6 +11,7 @@ user1 = User.create!(
   password: "123456"
 )
 
+
 # interest1 = Interest.create!(name: "architecture", user_id: user1.id)
 #
 # Quiz.create!(number_of_question: 2, user_id: user1.id)

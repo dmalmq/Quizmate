@@ -1,5 +1,5 @@
 class QuizzesController < ApplicationController
-
+  # before_action :reset_question, only: :show
   def index
     @quizzes = Quiz.all
   end
@@ -21,9 +21,13 @@ class QuizzesController < ApplicationController
     @quiz.user = current_user
     @quiz.save
     questions.each do |question|
-      question.score -= 1
-      @quiz.questions << question # Reassign the question to the quiz
+    #   question.answered = false
+    #   question.score -= 1
+        question.quiz = @quiz
+        question.save
+        # Reassign the question to the quiz
     end
+    @quiz.save
 
     redirect_to quiz_question_path(@quiz, @quiz.questions.first)
   end
@@ -38,4 +42,7 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.find(params[:id])
     @quiz.total_points = @quiz.question.where(corrected: true).count
   end
+
+
+
 end
