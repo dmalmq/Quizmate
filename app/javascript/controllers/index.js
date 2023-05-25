@@ -4,8 +4,11 @@
 
 import { application } from "./application"
 
-import MenuController from "./menu_controller"
-application.register("menu", MenuController)
+import ChartController from "./chart_controller"
+application.register("chart", ChartController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import MenuController from "./menu_controller"
+application.register("menu", MenuController)

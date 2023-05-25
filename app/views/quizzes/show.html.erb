@@ -1,1 +1,64 @@
+
+
+<div class="text-center">
+  <h2>Review Answers</h2>
+</div>
+
+
+
+
+<div class="h-300 pt-2 m-3 max-w-sm border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 bg-indigo-500">
+  <h3 class="text-center text-white">Daily Quiz</h3>
+  <div class=" m-2 flex flex-row items-center block max-w-sm p-3 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-row bg-red-400">
+    <div class ="w-100 relative">
+      <div class=" w-4/5 overflow-hidden" data-controller="chart">
+        <canvas
+          data-te-chart="doughnut"
+          data-te-dataset-label="Traffic"
+          data-te-dataset-data="[1, 3]"
+          data-te-dataset-background-color="['rgba(255, 165, 181, 1)', 'rgba(255, 255, 255, 1)']">
+        </canvas>
+      </div>
+      <h3 class="absolute bottom-6 left-9"><%= @quiz.corrected_times %>/<%= @quiz.questions.count %></h3>
+    </div>
+    <div>
+      <p class="mb-0 text-sm"><%= "You answered #{@quiz.corrected_times} out of #{@quiz.questions.count} questions correctly." %></p>
+    </div>
+  </div>
+</div>
+
+
+<div class="m-2">
+  <ol class="px-0 m-1">
+  <% n = 0 %>
+  <% @quiz.questions.each do |question| %>
+  <div class="block max-w-sm px-6 py-1 bg-slate-200 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex flex-row">
+  <div>
+    <% n+=1 %>
+  </div>
+  <div>
+    <%= n %>
+    <li><%= question.title %></li>
+    <li>Your answer: <%= question.user_option.content %>
+    <%= question.corrected? ? "✅" : "❌"%></li><br>
+  </div>
+  </div>
+  <% end %>
+  </ol>
+</div>
+
+<%= link_to "🏠", interests_path  %>
+
+
+
+<%# <p>Total Questions:</p> %>
+<ul>
+<% @interests_with_question_counts.each do |hash| %>
+<li><% interest = hash.keys.first%>
+<% count = hash.values.first %>
+<%= "#{interest} - #{count}" %></li>
+<% end %>
+</ul>
+
 <h1><%= @quiz.questions.where(corrected: true).count %>/<%= @quiz.questions.count %></h1>
+
