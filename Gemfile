@@ -86,7 +86,6 @@ group :test do
   gem "webdrivers"
 end
 
-
 # Tailwind gems:
 gem "tailwindcss-rails", "~> 2.0"
 gem 'simple_form-tailwind'
