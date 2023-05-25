@@ -1,6 +1,6 @@
 <div class="grid w-full mt-10 place-items-center">
 
-  
+
 <div class="flex items-center gap-4">
   <div>
     <h1>Welcome Lisa</h1>
@@ -18,9 +18,9 @@
 <h1 class="text-2xl font-bold pt-10 pb-2">Interests:</h1>
 <div class="flex justify-content gap-4 w-2/3 overflow-x-auto">
   <% @interests.each do |interest| %>
-    <%= link_to interests_path(interest) do %>
-      <div class="bg-white border border-gray-200 w-48 shrink-0 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">  
-      <img src="http://source.unsplash.com/featured/?<%= interest.name.strip %>&<%= rand(1000) %>/800x333", class="w-72 h-36" %>  
+    <%= link_to interest_path(interest) do %>
+      <div class="bg-white border border-gray-200 w-48 shrink-0 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <img src="http://source.unsplash.com/featured/?<%= interest.name.strip %>&<%= rand(1000) %>/800x333", class="w-72 h-36" %>
       <div class="p-2">
       <h5 class="text-center text-xl font-bold tracking-tight text-gray-900 dark:text-white"><%= interest.name %></h5>
     <% end %>
@@ -34,4 +34,3 @@
 <% end %>
 
 </div>
-
