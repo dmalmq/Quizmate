@@ -24,7 +24,7 @@
         <% if @question.correct_option == option %>
          <li>
           <%= f.radio_button :user_option_id, option.id, class: "hidden peer", required: true, id: option.id %>
-          <label for="<%= option.id %>" class="py-2 w-full p-2 text-gray-500 bg-green-500 border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700  hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+          <label for="<%= option.id %>" class="py-2 w-full p-2 text-white bg-green-500 border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700  hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
             <div class="block items-center">
               <div class="w-full text-md items-center"><%= LETTERS[index] %> <%= option.content %></div>
             </div>
@@ -32,7 +32,7 @@
          </li>
        <% elsif option != @question.correct_option && option == @question.user_option %>
  <%= f.radio_button :user_option_id, option.id, class: "hidden peer", required: true, id: option.id %>
-          <label for="<%= option.id %>" class="py-2 w-full p-2 text-gray-500 bg-red-500 border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+          <label for="<%= option.id %>" class="py-2 w-full p-2 text-white bg-red-500 border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
             <div class="block items-center">
               <div class="w-full text-md items-center"><%= LETTERS[index] %> <%= option.content %></div>
             </div>
