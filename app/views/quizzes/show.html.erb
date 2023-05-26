@@ -1,64 +1,37 @@
+<%= render "shared/navbar2" %>
+<%= render "shared/navbar3" %>
 
-
-<div class="text-center">
-  <h2>Review Answers</h2>
-</div>
-
-
-
-
+  <h3 class="text-center mt-4 text-slate-900">Quiz Summary</h3>
 <div class="h-300 pt-2 m-3 max-w-sm border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 bg-indigo-500">
-  <h3 class="text-center text-white">Daily Quiz</h3>
-  <div class=" m-2 flex flex-row items-center block max-w-sm p-3 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 flex flex-row bg-red-400">
-    <div class ="w-100 relative">
-      <div class=" w-4/5 overflow-hidden" data-controller="chart">
+  <div class=" m-2  items-center block max-w-sm p-3 rounded-lg dark:bg-gray-800 dark:border-gray-700 bg-indigo-500">
+    <div class="grid grid-col-1 gap-1 justify-center">
+      <h4 class ="text-center mx-auto text-white mt-2"> <%= @correct/@total.to_f > 60 ? "Well done" : "Keep practicing!"%> </h4>
+      <div class="relative mx-auto h-52 w-2/3 mr-0 basis-2/5 overflow-hidden" data-controller="chart">
         <canvas
           data-te-chart="doughnut"
-          data-te-dataset-label="Traffic"
-          data-te-dataset-data="[1, 3]"
-          data-te-dataset-background-color="['rgba(255, 165, 181, 1)', 'rgba(255, 255, 255, 1)']">
+          data-te-dataset-data= <%= "[#{@quiz.questions.where(corrected: true).count},#{@total - @correct}]"%>
+          data-te-dataset-background-color="['rgb(67, 56, 202)', 'rgb(226, 232, 240)']">
         </canvas>
+       <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white"><p class="text-3xl font-bold pb-0 mb-0"><%= @correct %>/<%= @total %></p></div>
       </div>
-      <h3 class="absolute bottom-6 left-9"><%= @quiz.corrected_times %>/<%= @quiz.questions.count %></h3>
-    </div>
-    <div>
-      <p class="mb-0 text-sm"><%= "You answered #{@quiz.corrected_times} out of #{@quiz.questions.count} questions correctly." %></p>
+      <div>
+      <p class="mb-0 mt-2 basis-3/5 pb-0 text-lg text-white text-center"><%= "You answered #{@correct} out of #{@total} questions correctly." %></p>
     </div>
   </div>
 </div>
 
-
-<div class="m-2">
-  <ol class="px-0 m-1">
   <% n = 0 %>
   <% @quiz.questions.each do |question| %>
-  <div class="block max-w-sm px-6 py-1 bg-slate-200 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex flex-row">
-  <div>
-    <% n+=1 %>
-  </div>
-  <div>
-    <%= n %>
-    <li><%= question.title %></li>
-    <li>Your answer: <%= question.user_option.content %>
-    <%= question.corrected? ? "✅" : "❌"%></li><br>
-  </div>
-  </div>
+  <% n+=1 %>
+    <div class="block max-w-sm my-2 mx-2 px-6 pr-1 pl-0 bg-slate-200 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <div class="flex flex-row items-center">
+        <p class="text-white bg-indigo-700 border border-2 rounded-full text-2xl font-bold h-full basis-1/6 text-center items-center mr-4 ml-2 my-0"><%= n %></p>
+        <div class="basis-5/6">
+        <p class="pt-4"><%= question.title %></p>
+        <p class=""><%= question.user_option.content %>
+        <%= question.corrected? ? "✅" : "❌"%></p>
+        </div>
+      </div>
+    </div>
   <% end %>
-  </ol>
 </div>
-
-<%= link_to "🏠", interests_path  %>
-
-
-
-<%# <p>Total Questions:</p> %>
-<ul>
-<% @interests_with_question_counts.each do |hash| %>
-<li><% interest = hash.keys.first%>
-<% count = hash.values.first %>
-<%= "#{interest} - #{count}" %></li>
-<% end %>
-</ul>
-
-<h1><%= @quiz.questions.where(corrected: true).count %>/<%= @quiz.questions.count %></h1>
-
