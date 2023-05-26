@@ -4,23 +4,16 @@
   >
     <div class="flex items-center justify-center flex-col mx-auto max-w-3xl text-center h-screen">
       <%= image_tag "welcome.png", class: "w-64 h-64 animate-bounce" %>
-
-
       <h1
-        class="pb-0 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-5xl font-extrabold text-transparent sm:text-5xl"
+        class="pb-0 pt-0 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-5xl font-extrabold text-transparent sm:text-5xl"
       >
         QuizMate
-
       </h1>
-
-
-
-      <h5 class="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
+      <h5 class="mx-auto mt-2 max-w-xl sm:text-xl/relaxed">
         sign in & start learning!
       </h5>
-
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <%= link_to "Get Started", interests_path, class: "no-underline block w-48 rounded-full border-blue-600 bg-indigo-900	 px-12 py-3 font-medium text-slate-50 hover:bg-sky-700 hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto" %>
+      <div class="mt-4 flex flex-wrap justify-center gap-2 animate-ping">
+        <%= link_to "Get Started", interests_path, class: "animate-ping no-underline block w-48 rounded-full border-blue-600 bg-indigo-900	 px-12 py-3 font-medium text-slate-50 hover:bg-sky-700 hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto" %>
       </div>
     </div>
   </div>

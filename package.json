@@ -13,5 +13,8 @@
   },
   "scripts": {
     "build": "webpack --config webpack.config.js"
+  },
+  "devDependencies": {
+    "tailwindcss-animated": "^1.0.1"
   }
 }
