@@ -31,8 +31,7 @@
 <div class="m-2">
   <ol class="px-0 m-1">
   <% n = 0 %>
-  <% @quiz.questions.each do |question| %>
-  <div class="block max-w-sm px-6 py-1 bg-slate-200 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex flex-row">
+  <% @quiz.questions.each do |question| %> <div class="block max-w-sm px-6 py-1 bg-slate-200 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 flex flex-row">
   <div>
     <% n+=1 %>
   </div>
@@ -61,4 +60,3 @@
 </ul>
 
 <h1><%= @quiz.questions.where(corrected: true).count %>/<%= @quiz.questions.count %></h1>
-
