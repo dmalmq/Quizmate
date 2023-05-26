@@ -13,6 +13,9 @@ class QuizzesController < ApplicationController
     @quiz_interests = Interest.joins(:questions)
                               .where(questions: { quiz_id: @quiz.id })
                               .distinct
+
+    @correct = @quiz.questions.where(corrected: true).count
+    @total = @quiz.questions.count
   end
 
   def new
