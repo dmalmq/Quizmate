@@ -92,4 +92,3 @@ gem 'simple_form-tailwind'
 
 # OpenAI
 gem "ruby-openai"
-gem "sassc-rails"
