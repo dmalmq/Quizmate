@@ -5,9 +5,6 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-
-
-
 module Quizmate
   class Application < Rails::Application
     config.generators do |generate|
@@ -18,10 +15,8 @@ module Quizmate
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
-
     # Needs to be here for tailwind to work:
     config.assets.css_compressor = nil
-
 
     # Configuration for the application, engines, and railties goes here.
     #
