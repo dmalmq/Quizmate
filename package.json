@@ -7,10 +7,6 @@
     "@popperjs/core": "^2.11.7",
     "bootstrap": "^5.2.3",
     "flowbite": "^1.6.5",
-    "postcss": "^8.4.23",
-    "postcss-flexbugs-fixes": "^5.0.2",
-    "postcss-import": "^15.1.0",
-    "postcss-nested": "^6.0.1",
     "webpack": "^5.83.1",
     "webpack-cli": "^5.1.1"
   },
