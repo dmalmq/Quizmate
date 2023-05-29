@@ -1,10 +1,6 @@
-
 <%= render "shared/navbar2" %>
 <%= render "shared/navbar3" %>
-
-<h1><%= @quiz.challenges.where(corrected: true).count%>/<%= @quiz.challenges.count %></h1>
-  <h3 class="text-center mt-4 text-slate-900">Quiz Summary</h3>
-
+<h3 class="text-center mt-4 text-slate-900">Quiz Summary</h3>
 <div class="h-300 pt-2 m-3 max-w-sm border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 bg-indigo-500">
   <div class=" m-2  items-center block max-w-sm p-3 rounded-lg dark:bg-gray-800 dark:border-gray-700 bg-indigo-500">
     <div class="grid grid-col-1 gap-1 justify-center">
@@ -25,16 +21,14 @@
     </div>
   </div>
   <% n = 0 %>
-
   <% @quiz.challenges.each do |challenge| %>
-  <% n+=1 %>
+    <% n+=1 %>
     <div class="block max-w-sm my-2 mx-2 px-6 pr-1 pl-0 bg-slate-200 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
       <div class="flex flex-row items-center">
         <p class="text-white bg-indigo-700 border-2 rounded-full text-2xl font-bold h-full basis-1/6 text-center items-center mr-4 ml-2 my-0"><%= n %></p>
         <div class="basis-5/6">
-        <p class="pt-4"><%= challenge.title %></p>
-        <p class=""><%= challenge.user_option.content %>
-        <%= challenge.corrected? ? "✅" : "❌"%></p>
+          <p class=""><%= challenge.user_option.content %>
+            <%= challenge.corrected? ? "✅" : "❌"%></p>
         </div>
       </div>
     </div>
