@@ -1,31 +1,73 @@
-<h5>Title: <%= @question.content %></h2>
-<h5>Question: <%= @question.title %></h2>
 
+<div class="grid h-screen w-screen bg-indigo-700 place-items-center">
+  <div class="px-4 mx-4 my-auto bg-white rounded-lg mb-32">
 
-<%= simple_form_for @question, wrapper: :default do |f| %>
-  <div class="flex flex-col">
-    <ul class="w-96 gap-3 flex flex-col">
-      <% @question.options.each do |option| %>
+    <h5 class="my-4">Question: </h5>
+    <h5><%= @question.title %></h5>
+
+    <%= simple_form_for @question, wrapper: :default do |f| %>
+    <ul class="w-86 mx-0 px-0 gap-8 flex flex-col mt-8">
+      <% @question.options.each_with_index do |option, index| %>
+
+        <% if @question.user_option.nil? %>
         <li>
           <%= f.radio_button :user_option_id, option.id, class: "hidden peer", required: true, id: option.id %>
-          <label for="<%= option.id %>" class="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-slate-50 border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:bg-blue-500 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+          <label for="<%= option.id %>" class="py-2 w-full p-2 text-gray-500 bg-slate-50 border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-indigo-600 peer-checked:bg-indigo-500 peer-checked:text-white hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
             <div class="block items-center">
-              <div class="w-full text-sm font-semibold items-center"><%= option.content %></div>
+              <div class="w-full text-md items-center"><%= LETTERS[index] %> <%= option.content %></div>
             </div>
           </label>
         </li>
+
+      <% else %>
+
+        <% if @question.correct_option == option %>
+         <li>
+          <%= f.radio_button :user_option_id, option.id, class: "hidden peer", required: true, id: option.id %>
+          <label for="<%= option.id %>" class="py-2 w-full p-2 text-white bg-green-500 border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700  hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <div class="block items-center">
+              <div class="w-full text-md items-center"><%= LETTERS[index] %> <%= option.content %></div>
+            </div>
+          </label>
+         </li>
+       <% elsif option != @question.correct_option && option == @question.user_option %>
+ <%= f.radio_button :user_option_id, option.id, class: "hidden peer", required: true, id: option.id %>
+          <label for="<%= option.id %>" class="py-2 w-full p-2 text-white bg-red-500 border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <div class="block items-center">
+              <div class="w-full text-md items-center"><%= LETTERS[index] %> <%= option.content %></div>
+            </div>
+          </label>
+          </li>
+
+        <% else %>
+<%= f.radio_button :user_option_id, option.id, class: "hidden peer", required: true, id: option.id %>
+          <label for="<%= option.id %>" class="py-2 w-full p-2 text-gray-500 bg-slate-50 border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+            <div class="block items-center">
+              <div class="w-full text-md items-center"><%= LETTERS[index] %> <%= option.content %></div>
+            </div>
+          </label>
+          </li>
+
+       <% end %>
+        <% end %>
       <% end %>
     </ul>
-  </div>
-<% if @next_question && @question.user_option %>
-  <%= link_to 'next_question', quiz_question_path(@quiz, @next_question)%>
+
+  <% if @next_question && @question.user_option %>
+    <div class="mt-14 mb-12">
+  <%= link_to 'Next question', quiz_question_path(@quiz, @next_question), class: "items-center text-xl no-underline font-bold px-8 py-3 focus:outline-none text-white h-10 bg-indigo-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
+    </div>
 <% elsif @question.user_option %>
   <p>
-  "Should display the result of the Quiz when button is clicked. The path is random in the code. please change it :)!!"
-  <%= link_to 'end quiz', quiz_question_path(@quiz) %>
+
+  <%= f.button :submit, "See Answer", class: "btn btn-secondary btn-lg" %>
+  <%= link_to 'end quiz', quiz_path(@quiz) %>
   </p>
 <% else %>
-  <%= f.button :submit, "See Answer", class: "bg-blue-500 hover:bg-blue-700 text-blue font-bold py-2 px-4 rounded text-gray-900" %>
+  <div class="mt-12 mb-12">
+  <%= f.button :submit, "See Answer", class: "btn btn-secondary btn-lg" %>
+  <div>
 <% end %>
 <% end %>
-
+  </div>
+</div>

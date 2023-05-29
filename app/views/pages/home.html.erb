@@ -1,9 +1,27 @@
-<div class="container mt-4 flex">
-  <div>
-    <h1>Welcome Lisa</h1>
-    <p>Find me in app/views/pages/home.html.erb</p>
-  </div>
-  <%= image_tag "avatar.jpg", class: "w-24 h-24 rounded-full" %>
-  <div id="cal-heatmap"></div>
-</div>
+<section class="bg-gray-900 text-white h-screen ">
+  <div
+    class="mx-auto max-w-screen-xl lg:flex lg:h-screen lg:items-center h-screen place-items-center"
+  >
+    <div class="flex items-center justify-center flex-col mx-auto max-w-3xl text-center h-screen">
+      <%= image_tag "welcome.png", class: "w-64 h-64 animate-bounce" %>
 
+
+      <h1
+        class="pb-0 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-5xl font-extrabold text-transparent sm:text-5xl"
+      >
+        QuizMate
+
+      </h1>
+
+
+
+      <h5 class="mx-auto mt-4 max-w-xl sm:text-xl/relaxed">
+        sign in & start learning!
+      </h5>
+
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <%= link_to "Get Started", interests_path, class: "no-underline block w-48 rounded-full border-blue-600 bg-indigo-900	 px-12 py-3 font-medium text-slate-50 hover:bg-sky-700 hover:bg-transparent hover:text-white focus:outline-none focus:ring active:text-opacity-75 sm:w-auto" %>
+      </div>
+    </div>
+  </div>
+</section>
