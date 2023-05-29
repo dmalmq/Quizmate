@@ -18,7 +18,7 @@ class InterestsController < ApplicationController
     authorize @interest
     @interest.user = current_user
     if @interest.save
-      @interest.generate_questions
+      # @interest.generate_questions
       redirect_to interests_path
     else
       @interests = Interest.all
