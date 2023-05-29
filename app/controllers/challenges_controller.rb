@@ -43,6 +43,7 @@ class ChallengesController < ApplicationController
       challenge.question.streak = 0
       challenge.corrected = false
       challenge.question.total_asked += 1
+      challenge.question.streak = 0
       challenge.question.last_asked = Time.now.strftime("%d/%m/%Y %H:%M")
     end
     challenge.question.save
