@@ -18,7 +18,6 @@ class Question < ApplicationRecord
       challenge.save!
     end
   end
-
 end
 
 LETTERS = ["A. ", "B. ", "C. ", "D. "]
