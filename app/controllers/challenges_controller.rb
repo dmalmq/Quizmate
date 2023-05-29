@@ -3,9 +3,6 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
     @quiz = Quiz.find(params[:quiz_id])
     @next_question = @challenge.quiz.challenges.where(answered: false).first
-    # redirect_to quiz_challenge_path(@challenge.quiz, @challenge)
-    # else
-    #   render :show, status: :unprocessable_entity
   end
 
   def update
