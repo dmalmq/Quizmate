@@ -30,7 +30,7 @@
       <% @interests.each do |interest| %>
         <%= link_to interest_path(interest), class: "no-underline" do %>
           <div class="bg-white border border-gray-200  w-36 shrink-0 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <img src="http://source.unsplash.com/featured/?<%= interest.name.strip %>&<%= rand(1000) %>/800x333", class="w-36 h-24" %>
+            <img src="http://source.unsplash.com/featured/?<%= interest.name.split.join("%20") %>", class="w-36 h-24" %>
             <div class="p-2">
               <h5 class="text-center text-xl font-bold tracking-tight text-gray-900 dark:text-white"><%= interest.name %></h5>
             </div>

@@ -55,18 +55,22 @@
 
   <% if @next_question && @question.user_option %>
     <div class="mt-14 mb-12">
-  <%= link_to 'Next question', quiz_question_path(@quiz, @next_question), class: "items-center text-xl no-underline font-bold px-8 py-3 focus:outline-none text-white h-10 bg-indigo-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
+      <%= link_to 'Next question', quiz_question_path(@quiz, @next_question), class: "items-center text-xl no-underline font-bold px-8 py-3 focus:outline-none text-white h-10 bg-indigo-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
     </div>
-<% elsif @question.user_option %>
-  <p>
 
-  <%= f.button :submit, "See Answer", class: "btn btn-secondary btn-lg" %>
-  <%= link_to 'end quiz', quiz_path(@quiz) %>
+  <% elsif @question.user_option %>
+
+  <p>
+    <%= f.button :submit, "See Answer", class: "btn btn-secondary btn-lg" %>
+    <%= link_to 'end quiz', quiz_path(@quiz) %>
   </p>
+
 <% else %>
+
   <div class="mt-12 mb-12">
   <%= f.button :submit, "See Answer", class: "btn btn-secondary btn-lg" %>
   <div>
+
 <% end %>
 <% end %>
   </div>
