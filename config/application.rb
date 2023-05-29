@@ -17,6 +17,7 @@ module Quizmate
 
     # Needs to be here for tailwind to work:
     config.assets.css_compressor = nil
+    config.active_job.queue_adapter = :sidekiq
 
     # Configuration for the application, engines, and railties goes here.
     #
