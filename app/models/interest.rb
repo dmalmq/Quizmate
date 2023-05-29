@@ -2,7 +2,7 @@ class Interest < ApplicationRecord
   belongs_to :user
   has_many :questions, dependent: :destroy
   has_many :options, through: :questions
-  # has_many :challenges, through: :questions
+  has_many :challenges, through: :questions
   validates :name, presence: true
   after_create :generate_questions
 
@@ -44,8 +44,6 @@ class Interest < ApplicationRecord
     ((@answered.to_f / @total_challenges) * 100).round(2)
   end
 end
-
-
 
 # openai response:
 # data = [
