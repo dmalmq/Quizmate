@@ -3,7 +3,7 @@ class Interest < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :options, through: :questions
   validates :name, presence: true
-
+  has_many :challenges, through: :questions
   # after_save :generate_questions
 
   def generate_questions

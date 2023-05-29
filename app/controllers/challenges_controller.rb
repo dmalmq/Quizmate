@@ -1,16 +1,16 @@
 class ChallengesController < ApplicationController
+  def index
+    @challenges = Challenge.all
+  end
+
   def show
     @challenge = Challenge.find(params[:id])
     @quiz = Quiz.find(params[:quiz_id])
     @next_question = @challenge.quiz.challenges.where(answered: false).first
-    # redirect_to quiz_challenge_path(@challenge.quiz, @challenge)
-    # else
-    #   render :show, status: :unprocessable_entity
   end
 
   def update
     @challenge = Challenge.find(params[:id])
-    # @question = Question.find(params[:id])
     if @challenge.update(challenge_params)
       perform(@challenge)
       @next_question = @challenge.quiz.challenges.where(answered: false).first # question not answred
