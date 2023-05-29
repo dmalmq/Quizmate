@@ -35,6 +35,9 @@ gem 'cloudinary', '~> 1.16.0'
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
 
+gem "sidekiq"
+gem "sidekiq-failures", "~> 1.0"
+
 # gem 'faker'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
