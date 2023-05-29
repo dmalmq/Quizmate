@@ -1,15 +1,15 @@
-
+Challenge.destroy_all
 Option.destroy_all
 Question.destroy_all
 Interest.destroy_all
 Quiz.destroy_all
 User.destroy_all
 
-
 user1 = User.create!(
   email: "pooh@test.com",
   password: "123456"
 )
+
 
 
 # interest1 = Interest.create!(name: "architecture", user_id: user1.id)
@@ -285,3 +285,4 @@ user1 = User.create!(
 # )
 #
 # question10.correct_option_id = correct10.id
+
