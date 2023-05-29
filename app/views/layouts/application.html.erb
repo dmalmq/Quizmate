@@ -8,12 +8,17 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
+    <script src="https://kit.fontawesome.com/d9c17ccc37.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@700&display=swap" rel="stylesheet">
   </head>
 
   <body>
 
-  <%= render "shared/navbar2" %>
-  <%= render "shared/navbar3" %>
+  <%# <%= render "shared/navbar2" %>
+  <%# <%= render "shared/navbar3" %>
   <%= render "shared/flashes" %>
   <%= yield %>
 

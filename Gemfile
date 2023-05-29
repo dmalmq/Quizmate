@@ -51,6 +51,11 @@ gem "chartkick"
 # Use Sass to process CSS
 gem "sassc-rails"
 
+# DB gems
+gem 'bullet', '~> 7.0', '>= 7.0.7'
+gem 'blazer', '~> 2.6', '>= 2.6.5'
+gem "rails_admin", "3.0"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
@@ -70,7 +75,7 @@ group :development do
   gem "web-console"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
+  gem "rack-mini-profiler"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"

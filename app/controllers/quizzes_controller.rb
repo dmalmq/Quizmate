@@ -8,6 +8,17 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = Quiz.find(params[:id])
+    
+    @interests_with_question_counts = Interest.left_joins(:questions)
+                                              .group('interests.id')
+                                              .select('interests.name, COUNT(questions.id) AS question_count')
+                                              .map { |interest| { interest.name => interest.question_count } }
+    @quiz_interests = Interest.joins(:questions)
+                              .where(questions: { quiz_id: @quiz.id })
+                              .distinct
+
+    @correct = @quiz.challenges.where(corrected: true).count
+    @total = @quiz.challenges.count
   end
 
   def new
@@ -32,10 +43,5 @@ class QuizzesController < ApplicationController
 
   def quiz_params
     params.fetch(:quiz, {}).permit(:number_of_question) # Number of quizzes each day
-  end
-
-  def result
-    @quiz = Quiz.find(params[:id])
-    @quiz.total_points = @quiz.question.where(corrected: true).count
   end
 end

@@ -8,10 +8,11 @@ class InterestsController < ApplicationController
 
   def show
     @interest = Interest.find(params[:id])
-    @questions = @interest.questions
+    @questions = @interest.questions.includes([:options])
   end
 
   def create
+    @quiz = Quiz.new
     @interest = Interest.new(interest_params)
     @interest.user = current_user
     if @interest.save

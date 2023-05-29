@@ -1,9 +1,9 @@
 class Interest < ApplicationRecord
   belongs_to :user
-  has_many :questions
-  has_many :options, through: :options
+  has_many :questions, dependent: :destroy
+  has_many :options, through: :questions
+  validates :name, presence: true
   has_many :challenges, through: :questions
-
   # after_save :generate_questions
 
   def generate_questions
