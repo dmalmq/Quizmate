@@ -13,9 +13,7 @@
     dark:border-gray-600
   ">
   <div class="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
-    <%= link_to interests_path do %>
-
-      <button
+    <button
         type="button"
         class="
           inline-flex
@@ -27,8 +25,8 @@
           hover:bg-gray-50
           dark:hover:bg-gray-800
           group
-        ">
-
+          ">
+      <%= link_to interests_path do %>
         <svg
           class="
             w-6
@@ -46,7 +44,8 @@
           <path
             d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
         </svg>
-        <span
+      <% end %>
+      <span
           class="
             text-sm
             text-gray-500
@@ -54,10 +53,7 @@
             group-hover:text-blue-600
             dark:group-hover:text-blue-500
           ">Home</span>
-
-      </button>
-    <% end %>
-
+    </button>
     <button
       type="button"
       class="
@@ -135,7 +131,6 @@
           dark:group-hover:text-blue-500
         ">Settings</span>
     </button>
-    <%= link_to destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" do %>
     <button
       type="button"
       class="
@@ -177,6 +172,5 @@
           dark:group-hover:text-blue-500
         ">Profile</span>
     </button>
-  <% end %>
   </div>
 </div>
