@@ -338,7 +338,6 @@ DEPENDENCIES
   bootsnap
   bullet (~> 7.0, >= 7.0.7)
   capybara
-  chartkick
   cloudinary (~> 1.16.0)
   debug
   devise

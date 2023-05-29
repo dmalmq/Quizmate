@@ -4,11 +4,18 @@ class QuizzesController < ApplicationController
     @interests = Interest.all
     @questions = Question.all
     @challenges = Challenge.all
+    @total_challenges = 0
+    @answered = 0
+    @title = @interests.pluck(:name)
+
+    @result = @interests.map do |interest|
+      interest.corrected_percentage
+    end
+
   end
 
   def show
     @quiz = Quiz.find(params[:id])
-    
     @interests_with_question_counts = Interest.left_joins(:questions)
                                               .group('interests.id')
                                               .select('interests.name, COUNT(questions.id) AS question_count')
@@ -16,7 +23,6 @@ class QuizzesController < ApplicationController
     @quiz_interests = Interest.joins(:questions)
                               .where(questions: { quiz_id: @quiz.id })
                               .distinct
-
     @correct = @quiz.challenges.where(corrected: true).count
     @total = @quiz.challenges.count
   end
@@ -31,7 +37,7 @@ class QuizzesController < ApplicationController
     @quiz.corrected_times = 0
     @quiz.user = current_user
     @quiz.save
-    questions = Question.order(streak: :desc).limit(10)
+    questions = Question.order(streak: :asc).limit(10)
     questions.each do |question|
       challenge = Challenge.new(quiz: @quiz, question: question)
       challenge.save
