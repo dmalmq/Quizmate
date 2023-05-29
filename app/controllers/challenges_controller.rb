@@ -5,6 +5,7 @@ class ChallengesController < ApplicationController
 
   def show
     @challenge = Challenge.find(params[:id])
+    @options = @challenge.question.options
     authorize @challenge
     @quiz = Quiz.find(params[:quiz_id])
     @next_question = @challenge.quiz.challenges.where(answered: false).first

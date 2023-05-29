@@ -4,7 +4,7 @@
     <h5><%= @challenge.question.title %></h5>
     <%= simple_form_for @challenge, wrapper: :default do |f| %>
       <ul class="w-86 mx-0 px-0 gap-8 flex flex-col mt-8">
-        <% @challenge.question.options.each_with_index do |option, index| %>
+        <% @options.each_with_index do |option, index| %>
           <% if @challenge.user_option.nil? %>
             <li>
               <%= f.radio_button :user_option_id, option.id, class: "hidden peer", required: true, id: option.id %>

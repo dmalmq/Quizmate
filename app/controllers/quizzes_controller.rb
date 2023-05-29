@@ -4,6 +4,7 @@ class QuizzesController < ApplicationController
     @interests = Interest.all
     @questions = Question.all
     @challenges = Challenge.all
+    @options = Option.all
     @total_challenges = 0
     @answered = 0
     @title = @interests.pluck(:name)
@@ -11,14 +12,11 @@ class QuizzesController < ApplicationController
     @result = @interests.map do |interest|
       interest.corrected_percentage
     end
-
   end
 
   def show
     @quiz = Quiz.find(params[:id])
-
     authorize @quiz
-
     @interests_with_question_counts = Interest.left_joins(:questions)
                                               .group('interests.id')
                                               .select('interests.name, COUNT(questions.id) AS question_count')
@@ -43,6 +41,9 @@ class QuizzesController < ApplicationController
     @quiz.save
     questions = Question.order(streak: :asc).limit(10)
     questions.each do |question|
+      options = question.options.shuffle
+      question.save(options: options)
+      raise
       challenge = Challenge.new(quiz: @quiz, question: question)
       challenge.save
     end
