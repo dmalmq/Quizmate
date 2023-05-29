@@ -1,22 +1,39 @@
 <%= render "shared/navbar2" %>
 <%= render "shared/navbar3" %>
 <div class="grid w-full bg-indigo-700 dark:bg-indigo-700">
-  <div class="flex flex-col w-full bg-indigo-700 dark:bg-indigo-700">
+  <div class="flex flex-col items-stretch w-full bg-indigo-700 dark:bg-indigo-700">
     <div class="pt-2 flex">
       <h1 class="pl-2 pb-0 bg-gradient-to-r from-emerald-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text text-3xl font-extrabold text-transparent sm:text-3xl">
         Welcome Lisa
       </h1>
     </div>
-    <div class="flex pt-0 justify-content">
-      <%= image_tag "heatmap.png", class: "w-88 pb-2 px-2 pt-0" %>
+    <div class="flex pt-0 mb-2">
+      <%= simple_form_for(@quiz) do |f| %>
+        <%= f.submit 'Start Quiz', class: "mx-2 focus:outline-none text-purple-800 bg-white hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-xl px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
+      <% end %>
     </div>
   </div>
-  <div class="bg-white rounded-t-2xl pb-36">
-    <div class="flex flex-col pt-4 px-2 place-items-center rounded-t-2xl bg-white">
+  <div class="bg-white h-screen rounded-t-2xl">
+    <h1 class="text-2xl font-bold pl-2 pt-3 ">Your Interests:</h1>
+    <div class="pt-1 rounded-t-2xl overflow-x-auto">
+      <div class="grid grid-rows-2 grid-flow-col gap-2 grow-0 w-96 overflow-x-auto px-2 justify-content">
+        <% @interests.each do |interest| %>
+          <%= link_to interest_path(interest), class: "no-underline" do %>
+            <div class="grow-0  border border-gray-200  w-36 shrink-0 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              <img src="http://source.unsplash.com/featured/?<%= interest.name.strip %>&<%= rand(1000) %>/800x333", class="w-36 h-24" %>
+              <div class="h-16 grow-0 items-center">
+                <h5 class="mb-0 align-middle grow-0 place-items-center text-center text-md font-bold tracking-tight text-gray-900 dark:text-white"><%= interest.name.capitalize %></h5>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="flex flex-col mt-3 pt-4 px-2 place-items-center ">
       <div>
         <h5 class="text-md font-bold">Add a new Interest </h5>
       </div>
-      <div>
+      <div class="pb-8">
         <%= simple_form_for(@interest) do |f| %>
           <div class="flex gap-2 pt-0 ">
             <%= f.input :name, placeholder: "music...", class: "h-10", label: false %>
@@ -25,6 +42,7 @@
         <% end %>
       </div>
     </div>
+
     <h1 class="text-2xl font-bold pl-2 pt-2 bg-white">Your Interests:</h1>
     <div class="grid grid-rows-2 gap-2 w-96 overflow-x-auto px-2 justify-content">
       <% @interests.sort.reverse.each do |interest| %>
@@ -43,5 +61,7 @@
         <%= f.submit 'Start Quiz', class: "mt-4 align-midle focus:outline-none text-white bg-indigo-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-xl px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
       </div>
     <% end %>
+
   </div>
+</div>
 </div>

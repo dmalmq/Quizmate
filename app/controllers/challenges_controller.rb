@@ -1,4 +1,8 @@
 class ChallengesController < ApplicationController
+  def index
+    @challenges = Challenge.all
+  end
+
   def show
     @challenge = Challenge.find(params[:id])
     @quiz = Quiz.find(params[:quiz_id])
@@ -7,7 +11,6 @@ class ChallengesController < ApplicationController
 
   def update
     @challenge = Challenge.find(params[:id])
-    # @question = Question.find(params[:id])
     if @challenge.update(challenge_params)
       perform(@challenge)
       @next_question = @challenge.quiz.challenges.where(answered: false).first # question not answred
