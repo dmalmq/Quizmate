@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_021850) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_082449) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -98,6 +98,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_021850) do
     t.index ["creator_id"], name: "index_blazer_queries_on_creator_id"
   end
 
+  create_table "challenges", force: :cascade do |t|
+    t.boolean "corrected", default: false
+    t.integer "score", default: 0
+    t.boolean "answered", default: false
+    t.bigint "user_option_id"
+    t.bigint "question_id", null: false
+    t.bigint "quiz_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_challenges_on_question_id"
+    t.index ["quiz_id"], name: "index_challenges_on_quiz_id"
+    t.index ["user_option_id"], name: "index_challenges_on_user_option_id"
+  end
+
   create_table "interests", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id", null: false
@@ -121,18 +135,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_021850) do
     t.integer "total_asked", default: 0
     t.datetime "last_asked"
     t.bigint "correct_option_id"
-    t.bigint "user_option_id"
     t.bigint "interest_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "corrected", default: false
-    t.bigint "quiz_id"
-    t.boolean "answered", default: false
-    t.integer "score", default: 0
     t.index ["correct_option_id"], name: "index_questions_on_correct_option_id"
     t.index ["interest_id"], name: "index_questions_on_interest_id"
-    t.index ["quiz_id"], name: "index_questions_on_quiz_id"
-    t.index ["user_option_id"], name: "index_questions_on_user_option_id"
   end
 
   create_table "quizzes", force: :cascade do |t|
@@ -160,11 +167,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_021850) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "challenges", "options", column: "user_option_id"
+  add_foreign_key "challenges", "questions"
+  add_foreign_key "challenges", "quizzes"
   add_foreign_key "interests", "users"
   add_foreign_key "options", "questions"
   add_foreign_key "questions", "interests"
   add_foreign_key "questions", "options", column: "correct_option_id"
-  add_foreign_key "questions", "options", column: "user_option_id"
-  add_foreign_key "questions", "quizzes"
   add_foreign_key "quizzes", "users"
 end

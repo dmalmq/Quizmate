@@ -50,7 +50,6 @@
     </div>
   <% elsif @challenge.user_option %>
     <p>
-      <%= f.button :submit, "See Answer", class: "btn btn-secondary btn-lg" %>
       <%= link_to 'end quiz', quiz_path(@quiz) %>
     </p>
   <% else %>

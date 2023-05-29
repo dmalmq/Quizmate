@@ -1,11 +1,14 @@
 class QuizzesController < ApplicationController
-  # before_action :reset_question, only: :show
   def index
     @quizzes = Quiz.all
+    @interests = Interest.all
+    @questions = Question.all
+    @challenges = Challenge.all
   end
 
   def show
     @quiz = Quiz.find(params[:id])
+    
     @interests_with_question_counts = Interest.left_joins(:questions)
                                               .group('interests.id')
                                               .select('interests.name, COUNT(questions.id) AS question_count')
@@ -14,8 +17,8 @@ class QuizzesController < ApplicationController
                               .where(questions: { quiz_id: @quiz.id })
                               .distinct
 
-    @correct = @quiz.questions.where(corrected: true).count
-    @total = @quiz.questions.count
+    @correct = @quiz.challenges.where(corrected: true).count
+    @total = @quiz.challenges.count
   end
 
   def new
@@ -23,36 +26,22 @@ class QuizzesController < ApplicationController
   end
 
   def create
-    @quiz = Quiz.new
-    questions = Question.order(score: :desc).limit(10) # Retrieve 10 questions in descending order of score
-    @quiz.questions = questions # Assign the questions to the quiz
+    @quiz = Quiz.new(quiz_params)
     @quiz.number_of_question = 10
     @quiz.corrected_times = 0
     @quiz.user = current_user
     @quiz.save
+    questions = Question.order(streak: :desc).limit(10)
     questions.each do |question|
-    #   question.answered = false
-    #   question.score -= 1
-        question.quiz = @quiz
-        question.save
-        # Reassign the question to the quiz
+      challenge = Challenge.new(quiz: @quiz, question: question)
+      challenge.save
     end
-    @quiz.save
-
-    redirect_to quiz_question_path(@quiz, @quiz.questions.first)
+    redirect_to quiz_challenge_path(@quiz, @quiz.challenges.first)
   end
 
   private
 
   def quiz_params
-    params.require(:quiz).permit(:number_of_question) # Number of quizzes each day
+    params.fetch(:quiz, {}).permit(:number_of_question) # Number of quizzes each day
   end
-
-  def result
-    @quiz = Quiz.find(params[:id])
-    @quiz.total_points = @quiz.question.where(corrected: true).count
-  end
-
-
-
 end

@@ -22,4 +22,5 @@ module.exports = {
     require("@tailwindcss/container-queries"),
     require('flowbite/plugin')
   ],
+  plugins: [require("daisyui")]
 };
