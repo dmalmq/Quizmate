@@ -34,6 +34,7 @@
             <div class="p-2">
               <h5 class="text-center text-xl font-bold tracking-tight text-gray-900 dark:text-white"><%= interest.name %></h5>
             </div>
+            <%= link_to "X", interest_path(interest), data:{turbo_method: :delete, turbo_confirm: "Delete #{interest.name} ?"} %>
           </div>
         <% end %>
       <% end %>

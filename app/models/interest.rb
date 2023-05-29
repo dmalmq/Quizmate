@@ -2,8 +2,8 @@ class Interest < ApplicationRecord
   belongs_to :user
   has_many :questions, dependent: :destroy
   has_many :options, through: :questions
+  # has_many :challenges, through: :questions
   validates :name, presence: true
-  has_many :challenges, through: :questions
   # after_save :generate_questions
 
   def generate_questions
@@ -11,7 +11,7 @@ class Interest < ApplicationRecord
     interest = self.name
     prompt = <<~PROMPT
 
-    Generate 10 medium difficult multiple-choice questions for the interest "#{interest}" as a JSON, where content is a description of the answer and the first option is always the correct answer:
+    Generate 10 medium difficult multiple-choice questions for the interest "#{interest}" as a JSON, where content is a elaboration of the answer and the first option is always the correct answer:
     [{
       title: "title",
       content: "content",

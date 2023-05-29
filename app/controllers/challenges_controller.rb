@@ -1,16 +1,18 @@
 class ChallengesController < ApplicationController
   def index
-    @challenges = Challenge.all
+    @challenges = policy_scope(Challenge)
   end
 
   def show
     @challenge = Challenge.find(params[:id])
+    authorize @challenge
     @quiz = Quiz.find(params[:quiz_id])
     @next_question = @challenge.quiz.challenges.where(answered: false).first
   end
 
   def update
     @challenge = Challenge.find(params[:id])
+    authorize @challenge
     if @challenge.update(challenge_params)
       perform(@challenge)
       @next_question = @challenge.quiz.challenges.where(answered: false).first # question not answred

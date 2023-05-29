@@ -1,6 +1,6 @@
 class QuizzesController < ApplicationController
   def index
-    @quizzes = Quiz.all
+    @quizzes = policy_scope(Quiz)
     @interests = Interest.all
     @questions = Question.all
     @challenges = Challenge.all
@@ -8,7 +8,7 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = Quiz.find(params[:id])
-    
+    authorize @quiz
     @interests_with_question_counts = Interest.left_joins(:questions)
                                               .group('interests.id')
                                               .select('interests.name, COUNT(questions.id) AS question_count')
@@ -27,6 +27,7 @@ class QuizzesController < ApplicationController
 
   def create
     @quiz = Quiz.new(quiz_params)
+    authorize @quiz
     @quiz.number_of_question = 10
     @quiz.corrected_times = 0
     @quiz.user = current_user
