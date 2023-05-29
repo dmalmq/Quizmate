@@ -4,6 +4,7 @@ class Quizzes::QuestionsController < ApplicationController
     @question = Question.includes([:interest]).find(params[:id])
     @quiz = Quiz.find(params[:quiz_id])
     @next_question = @quiz.questions.where(answered: false).first
+    @answered_questions = @quiz.questions.reject{ |question| question.user_option.nil? }
   end
 
     def reset
