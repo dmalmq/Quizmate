@@ -1,7 +1,9 @@
 class QuizzesController < ApplicationController
-
   def index
     @quizzes = Quiz.all
+    @interests = Interest.all
+    @questions = Question.all
+    @challenges = Challenge.all
   end
 
   def show
@@ -13,7 +15,6 @@ class QuizzesController < ApplicationController
   end
 
   def create
-
     @quiz = Quiz.new(quiz_params)
     @quiz.number_of_question = 10
     @quiz.corrected_times = 0
@@ -25,18 +26,6 @@ class QuizzesController < ApplicationController
       challenge.save
     end
     redirect_to quiz_challenge_path(@quiz, @quiz.challenges.first)
-    # questions = Question.order(score: :desc).limit(10) # Retrieve 10 questions in descending order of score
-    # @quiz.questions = questions # Assign the questions to the quiz
-    # @quiz.number_of_question = 10
-    # @quiz.corrected_times = 0
-    # @quiz.user = current_user
-    # @quiz.save
-    # questions.each do |question|
-    #   question.score -= 1
-    #   @quiz.questions << question # Reassign the question to the quiz
-    # end
-
-    # redirect_to quiz_question_path(@quiz, @quiz.questions.first)
   end
 
   private
