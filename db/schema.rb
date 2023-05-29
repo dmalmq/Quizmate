@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_021850) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_05_25_082449) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,20 +41,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_021850) do
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
-
-
-  create_table "challenges", force: :cascade do |t|
-    t.boolean "corrected", default: false
-    t.integer "score", default: 0
-    t.boolean "answered", default: false
-    t.bigint "user_option_id"
-    t.bigint "question_id", null: false
-    t.bigint "quiz_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["question_id"], name: "index_challenges_on_question_id"
-    t.index ["quiz_id"], name: "index_challenges_on_quiz_id"
-    t.index ["user_option_id"], name: "index_challenges_on_user_option_id"
 
   create_table "blazer_audits", force: :cascade do |t|
     t.bigint "user_id"
@@ -111,7 +96,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_021850) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["creator_id"], name: "index_blazer_queries_on_creator_id"
+  end
 
+  create_table "challenges", force: :cascade do |t|
+    t.boolean "corrected", default: false
+    t.integer "score", default: 0
+    t.boolean "answered", default: false
+    t.bigint "user_option_id"
+    t.bigint "question_id", null: false
+    t.bigint "quiz_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_challenges_on_question_id"
+    t.index ["quiz_id"], name: "index_challenges_on_quiz_id"
+    t.index ["user_option_id"], name: "index_challenges_on_user_option_id"
   end
 
   create_table "interests", force: :cascade do |t|
