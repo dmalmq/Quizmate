@@ -2,21 +2,21 @@ class Interest < ApplicationRecord
   belongs_to :user
   has_many :questions, dependent: :destroy
   has_many :options, through: :questions
-  # has_many :challenges, through: :questions
+  has_many :challenges, through: :questions
   validates :name, presence: true
   # after_save :generate_questions
 
   def generate_questions
     # create question
-    interest = self.name
+    interest = name
     prompt = <<~PROMPT
 
-    Generate 10 medium difficult multiple-choice questions for the interest "#{interest}" as a JSON, where content is a elaboration of the answer and the first option is always the correct answer:
-    [{
-      title: "title",
-      content: "content",
-      options: ["option 1", "option 2", "option 3", "option 4"]
-    }]
+      Generate 10 medium difficult multiple-choice questions for the interest "#{interest}" as a JSON, where content is a elaboration of the answer and the first option is always the correct answer:
+      [{
+        title: "title",
+        content: "content",
+        options: ["option 1", "option 2", "option 3", "option 4"]
+      }]
     PROMPT
 
     response = OpenaiService.new(prompt).call
@@ -24,7 +24,7 @@ class Interest < ApplicationRecord
     # Iterate over the array of hashes
     formatted_response.each do |hash|
       # Create a new Question instance using the title and content
-      question = Question.create(title: hash["title"], content: hash["content"], interest_id: self.id)
+      question = Question.create(title: hash["title"], content: hash["content"], interest_id: id)
       # Create Option instances for each option in the options array
       hash["options"].each do |option_content|
         Option.create(content: option_content, question_id: question.id)
@@ -40,8 +40,6 @@ class Interest < ApplicationRecord
     ((@answered.to_f / @total_challenges) * 100).round(2)
   end
 end
-
-
 
 # openai response:
 # data = [
