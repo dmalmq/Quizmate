@@ -42,6 +42,26 @@
         <% end %>
       </div>
     </div>
+
+    <h1 class="text-2xl font-bold pl-2 pt-2 bg-white">Your Interests:</h1>
+    <div class="grid grid-rows-2 gap-2 w-96 overflow-x-auto px-2 justify-content">
+      <% @interests.sort.reverse.each do |interest| %>
+        <%= link_to interest_path(interest), class: "no-underline" do %>
+          <div class="bg-white border border-gray-200  w-36 shrink-0 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <img src="http://source.unsplash.com/featured/?<%= interest.name.split.join("%20") %>", class="w-36 h-24" %>
+            <div class="p-2">
+              <h5 class="text-center mb-0 text-xl font-bold tracking-tight text-gray-900 dark:text-white"><%= interest.name %></h5>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="bg-white pl-2">
+      <%= simple_form_for(@quiz) do |f| %>
+        <%= f.submit 'Start Quiz', class: "mt-4 align-midle focus:outline-none text-white bg-indigo-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-xl px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
+      </div>
+    <% end %>
+
   </div>
 </div>
 </div>
