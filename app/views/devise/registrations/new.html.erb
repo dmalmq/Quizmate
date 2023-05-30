@@ -1,9 +1,7 @@
 <h2>Sign up</h2>
-
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
   <%= f.error_notification %>
-
-  <div class="form-inputs">
+  <div>
     <%= f.input :name,
                 required: true,
                 autofocus: true,
@@ -18,11 +16,10 @@
     <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
+    <%= f.input :photo, as: :file %>
   </div>
-
-  <div class="form-actions">
+  <div>
     <%= f.button :submit, "Sign up" %>
   </div>
 <% end %>
-
 <%= render "devise/shared/links" %>
