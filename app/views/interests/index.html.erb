@@ -12,6 +12,13 @@
     <h1 class="text-2xl font-bold pl-2 mt-2 py-2 text-center">Your Interests:</h1>
     <div class="pt-1 rounded-t-2xl overflow-x-auto flex justify-center">
       <div class="grid grid-rows-2 grid-flow-col gap-2 grow-0 w-96 overflow-x-auto px-2 justify-content">
+        <div class="grow-0  border border-gray-200  w-36 shrink-0 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          <div class="w-36 h-24" %>
+          </div>
+          <div class="h-16 bg-white flex flex-col justify-center grow-0 items-center">
+            <h5 class="grow-0 text-center text-md font-bold tracking-tight text-gray-900 dark:text-white">Add Interest</h5>
+          </div>
+        </div>
         <% @interests.sort.reverse.each do |interest| %>
           <%= link_to interest_path(interest), class: "no-underline" do %>
             <div class="grow-0  border border-gray-200  w-36 shrink-0 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
