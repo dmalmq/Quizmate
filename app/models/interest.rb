@@ -10,24 +10,21 @@ class Interest < ApplicationRecord
     FakeJob.perform_later(self)
   end
 
-
-    response = OpenaiService.new(prompt).call
-    formatted_response = JSON.parse(response)
-    # Iterate over the array of hashes
-    formatted_response.each do |hash|
-      options = hash["options"].shuffle
-      # Create a new Question instance using the title and content
-      question = Question.create(title: hash["title"], content: hash["content"], interest_id: self.id)
-      # Create Option instances for each option in the options array
-      options.each do |option_content|
-        Option.create(content: option_content, question_id: question.id)
-      end
-      correct_option = options.index(hash["options"].first)
-      question.correct_option = question.options[correct_option]
-      question.save
-    end
-  end
-
+  # response = OpenaiService.new(prompt).call
+  # formatted_response = JSON.parse(response)
+  # # Iterate over the array of hashes
+  # formatted_response.each do |hash|
+  #   options = hash["options"].shuffle
+  #   # Create a new Question instance using the title and content
+  #   question = Question.create(title: hash["title"], content: hash["content"], interest_id: self.id)
+  #   # Create Option instances for each option in the options array
+  #   options.each do |option_content|
+  #     Option.create(content: option_content, question_id: question.id)
+  #   end
+  #   correct_option = options.index(hash["options"].first)
+  #   question.correct_option = question.options[correct_option]
+  #   question.save
+  # end
 
   def corrected_percentage
     @total_challenges = challenges.count
