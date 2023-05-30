@@ -7,6 +7,7 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
     authorize @challenge
     @quiz = Quiz.find(params[:quiz_id])
+    @user = current_user
     @next_question = @challenge.quiz.challenges.where(answered: false).first
   end
 
@@ -38,6 +39,7 @@ class ChallengesController < ApplicationController
       challenge.question.last_asked = Time.now.strftime("%d/%m/%Y %H:%M")
       challenge.score += 1
       challenge.corrected = true
+      @user.experience += 5
 
     else
       challenge.question.streak = 0
@@ -46,6 +48,8 @@ class ChallengesController < ApplicationController
       challenge.question.streak = 0
       challenge.question.last_asked = Time.now.strftime("%d/%m/%Y %H:%M")
     end
+    @user.level = @user.experience / 100
+    @user.save
     challenge.question.save
     challenge.save # saving the question with the updated attribute
   end

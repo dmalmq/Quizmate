@@ -18,7 +18,7 @@ class FakeJob < ApplicationJob
     formatted_response.each do |hash|
       options = hash["options"].shuffle
       # Create a new Question instance using the title and content
-      question = Question.create(title: hash["title"], content: hash["content"], interest_id: self.id)
+      question = Question.create(title: hash["title"], content: hash["content"], interest_id: interest.id)
       # Create Option instances for each option in the options array
       options.each do |option_content|
         Option.create(content: option_content, question_id: question.id)

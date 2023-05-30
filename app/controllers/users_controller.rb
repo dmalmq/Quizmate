@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  def index
+  def show
     @user = current_user
-    authorize @challenge
+    authorize @user
   end
 end
