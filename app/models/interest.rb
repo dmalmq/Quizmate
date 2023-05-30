@@ -4,20 +4,12 @@ class Interest < ApplicationRecord
   has_many :options, through: :questions
   has_many :challenges, through: :questions
   validates :name, presence: true
-  # after_save :generate_questions
+  after_create :generate_questions
 
   def generate_questions
-    # create question
-    interest = self.name
-    prompt = <<~PROMPT
+    FakeJob.perform_later(self)
+  end
 
-    Generate 10 medium difficult multiple-choice questions for the interest "#{interest}" as a JSON, where content is a elaboration of the answer and the first option is always the correct answer:
-    [{
-      title: "title",
-      content: "content",
-      options: ["option 1", "option 2", "option 3", "option 4"]
-    }]
-    PROMPT
 
     response = OpenaiService.new(prompt).call
     formatted_response = JSON.parse(response)
@@ -36,14 +28,13 @@ class Interest < ApplicationRecord
     end
   end
 
+
   def corrected_percentage
     @total_challenges = challenges.count
     @answered = challenges.where(corrected: true).count
     ((@answered.to_f / @total_challenges) * 100).round(2)
   end
 end
-
-
 
 # openai response:
 # data = [
