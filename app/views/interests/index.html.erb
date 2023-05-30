@@ -34,12 +34,12 @@
             <%= f.input :name, placeholder: "music..", class: "h-10", label: false %>
             <%= f.submit 'Add', class: "focus:outline-none text-slate-50 h-10 bg-indigo-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-md px-4 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
           </div>
-          <div class="flex justify-center pt-4">
-            <%= simple_form_for(@quiz) do |f| %>
-              <%= f.submit 'Start Quiz', class: "mx-2 text-slate-50 focus:outline-none text-purple-800 bg-indigo-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-xl px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
-            <% end %>
-          </div>
         <% end %>
+        <div class="flex justify-center pt-4">
+          <%= simple_form_for(@quiz) do |f| %>
+            <%= f.submit 'Start Quiz', class: "mx-2 text-slate-50 focus:outline-none text-purple-800 bg-indigo-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-xl px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
