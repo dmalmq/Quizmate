@@ -1,3 +1,5 @@
+require "open-uri"
+
 Challenge.destroy_all
 Option.destroy_all
 Question.destroy_all
@@ -5,10 +7,16 @@ Interest.destroy_all
 Quiz.destroy_all
 User.destroy_all
 
-user1 = User.create!(
+file = URI.open("https://www.pngarts.com/files/10/Default-Profile-Picture-Transparent-Image.png")
+
+user1 = User.new(
   email: "pooh@test.com",
   password: "123456"
 )
+
+user1.photo.attach(io: file, filename: 'avatar.png', content_type: 'image/png')
+user1.save
+
 
 # interest1 = Interest.create!(name: "architecture", user_id: user1.id)
 #
