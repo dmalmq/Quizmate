@@ -3,17 +3,14 @@
 <div class="w-full bg-indigo-700 dark:bg-indigo-700">
   <div class="flex flex-col justify-center items-stretch w-full bg-indigo-700 dark:bg-indigo-700">
     <div class="pt-2 flex justify-center">
-      <h1 class="pl-2 pb-0 text-center bg-gradient-to-r from-emerald-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text text-3xl font-extrabold text-transparent sm:text-3xl">
-        Welcome <%= current_user.name %>
-      </h1>
-    </div>
-    <div class="flex justify-center pt-0 pt-2 mb-4">
-      <%= simple_form_for(@quiz) do |f| %>
-        <%= f.submit 'Start Quiz', class: "mx-2 focus:outline-none text-purple-800 bg-white hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-xl px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
-      <% end %>
     </div>
   </div>
-  <div class="bg-white h-screen rounded-t-2xl flex flex-col">
+  <div class="bg-slate-100 h-screen flex flex-col">
+    <div class="flex justify-center pt-4">
+      <%= simple_form_for(@quiz) do |f| %>
+        <%= f.submit 'Start Quiz', class: "mx-2 text-slate-50 focus:outline-none text-purple-800 bg-indigo-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-xl px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
+      <% end %>
+    </div>
     <h1 class="text-2xl font-bold pl-2 mt-2 py-2 text-center">Your Interests:</h1>
     <div class="pt-1 rounded-t-2xl overflow-x-auto flex justify-center">
       <div class="grid grid-rows-2 grid-flow-col gap-2 grow-0 w-96 overflow-x-auto px-2 justify-content">
@@ -21,7 +18,7 @@
           <%= link_to interest_path(interest), class: "no-underline" do %>
             <div class="grow-0  border border-gray-200  w-36 shrink-0 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
               <img src="http://source.unsplash.com/featured/?<%= interest.name.split.join("%20") %>/800x333", class="w-36 h-24" %>
-              <div class="h-16 flex flex-col justify-center grow-0 items-center">
+              <div class="h-16 bg-white flex flex-col justify-center grow-0 items-center">
                 <h5 class="grow-0 text-center text-md font-bold tracking-tight text-gray-900 dark:text-white"><%= interest.name.capitalize %></h5>
               </div>
             </div>
