@@ -16,9 +16,9 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = Quiz.find(params[:id])
-
     authorize @quiz
-
+    @achievements = Achievement.all
+    endquiz
     @interests_with_question_counts = Interest.left_joins(:questions)
                                               .group('interests.id')
                                               .select('interests.name, COUNT(questions.id) AS question_count')
@@ -28,6 +28,7 @@ class QuizzesController < ApplicationController
                               .distinct
     @correct = @quiz.challenges.where(corrected: true).count
     @total = @quiz.challenges.count
+    check_achievements(@achievements)
   end
 
   def new
@@ -47,6 +48,23 @@ class QuizzesController < ApplicationController
       challenge.save
     end
     redirect_to quiz_challenge_path(@quiz, @quiz.challenges.first)
+  end
+
+  def endquiz
+    user = current_user
+    user.completed_quizzes += 1
+    user.day_streak += 1
+    user.save
+  end
+
+  def check_achievements(achievements)
+    user = current_user
+    achievements.each do |achievement|
+      deliverable = achievement.deliverable # total_quizzes, total_questions, streak
+      target = achievement.target
+      Event.create(user: current_user, achievement: achievement) if eval("user.#{deliverable}") >= target
+    end
+    raise
   end
 
   private
