@@ -9,7 +9,6 @@ class Question < ApplicationRecord
   # belongs_to :user_option, class_name: "Option", optional: true
   # validates :score, numericality: { greater_than_or_equal_to: 0 }
 
-
   def remove_options
     self.correct_option_id = nil
     self.save!
