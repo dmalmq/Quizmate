@@ -5,6 +5,8 @@ module.exports = {
     "./app/javascript/**/*.js",
     "./app/views/**/*.{erb,haml,html,slim}",
     "./node_modules/flowbite/**/*.js",
+    "./src/**/*.{html,js}",
+    "./node_modules/tw-elements/dist/js/**/*.js",
   ],
   theme: {
     extend: {},
@@ -16,5 +18,6 @@ module.exports = {
     require("@tailwindcss/container-queries"),
     require("flowbite/plugin"),
     require("daisyui"),
+    require("tw-elements/dist/plugin.cjs"),
   ],
 };
