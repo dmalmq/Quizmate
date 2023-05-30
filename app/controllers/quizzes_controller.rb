@@ -4,7 +4,6 @@ class QuizzesController < ApplicationController
     @interests = Interest.all
     @questions = Question.all
     @challenges = Challenge.all
-    @options = Option.all
     @total_challenges = 0
     @answered = 0
     @title = @interests.pluck(:name)
@@ -39,11 +38,10 @@ class QuizzesController < ApplicationController
     @quiz.corrected_times = 0
     @quiz.user = current_user
     @quiz.save
+    @optionnnnn = []
     questions = Question.order(streak: :asc).limit(10)
     questions.each do |question|
-      options = question.options.shuffle
-      question.save(options: options)
-      raise
+      @optionnnnn << question.options.shuffle
       challenge = Challenge.new(quiz: @quiz, question: question)
       challenge.save
     end
