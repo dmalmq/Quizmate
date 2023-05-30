@@ -7,7 +7,6 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
     authorize @challenge
     @quiz = Quiz.find(params[:quiz_id])
-    @user = current_user
     @next_question = @challenge.quiz.challenges.where(answered: false).first
   end
 
@@ -32,6 +31,7 @@ class ChallengesController < ApplicationController
   def perform(challenge)
     challenge.answered = true # marking the challenge as answered
     challenge.save
+    @user = current_user
 
     if challenge.user_option_id == challenge.question.correct_option_id
       challenge.question.streak += 1
