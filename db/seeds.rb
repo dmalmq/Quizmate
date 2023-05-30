@@ -11,7 +11,8 @@ file = URI.open("https://www.pngarts.com/files/10/Default-Profile-Picture-Transp
 
 user1 = User.new(
   email: "pooh@test.com",
-  password: "123456"
+  password: "123456",
+  name: "Phuvit"
 )
 
 user1.photo.attach(io: file, filename: 'avatar.png', content_type: 'image/png')
