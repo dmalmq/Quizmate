@@ -10,12 +10,9 @@
       justify-between
       mx-auto
       ">
-    <%= link_to interests_path, class: "pt-2 pl-2 w-24 h-12" do %>
+    <%= link_to interests_path, class: "pl-2 pt-2 w-32 h-12" do %>
       <%= image_tag "logo.png" %>
     <% end %>
-    <h1 class="pt-2 pb-0 text-center bg-gradient-to-r from-emerald-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text text-xl font-extrabold text-transparent sm:text-3xl">
-      Welcome <%= current_user.name %>
-    </h1>
     <button
       data-action="menu#toggleDropdown"
       type="button"
@@ -24,6 +21,7 @@
         items-center
         p-0
         mr-4
+        pt-2
         ml-3
         text-sm
         text-gray-500
