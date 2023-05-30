@@ -17,6 +17,7 @@ user1 = User.new(
 user1.photo.attach(io: file, filename: 'avatar.png', content_type: 'image/png')
 user1.save
 
+
 # interest1 = Interest.create!(name: "architecture", user_id: user1.id)
 #
 # Quiz.create!(number_of_question: 2, user_id: user1.id)

@@ -4,16 +4,11 @@
 <div class="h-300 pt-2 m-3 max-w-sm border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 bg-indigo-500">
   <div class=" m-2  items-center block max-w-sm p-3 rounded-lg dark:bg-gray-800 dark:border-gray-700 bg-indigo-500">
     <div class="grid grid-col-1 gap-1 justify-center">
-      <h4 class ="text-center mx-auto text-white mt-2"> <%= @correct/@total.to_f > 60 ? "Well done" : "Keep practicing!"%> </h4>
+
+      <h4 class ="text-center mx-auto text-white mt-2"> <%= @correct/@total.to_f > 0.6 ? "Well done" : "Keep practicing!"%> </h4>
+
       <div class="relative mx-auto h-52 w-2/3 mr-0 basis-2/5 overflow-hidden" data-controller="chart">
-        <canvas
-          data-te-chart="doughnut"
-          data-te-dataset-data= <%= "[#{@quiz.challenges.where(corrected: true).count},#{@total - @correct}]"%>
-          data-te-dataset-background-color="['rgb(67, 56, 202)', 'rgb(226, 232, 240)']">
-        </canvas>
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white">
-          <p class="text-3xl font-bold pb-0 mb-0"><%= @correct %>/<%= @total %></p>
-        </div>
+        <div class="radial-progress text-white text-3xl" style="--value:<%=(@correct/@total.to_f)* 100%>; --size:12rem; --thickness: 1rem;"><%= @correct %>/<%= @total %></div>
       </div>
       <div>
         <p class="mb-0 mt-2 basis-3/5 pb-0 text-lg text-white text-center"><%= "You answered #{@correct} out of #{@total} questions correctly." %></p>
@@ -21,14 +16,23 @@
     </div>
   </div>
   <% n = 0 %>
-  <% @quiz.challenges.each do |challenge| %>
+  <% @quiz.challenges.each_with_index do |challenge, index| %>
     <% n+=1 %>
-    <div class="block max-w-sm my-2 mx-2 px-6 pr-1 pl-0 bg-slate-200 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-      <div class="flex flex-row items-center">
-        <p class="text-white bg-indigo-700 border-2 rounded-full text-2xl font-bold h-full basis-1/6 text-center items-center mr-4 ml-2 my-0"><%= n %></p>
-        <div class="basis-5/6">
-          <p class=""><%= challenge.user_option.content %>
-            <%= challenge.corrected? ? "✅" : "❌"%></p>
+    <div class="block max-w-full my-2 mx-2 px-6 pr-0 pl-0 bg-slate-200 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <div class="flex flex-col items-center ">
+        <div class="w-full">
+          <button id="dropdownDividerButton" data-dropdown-toggle="dropdownDivider<%= index %>" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 w-full h-16 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+            <p class="text-white bg-indigo-700 place-self-start border-2 rounded-full text-2xl font-bold h-full text-center items-center"><%= n %></p>
+            <p><%= challenge.question.title %> <%= challenge.corrected? ? "✅" : "❌"%> </p>
+            <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+          <div id="dropdownDivider<%= index %>" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-48 dark:bg-gray-700 dark:divide-gray-600">
+            <div class="py-2">
+              <p class="block px-4 py-2 text-sm text-gray-700  dark:text-gray-200 ">Correct Answer: <%= challenge.user_option.content %></p>
+            </div>
+            <div class="py-2">
+              <p class="block px-4 py-2 text-sm text-gray-700  dark:text-gray-200 ">Description: <%= challenge.question.content %> </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

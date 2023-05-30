@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  require "sidekiq/web"
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   root to: "pages#home"
@@ -12,6 +13,11 @@ Rails.application.routes.draw do
   resources :challenges, only: [:destroy, :update]
   authenticate :user, ->(user) { user.admin? } do
     mount Blazer::Engine, at: "blazer"
+  end
+
+
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

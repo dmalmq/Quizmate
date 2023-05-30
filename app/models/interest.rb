@@ -4,35 +4,30 @@ class Interest < ApplicationRecord
   has_many :options, through: :questions
   has_many :challenges, through: :questions
   validates :name, presence: true
-  # after_save :generate_questions
+  after_create :generate_questions
 
   def generate_questions
-    # create question
-    interest = name
-    prompt = <<~PROMPT
+    FakeJob.perform_later(self)
+  end
 
-      Generate 10 medium difficult multiple-choice questions for the interest "#{interest}" as a JSON, where content is a elaboration of the answer and the first option is always the correct answer:
-      [{
-        title: "title",
-        content: "content",
-        options: ["option 1", "option 2", "option 3", "option 4"]
-      }]
-    PROMPT
 
     response = OpenaiService.new(prompt).call
     formatted_response = JSON.parse(response)
     # Iterate over the array of hashes
     formatted_response.each do |hash|
+      options = hash["options"].shuffle
       # Create a new Question instance using the title and content
-      question = Question.create(title: hash["title"], content: hash["content"], interest_id: id)
+      question = Question.create(title: hash["title"], content: hash["content"], interest_id: self.id)
       # Create Option instances for each option in the options array
-      hash["options"].each do |option_content|
+      options.each do |option_content|
         Option.create(content: option_content, question_id: question.id)
       end
-      question.correct_option = question.options.first
+      correct_option = options.index(hash["options"].first)
+      question.correct_option = question.options[correct_option]
       question.save
     end
   end
+
 
   def corrected_percentage
     @total_challenges = challenges.count
