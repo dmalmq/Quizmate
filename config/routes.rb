@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   root to: "pages#home"
+  resources :users, only: [:show, :index]
   resources :interests, only: [:index, :show, :create, :destroy]
   resources :quizzes, only: [:index, :show, :create, :new] do
     resources :challenges, only: [:create, :new, :show]

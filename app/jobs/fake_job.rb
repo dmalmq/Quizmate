@@ -16,13 +16,15 @@ class FakeJob < ApplicationJob
     formatted_response = JSON.parse(response)
     # Iterate over the array of hashes
     formatted_response.each do |hash|
+      options = hash["options"].shuffle
       # Create a new Question instance using the title and content
-      question = Question.create(title: hash["title"], content: hash["content"], interest_id: interest.id)
+      question = Question.create(title: hash["title"], content: hash["content"], interest_id: self.id)
       # Create Option instances for each option in the options array
-      hash["options"].each do |option_content|
+      options.each do |option_content|
         Option.create(content: option_content, question_id: question.id)
       end
-      question.correct_option = question.options.first
+      correct_option = options.index(hash["options"].first)
+      question.correct_option = question.options[correct_option]
       question.save
     end
   end
