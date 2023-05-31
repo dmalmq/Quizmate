@@ -59,7 +59,9 @@ class QuizzesController < ApplicationController
       end
     end
 
+    n = 0
     @questions.each do |question|
+      n += 1
       challenge = Challenge.new(quiz: @quiz, question: question)
       challenge.save
     end
