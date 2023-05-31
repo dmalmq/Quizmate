@@ -9,19 +9,18 @@ class InterestsController < ApplicationController
   def show
     @interest = Interest.find(params[:id])
     authorize @interest
-    @questions = @interest.questions.includes([:options])
+    @questions = @interest.questions.includes([:options]).reverse
   end
 
   def create
-    @quiz = Quiz.new
     @interest = Interest.new(interest_params)
     authorize @interest
     @interest.user = current_user
     if @interest.save
-      # @interest.generate_questions
+      @interest.generate_questions
       redirect_to interests_path
     else
-      @interests = Interest.all
+      # @interests = Interest.all
       render :index, status: :unprocessable_entity
     end
   end

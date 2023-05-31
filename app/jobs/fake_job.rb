@@ -1,10 +1,10 @@
 class FakeJob < ApplicationJob
   queue_as :default
 
-  def perform(interest)
+  def perform(interest, amount)
     prompt = <<~PROMPT
 
-    Generate 10 medium difficult multiple-choice questions for the interest "#{interest.name}" as a JSON, where content is a elaboration of the answer and the first option is always the correct answer:
+    Generate #{amount} medium difficult multiple-choice questions for the interest "#{interest.name}" as a JSON, where content is a elaboration of the answer, options beeing one scentence in length max. and the first option is always the correct answer:
     [{
       title: "title",
       content: "content",

@@ -7,8 +7,8 @@ class Interest < ApplicationRecord
   after_create :generate_questions
   # has_one_attached :photo
 
-  def generate_questions
-    FakeJob.perform_later(self)
+  def generate_questions(amount = 3)
+    FakeJob.perform_later(self, amount)
   end
 
   # response = OpenaiService.new(prompt).call
