@@ -1,11 +1,11 @@
 <%= render "shared/navbar2" %>
 <%= render "shared/navbar3" %>
-<h3 class="text-center font-rubik-bubbles font-bold mt-4 text-slate-900">Quiz Summary</h3>
+<h3 class="text-center font-bold mt-4 text-slate-900">Quiz Summary</h3>
 <div class="flex flex-col items-center h-300 pt-2 m-3 max-w-sm border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 bg-indigo-500">
   <div class="m-2 items-center block max-w-sm p-3 rounded-lg dark:bg-gray-800 dark:border-gray-700 bg-indigo-500">
     <div class="grid grid-col-1 gap-1 justify-center">
       <h4 class ="text-center mx-auto text-white mt-2"> <%= @correct/@total.to_f > 0.6 ? "Well done" : "Keep practicing!"%> </h4>
-      <div class="relative mx-auto h-52 w-2/3 mr-0 basis-2/5 overflow-hidden" data-controller="chart">
+      <div class="relative mx-auto h-52 w-48 mr-0 basis-2/5 overflow-hidden" data-controller="chart">
         <div class="radial-progress text-white text-3xl mt-2" style="--value:<%=(@correct/@total.to_f)* 100%>; --size:12rem; --thickness: 1.5rem;"><%= @correct %>/<%= @total %></div>
       </div>
       <div>

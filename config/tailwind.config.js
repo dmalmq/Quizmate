@@ -11,8 +11,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'font-family': ['"Rubik Bubbles"', 'cursive'],
+        'rubik-bubbles': ['"Rubik Bubbles"', 'cursive'],
+        'kenia': ['"Kenia"', 'cursive'],
+        'puff': ['"DynaPuff"', 'cursive'],
+        'suez': ['"Suez One"', 'serif'],
+        'tomorrow': ['"Tomorrow"', 'sans serif'],
     },
+  },
   },
   plugins: [
     require("@tailwindcss/forms"),
