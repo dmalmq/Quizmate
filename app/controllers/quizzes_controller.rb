@@ -51,12 +51,11 @@ class QuizzesController < ApplicationController
     if @questions.uniq.length == @questions.length
       nil
     else
-      until @questions.uniq.length == @questions.length - 1 do
-        interest_sample = Interest.all.sample
-        all_questions = interest_sample.questions.order(streak: :asc)
-        sampled_question = all_questions.sample
-        @questions << sampled_question
-      end
+      @questions.uniq
+      interest_sample = Interest.all.sample
+      all_questions = interest_sample.questions.order(streak: :asc)
+      sampled_question = all_questions.sample
+      @questions << sampled_question
     end
 
     n = 0

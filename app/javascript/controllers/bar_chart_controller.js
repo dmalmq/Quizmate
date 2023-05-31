@@ -13,7 +13,7 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log(this.percentageValue)
+    console.log(this.filterArrayNan)
     console.log(this.titleValue)
     initTE({ Chart });
     this.dataBarHorizontal = {
@@ -23,7 +23,7 @@ export default class extends Controller {
         datasets: [
           {
             label: [JSON.parse(this.titleValue)],
-            data: JSON.parse(this.percentageValue),
+            data: JSON.parse(this.filterArrayNan),
             backgroundColor: [
               "rgb(84, 56, 243)",
               "rgb(243, 22, 2)",
@@ -69,6 +69,11 @@ export default class extends Controller {
       this.optionsBarHorizontal
     );
   }
+
+  filterArrayNan() {
+      this.percentageValue.filter(function(percentage) {
+      return percentage !== 'Nan';
+    });
+    // Perform further operations with the filtered array
+  }
 }
-
-
