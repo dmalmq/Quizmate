@@ -32,15 +32,14 @@ class ChallengesController < ApplicationController
     challenge.answered = true # marking the challenge as answered
     challenge.save
     @user = current_user
-
+    Question.where('streak >= ?', 3).update_all('streak = streak - 1')
     if challenge.user_option_id == challenge.question.correct_option_id
       challenge.question.streak += 1
       challenge.question.total_asked += 1
       challenge.question.last_asked = Time.now.strftime("%d/%m/%Y %H:%M")
       challenge.score += 1
       challenge.corrected = true
-      @user.experience += 5
-
+      @user.experience += 10
     else
       challenge.question.streak = 0
       challenge.corrected = false
@@ -48,7 +47,10 @@ class ChallengesController < ApplicationController
       challenge.question.streak = 0
       challenge.question.last_asked = Time.now.strftime("%d/%m/%Y %H:%M")
     end
-    @user.level = @user.experience / 100
+    if @user.experience >= @user.total_exp
+      @user.level += 1
+      @user.total_exp += 100 * @user.level
+    end
     @user.save
     challenge.question.save
     challenge.save # saving the question with the updated attribute

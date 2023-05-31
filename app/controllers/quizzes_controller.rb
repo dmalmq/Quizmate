@@ -7,6 +7,7 @@ class QuizzesController < ApplicationController
     @total_challenges = 0
     @answered = 0
     @title = @interests.pluck(:name)
+    @user = current_user
 
     @result = @interests.map do |interest|
       interest.corrected_percentage
@@ -34,12 +35,33 @@ class QuizzesController < ApplicationController
   def create
     @quiz = Quiz.new(quiz_params)
     authorize @quiz
-    @quiz.number_of_question = 10
+    @quiz.number_of_question = 8
     @quiz.corrected_times = 0
     @quiz.user = current_user
     @quiz.save
-    questions = Question.order(streak: :asc).limit(10)
-    questions.each do |question|
+    # question_per_interests = (8.to_f / Interest.all.count).ceil
+    @questions = []
+
+    8.times do
+      interest_sample = Interest.all.sample
+      all_questions = interest_sample.questions.order(streak: :asc)
+      sampled_question = all_questions.sample
+      @questions << sampled_question
+    end
+    if @questions.uniq.length == @questions.length
+      nil
+    else
+      until @questions.uniq.length == @questions.length - 1 do
+        interest_sample = Interest.all.sample
+        all_questions = interest_sample.questions.order(streak: :asc)
+        sampled_question = all_questions.sample
+        @questions << sampled_question
+      end
+    end
+
+    n = 0
+    @questions.each do |question|
+      n += 1
       challenge = Challenge.new(quiz: @quiz, question: question)
       challenge.save
     end
