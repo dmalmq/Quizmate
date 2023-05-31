@@ -2,14 +2,34 @@
 <%= render "shared/navbar3" %>
 
 <div class="m-2">
-  <h1 class="text-2xl font-bold uppercase"><%= @interest.name %></h1>
+  <h1 class="text-2xl font-bold uppercase text-blue-700"><%= @interest.name %></h1>
 </div>
 
-<%= form_tag interest_questions_path(@interest), method: :post do %>
-  <%= label_tag :amount, "Amount:" %>
-  <%= number_field_tag :amount, nil, in: 1..10, id: "amount" %>
-  <%= submit_tag "Submit", name: "commit", value:"Create More!", class:"mx-3 focus:outline-none text-slate-50 no-underline h-10 bg-violet-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
-<% end %>
+
+<div class="text-center">
+  <div><p class="mb-2 font-bold text-blue-700 dark:text-gray-400"><%= @interest.questions.count %> Questions</p></div>
+   <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-bottom-example" data-drawer-show="drawer-bottom-example" data-drawer-placement="bottom" aria-controls="drawer-bottom-example">
+   Add more!
+   </button>
+</div>
+
+<!-- drawer component -->
+<div id="drawer-bottom-example" class="fixed bottom-0 left-0 right-0 z-40 w-full p-4 overflow-y-auto transition-transform bg-slate-100 drop-shadow-xl dark:bg-gray-800 transform-none" tabindex="-1" aria-labelledby="drawer-bottom-label">
+    <h3 id="drawer-bottom-label" class="inline-flex items-center mb-2 text-base font-semibold text-gray-700 dark:text-gray-400"><svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></svg>Add Questions</h3>
+    <h5 id="drawer-bottom-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"><svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></svg>Add up to 10 additional questions for your interest in <%= @interest.name %></h5>
+    <button type="button" data-drawer-hide="drawer-bottom-example" aria-controls="drawer-bottom-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        <span class="sr-only">Close menu</span>
+    </button>
+    <%= form_tag interest_questions_path(@interest), method: :post do %>
+      <%= label_tag :amount, ""%>
+      <%= number_field_tag :amount, nil, in: 1..10, id: "amount" %>
+      <div><%= submit_tag "Submit", name: "commit", value:"Create!", class:"mx-3 focus:outline-none text-slate-50 no-underline h-10 bg-violet-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %></div>
+    <% end %>
+    <div class="pb-16"></div>
+</div>
+
+
 
 <% @questions.each_with_index do |question, index| %>
   <div class="h-42 mx-3 pb-0">
@@ -46,6 +66,9 @@
   </div>
 <% end %>
 <div>
-<%= link_to "Delete #{@interest.name}", interest_path(@interest), data:{turbo_method: :delete, turbo_confirm: "Delete #{@interest.name} ?"} %>
-<%= link_to "All Interests", interests_path, class: "mx-3 focus:outline-none text-slate-50 no-underline h-10 bg-violet-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
+<%= link_to interest_path(@interest), data:{turbo_method: :delete, turbo_confirm: "Delete #{@interest.name} ?"}, class: "mx-3 focus:outline-none text-slate-50 no-underline h-10 bg-red-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" do%>
+  <i class="fa-regular fa-trash"></i> <%= @interest.name %>
+<% end %>
 </div>
+
+<div class="pb-20"></div>
