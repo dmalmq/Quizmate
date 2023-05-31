@@ -3,19 +3,18 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   root to: "pages#home"
-  resources :users, only: [:show, :index]
-  resources :interests, only: [:index, :show, :create, :destroy]
-  resources :quizzes, only: [:index, :show, :create, :new] do
-    resources :challenges, only: [:create, :new, :show]
+  resources :users, only: %i[show index update]
+  resources :interests, only: %i[index show create destroy]
+  resources :quizzes, only: %i[index show create new] do
+    resources :challenges, only: %i[create new show]
     resources :questions, only: [:show], controller: "quizzes/questions"
   end
   resources :questions
 
-  resources :challenges, only: [:destroy, :update]
+  resources :challenges, only: %i[destroy update]
   authenticate :user, ->(user) { user.admin? } do
     mount Blazer::Engine, at: "blazer"
   end
-
 
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'

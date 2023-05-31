@@ -51,18 +51,16 @@ class QuizzesController < ApplicationController
     if @questions.uniq.length == @questions.length
       nil
     else
-      until @questions.uniq.length == @questions.length - 1 do
-        interest_sample = Interest.all.sample
-        all_questions = interest_sample.questions.order(streak: :asc)
-        sampled_question = all_questions.sample
-        @questions << sampled_question
-      end
+      interest_sample = Interest.all.sample
+      all_questions = interest_sample.questions.order(streak: :asc)
+      sampled_question = all_questions.sample
+      @questions << sampled_question
     end
 
     n = 0
     @questions.each do |question|
       n += 1
-      challenge = Challenge.new(quiz: @quiz, question: question, index_in_quiz: n)
+      challenge = Challenge.new(quiz: @quiz, question:, index_in_quiz: n)
       challenge.save
     end
     redirect_to quiz_challenge_path(@quiz, @quiz.challenges.first)
