@@ -25,13 +25,13 @@
     <div class=" grid grid-cols-2 gap-2 h-1/6">
       <div class="bg-indigo-600 p-2 ml-3 rounded-lg drop-shadow-2xl">
         <div class="stat-title text-white inline-block align-middle">Best Interest</div>
-        <div class="stat-value py-2 text-white text-4xl font-bold"><%= @interests.count %></div>
-        <p class="align-middle text-white">21% more than last month</p>
+        <div class="stat-value py-2 text-white text-4xl font-bold"><%= @most_correct_interest %></div>
+        <p class="align-middle text-white"><%= @most_correct_percentage %>% answered correctly</p>
       </div>
       <div class="bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-rose-500 to-indigo-700 p-2 rounded-lg mr-3 drop-shadow-2xl">
         <div class="stat-title text-white inline-block align-middle">Worst Interest</div>
-        <div class="stat-value py-2 text-white text-4xl font-bold"><%= count %></div>
-        <p class="align-middle text-white"><%= percentage.to_i %>% completed this month</p>
+        <div class="stat-value py-2 text-white text-4xl font-bold"><%= @least_correct_interest %></div>
+        <p class="align-middle text-white"><%= @least_correct_percentage %>% answered correctly</p>
       </div>
       <div class="bg-indigo-600 p-2 rounded-lg ml-3 drop-shadow-2xl">
         <div class="stat-title text-white inline-block align-middle">Total Question</div>
