@@ -5,6 +5,7 @@ class Interest < ApplicationRecord
   has_many :challenges, through: :questions
   validates :name, presence: true
   after_create :generate_questions
+  # has_one_attached :photo
 
   def generate_questions
     FakeJob.perform_later(self)

@@ -9,8 +9,8 @@
       items-center
       justify-between
       mx-auto
-    ">
-    <%= link_to interests_path, class: " w-24 h-24" do %>
+      ">
+    <%= link_to interests_path, class: "pl-2 pt-2 w-32 h-12" do %>
       <%= image_tag "logo.png" %>
     <% end %>
     <button
@@ -21,6 +21,7 @@
         items-center
         p-0
         mr-4
+        pt-2
         ml-3
         text-sm
         text-gray-500
@@ -34,7 +35,7 @@
       aria-expanded="false">
       <span class="sr-only">Open main m-2 menu</span>
       <div class="relative inline-block">
-        <%= cl_image_tag current_user.photo.key, class: "inline-block object-cover w-12 h-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2" %>
+        <%= cl_image_tag current_user.photo.key, class: "inline-block object-cover w-8 h-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2" %>
         <span class="absolute top-0 right-0 inline-block w-3 h-3 bg-green-600 border-2 border-white rounded-full"></span>
       </div>
     </button>

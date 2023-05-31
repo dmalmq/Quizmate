@@ -1,3 +1,4 @@
+
 import { Controller } from "@hotwired/stimulus"
 import {
   Chart,
@@ -69,3 +70,5 @@ export default class extends Controller {
     );
   }
 }
+
+

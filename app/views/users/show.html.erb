@@ -1,0 +1,13 @@
+
+<%= cl_image_tag @user.photo.key, height: 300, width: 400, crop: :fill %>
+<%= @user.name %>
+<%= @user.email %>
+<h3>Statistic</h3>
+<h3>Achievement</h3>
+<h3>Level: <%= @user.level %></h3>
+<p>EXP. <%= @user.experience %></p>
+<p> Add photo: </p>
+<%= simple_form_for(@user) do |f| %>
+  <%= f.input :photo, as: :file %>
+  <%= f.button :submit %>
+<% end %>

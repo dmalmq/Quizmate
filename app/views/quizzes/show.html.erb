@@ -4,37 +4,62 @@
 <div class="h-300 pt-2 m-3 max-w-sm border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 bg-indigo-500">
   <div class=" m-2  items-center block max-w-sm p-3 rounded-lg dark:bg-gray-800 dark:border-gray-700 bg-indigo-500">
     <div class="grid grid-col-1 gap-1 justify-center">
-
       <h4 class ="text-center mx-auto text-white mt-2"> <%= @correct/@total.to_f > 0.6 ? "Well done" : "Keep practicing!"%> </h4>
-
       <div class="relative mx-auto h-52 w-2/3 mr-0 basis-2/5 overflow-hidden" data-controller="chart">
-        <div class="radial-progress text-white text-3xl" style="--value:<%=(@correct/@total.to_f)* 100%>; --size:12rem; --thickness: 1rem;"><%= @correct %>/<%= @total %></div>
+        <div class="radial-progress text-white text-3xl mt-2" style="--value:<%=(@correct/@total.to_f)* 100%>; --size:12rem; --thickness: 1rem;"><%= @correct %>/<%= @total %></div>
       </div>
       <div>
-        <p class="mb-0 mt-2 basis-3/5 pb-0 text-lg text-white text-center"><%= "You answered #{@correct} out of #{@total} questions correctly." %></p>
+        <p class="mb-0 mt-2 basis-3/5 pb-0 text-base text-white text-center"><%= "You answered #{@correct} out of #{@total} questions correctly." %></p>
       </div>
     </div>
   </div>
   <% n = 0 %>
   <% @quiz.challenges.each_with_index do |challenge, index| %>
     <% n+=1 %>
-    <div class="block max-w-full my-2 mx-2 px-6 pr-0 pl-0 bg-slate-200 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-      <div class="flex flex-col items-center ">
-        <div class="w-full">
-          <button id="dropdownDividerButton" data-dropdown-toggle="dropdownDivider<%= index %>" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 w-full h-16 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-            <p class="text-white bg-indigo-700 place-self-start border-2 rounded-full text-2xl font-bold h-full text-center items-center"><%= n %></p>
-            <p><%= challenge.question.title %> <%= challenge.corrected? ? "✅" : "❌"%> </p>
-            <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
-          <div id="dropdownDivider<%= index %>" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-48 dark:bg-gray-700 dark:divide-gray-600">
-            <div class="py-2">
-              <p class="block px-4 py-2 text-sm text-gray-700  dark:text-gray-200 ">Correct Answer: <%= challenge.user_option.content %></p>
-            </div>
-            <div class="py-2">
-              <p class="block px-4 py-2 text-sm text-gray-700  dark:text-gray-200 ">Description: <%= challenge.question.content %> </p>
+    <div class="block max-w-full my-2 mx-2 px-6 pr-0 pl-0 bg-slate-200 border rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800  dark:hover:bg-gray-700">
+      <div class="flex flex-col items-center w-full h-full ">
+        <div class="h-42 mx-3 pb-0 w-full h-full">
+          <div id="accordion-color" data-accordion="collapse" data-active-classes="w-full h-full bg-blue-100 dark:bg-gray-800 text-blue-600 dark:text-white">
+            <h2 id="accordion-color-heading-1<%= index %>" class="mb-0">
+              <button type="button" class="flex items-center justify-between w-full h-full px-4 py-2 font-medium text-left text-gray-500  rounded-md focus:ring-1 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-color-body-1<%= index %>" aria-expanded="false" aria-controls="accordion-color-body-1<%= index %>" style="width: 100%">
+                <div class="flex flex-col">
+                  <div>
+                    <p class="text-base font-bold leading-snug mb-1 mr-4"><%= challenge.question.title %></p>
+                  </div>
+                  <div class="flex flex-row">
+                    <div>
+                      <p class="text-sm italic mb-0"> Your Answer: <%= challenge.user_option.content %>  </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-6 h-6 shrink-0">
+                  <% if challenge.corrected? == true %>
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>
+                            .color1{fill:#56b54e;}.color2{fill:#60cc5a;}.color3{fill:#6c2e7c;}
+                          </style> </defs> <g id="Icons2"> <path class="color1" d="M23,12A11,11,0,0,1,1,12a10.827,10.827,0,0,1,.29-2.5,11,11,0,0,1,21.42,0A10.827,10.827,0,0,1,23,12Z"></path> <ellipse class="color2" cx="12" cy="9.5" rx="10.71" ry="8.5"></ellipse> </g> <g data-name="Layer 4" id="Layer_4"> <path class="color3" d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,22A10,10,0,1,1,22,12,10.011,10.011,0,0,1,12,22Z"></path> <path class="color3" d="M16.293,8.293,10,14.586,7.707,12.293a1,1,0,0,0-1.414,1.414l3,3a1,1,0,0,0,1.414,0l7-7a1,1,0,0,0-1.414-1.414Z"></path> </g> </g></svg>
+                  <% else %>
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>
+                            .cls-1{fill:#b24040;}.cls-2{fill:#ce5959;}.cls-3{fill:#6c2e7c;}
+                          </style> </defs> <g id="Icons1"> <path class="cls-1" d="M23,12A11,11,0,0,1,1,12a10.827,10.827,0,0,1,.29-2.5,11,11,0,0,1,21.42,0A10.827,10.827,0,0,1,23,12Z"></path> <ellipse class="cls-2" cx="12" cy="9.5" rx="10.71" ry="8.5"></ellipse> </g> <g data-name="Layer 4" id="Layer_4"> <path class="cls-3" d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,22A10,10,0,1,1,22,12,10.011,10.011,0,0,1,12,22Z"></path> <path class="cls-3" d="M16.707,7.293a1,1,0,0,0-1.414,0L12,10.586,8.707,7.293A1,1,0,1,0,7.293,8.707L10.586,12,7.293,15.293a1,1,0,1,0,1.414,1.414L12,13.414l3.293,3.293a1,1,0,0,0,1.414-1.414L13.414,12l3.293-3.293A1,1,0,0,0,16.707,7.293Z"></path> </g> </g></svg>
+                  <% end %>
+                </div>
+              </button>
+            </h2>
+            <div id="accordion-color-body-1<%= index %>" class="hidden" aria-labelledby="accordion-color-heading-1<%= index %>">
+              <div class="flex flex-col px-4 py-2  dark:bg-gray-900">
+                <div class="flex flex-row">
+                  <div>
+                    <p class="mb-0 text-gray-500 font-semi-bold dark:text-gray-400"> Correct: <%= challenge.question.correct_option.content %>  </p>
+                  </div>
+                </div>
+                <hr class="w-full">
+                <div>
+                  <p class="text-gray-500 font-semi-bold dark:text-gray-400"> Description: <%= challenge.question.content %> </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   <% end %>
-</div>
