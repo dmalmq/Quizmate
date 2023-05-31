@@ -62,7 +62,7 @@ class QuizzesController < ApplicationController
     n = 0
     @questions.each do |question|
       n += 1
-      challenge = Challenge.new(quiz: @quiz, question: question)
+      challenge = Challenge.new(quiz: @quiz, question: question, index_in_quiz: n)
       challenge.save
     end
     redirect_to quiz_challenge_path(@quiz, @quiz.challenges.first)
