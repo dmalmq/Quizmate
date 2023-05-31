@@ -29,6 +29,8 @@ class Interest < ApplicationRecord
 
   def corrected_percentage
     @total_challenges = challenges.count
+    return 0 if @total_challenges <= 0
+
     @answered = challenges.where(corrected: true).count
     ((@answered.to_f / @total_challenges) * 100).round(2)
   end

@@ -51,6 +51,7 @@ class QuizzesController < ApplicationController
     if @questions.uniq.length == @questions.length
       nil
     else
+      @questions.uniq!
       interest_sample = Interest.all.sample
       all_questions = interest_sample.questions.order(streak: :asc)
       sampled_question = all_questions.sample
