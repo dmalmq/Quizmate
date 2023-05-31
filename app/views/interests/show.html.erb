@@ -1,14 +1,21 @@
 <%= render "shared/navbar2" %>
 <%= render "shared/navbar3" %>
-<%= link_to "Delete", interest_path(@interest), data:{turbo_method: :delete, turbo_confirm: "Delete #{@interest.name} ?"} %>
+
 <div class="m-2">
   <h1 class="text-2xl font-bold uppercase"><%= @interest.name %></h1>
 </div>
-<% @questions.each do |question| %>
+
+<%= form_tag interest_questions_path(@interest), method: :post do %>
+  <%= label_tag :amount, "Amount:" %>
+  <%= number_field_tag :amount, nil, in: 1..10, id: "amount" %>
+  <%= submit_tag "Submit", name: "commit", value:"Create More!", class:"mx-3 focus:outline-none text-slate-50 no-underline h-10 bg-violet-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
+<% end %>
+
+<% @questions.each_with_index do |question, index| %>
   <div class="h-42 mx-3 pb-0">
     <div id="accordion-color" data-accordion="collapse" data-active-classes="bg-blue-100 dark:bg-gray-800 text-blue-600 dark:text-white">
       <h6 id="accordion-color-heading-1-<%= question.id%>" class="mb-0">
-        <p class="flex items-center justify-between mb-2 w-full p-2 font-bold text-left text-slate-50 border border-b-0 border-gray-200 rounded-t-xl bg-indigo-700"><%= question.title %></p>
+        <p class="flex items-center justify-between mb-2 w-full p-2 font-bold text-left text-slate-50 border border-b-0 border-gray-200 rounded-t-xl bg-indigo-700"><%= @questions.size - index %> ) <%= question.title %><%= link_to "x", question_path(question), data:{turbo_method: :delete, turbo_confirm: "Delete #{question.title} ?"} %></p>
       </h6>
       <div id="accordion-color-body-1-<%= question.id%>" class="hidden" aria-labelledby="accordion-color-heading-1-<%= question.id%>">
       </div>
@@ -38,4 +45,7 @@
     </div>
   </div>
 <% end %>
+<div>
+<%= link_to "Delete #{@interest.name}", interest_path(@interest), data:{turbo_method: :delete, turbo_confirm: "Delete #{@interest.name} ?"} %>
 <%= link_to "All Interests", interests_path, class: "mx-3 focus:outline-none text-slate-50 no-underline h-10 bg-violet-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
+</div>
