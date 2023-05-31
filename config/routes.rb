@@ -1,17 +1,27 @@
 Rails.application.routes.draw do
+  # Admin
   require "sidekiq/web"
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
+  # Production
   root to: "pages#home"
-  resources :users, only: [:show, :index]
-  resources :interests, only: [:index, :show, :create, :destroy]
+
+  resources :users, only: %i[show index update]
+  resources :interests, only: [:index, :show, :create, :destroy] do
+    resources :questions, only: [:create]
+  end
   resources :quizzes, only: [:index, :show, :create, :new] do
     resources :challenges, only: [:create, :new, :show]
+
     resources :questions, only: [:show], controller: "quizzes/questions"
   end
-  resources :questions
+  resources :questions, only: [:destroy]
 
-  resources :challenges, only: [:destroy, :update]
+  resources :challenges, only: %i[destroy update]
   authenticate :user, ->(user) { user.admin? } do
     mount Blazer::Engine, at: "blazer"
   end
@@ -20,6 +30,7 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
