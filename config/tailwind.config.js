@@ -9,7 +9,15 @@ module.exports = {
     "./node_modules/tw-elements/dist/js/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'rubik-bubbles': ['"Rubik Bubbles"', 'cursive'],
+        'kenia': ['"Kenia"', 'cursive'],
+        'puff': ['"DynaPuff"', 'cursive'],
+        'suez': ['"Suez One"', 'serif'],
+        'tomorrow': ['"Tomorrow"', 'sans serif'],
+    },
+  },
   },
   plugins: [
     require("@tailwindcss/forms"),

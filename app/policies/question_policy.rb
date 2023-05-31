@@ -2,7 +2,7 @@ class QuestionPolicy < ApplicationPolicy
   # not yet needed
 
   def destroy?
-    true
+    record.interest.user == user
   end
 
   def create?
