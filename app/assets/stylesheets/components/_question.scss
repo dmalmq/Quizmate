@@ -106,5 +106,6 @@ a.button:hover {
 
 a.button.active {
   transform: rotate(135deg);
+  color: black;
   transition: transform 0.5s;
 }
