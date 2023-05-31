@@ -22,16 +22,19 @@
                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 <span class="sr-only">Close menu</span>
               </button>
-              <p class="font-bold text-left">Explore specific topics in our quiz app for a more tailored experience! </p>
+              <p class="font-bold text-left">From broad to specific, here are some exaples of what you can search for! </p>
               <ul class="list-disc pl-4">
                 <li>
-                  <p class="text-left">Instead of just "books," try entering a book title like "Pride and Prejudice." </p>
+                  <p class="text-left"> "Jane Austen" or "Pride and Prejudice" </p>
                 </li>
                 <li>
-                  <p class="text-left">Similarly, go beyond "art" by searching for specific artists or styles, such as "Vincent van Gogh" or "Impressionism." </p>
+                  <p class="text-left"> "Art", "Impressionism" or "Vincent van Gogh" </p>
+                </li>
+                <li>
+                  <p class="text-left"> "Something extremely in depth" </p>
                 </li>
               </ul>
-              <p class="text-left">Challenge yourself with personalized quizzes!</p>
+              <p class="text-left">You can add and remove individual questions later on</p>
               <%= simple_form_for(@interest) do |f| %>
                 <div class="flex gap-2 pt-2 pb-10 ">
                   <%= f.input :name, placeholder: "music..", class: "h-10", label: false %>
@@ -44,10 +47,11 @@
       </div>
       <% @interests.sort.reverse.each do |interest| %>
         <%= link_to interest_path(interest), class: "no-underline" do %>
-          <div class="grow-0  border border-gray-200  w-36 shrink-0 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          <div class="grow-0  border bg-zinc-400 border-gray-200  w-36 shrink-0 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <img src="http://source.unsplash.com/featured/?<%= interest.name.split.join("%20") %>/800x333", class="w-36 h-24" %>
             <div class="h-16 bg-white flex flex-col justify-center grow-0 items-center">
               <h5 class="grow-0 text-center text-md font-bold tracking-tight text-gray-900 dark:text-white"><%= interest.name.capitalize %></h5>
+
             </div>
           </div>
         <% end %>
