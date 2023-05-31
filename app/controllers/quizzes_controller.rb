@@ -43,7 +43,7 @@ class QuizzesController < ApplicationController
     @questions = []
 
     8.times do
-      interest_sample = Interest.all.sample
+      interest_sample = Interest.where(user: current_user).sample
       all_questions = interest_sample.questions.order(streak: :asc)
       sampled_question = all_questions.sample
       @questions << sampled_question
@@ -51,6 +51,7 @@ class QuizzesController < ApplicationController
     if @questions.uniq.length == @questions.length
       nil
     else
+      @questions.uniq!
       interest_sample = Interest.all.sample
       all_questions = interest_sample.questions.order(streak: :asc)
       sampled_question = all_questions.sample

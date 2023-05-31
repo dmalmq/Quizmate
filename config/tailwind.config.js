@@ -9,7 +9,10 @@ module.exports = {
     "./node_modules/tw-elements/dist/js/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'font-family': ['"Rubik Bubbles"', 'cursive'],
+    },
   },
   plugins: [
     require("@tailwindcss/forms"),

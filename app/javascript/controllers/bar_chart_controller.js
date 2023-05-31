@@ -69,6 +69,11 @@ export default class extends Controller {
       this.optionsBarHorizontal
     );
   }
+
+  // filterArrayNan() {
+  //     this.percentageValue.filter(function(percentage) {
+  //     return !isNaN(percentage);
+  //   });
+  //   // Perform further operations with the filtered array
+  // }
 }
-
-
