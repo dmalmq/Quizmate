@@ -1,14 +1,19 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   static targets = ["dropdown"];
 
   connect() {
-    console.log("menu connectedddddddddd")
+    console.log("menu connectedddddddddd");
   }
 
   toggleDropdown() {
-    console.log(this)
-    this.dropdownTarget.classList.toggle("hidden")
+    console.log(this);
+    this.dropdownTarget.classList.toggle("hidden");
+  }
+
+  removeHide() {
+    console.log(this);
+    this.dropdownTarget.classList.remove("hidden");
   }
 }
