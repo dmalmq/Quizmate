@@ -4,75 +4,68 @@ import {
   initTE,
 } from "tw-elements";
 
-// Connects to data-controller="bar-chart"
+// Chart
 export default class extends Controller {
   static values = {
     percentage: String,
     title: String
   }
+
   connect() {
     console.log(this.percentageValue)
     console.log(this.titleValue)
     initTE({ Chart });
-    this.dataBarCustomOptions = {
+    this.dataBarHorizontal = {
       type: "bar",
       data: {
         labels: JSON.parse(this.titleValue),
         datasets: [
           {
-            label: "performance by interest",
+            label: [JSON.parse(this.titleValue)],
             data: JSON.parse(this.percentageValue),
             backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
+              "rgb(84, 56, 243)",
+              "rgb(243, 22, 2)",
             ],
-            borderColor: [
-              "rgba(255,99,132,1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-            ],
-            borderWidth: 1,
           },
         ],
       },
     };
-    this.optionsBarCustomOptions = {
+
+    this.optionsBarHorizontal = {
       options: {
-        plugins: {
-          legend: {
-            position: "top",
-            labels: {
-              color: "green",
-            },
-          },
-        },
+        indexAxis: "y",
         scales: {
           x: {
+            stacked: false,
+            grid: {
+              display: false,
+              borderDash: [2],
+              zeroLineColor: "rgba(0,0,0,0)",
+              zeroLineBorderDash: [2],
+              zeroLineBorderDashOffset: [2],
+            },
             ticks: {
-              color: "#4285F4",
+              color: "rgba(0,0,0, 0.5)",
             },
           },
           y: {
+            stacked: true,
+            grid: {
+              display: false,
+            },
             ticks: {
-              color: "#f44242",
+              color: "rgba(0,0,0, 0.5)",
             },
           },
         },
       },
     };
+
     new Chart(
-      document.getElementById("bar-chart-custom-options"),
-      this.dataBarCustomOptions,
-      this.optionsBarCustomOptions
+      document.getElementById("bar-chart-horizontal"),
+      this.dataBarHorizontal,
+      this.optionsBarHorizontal
     );
   }
-
-
 }
