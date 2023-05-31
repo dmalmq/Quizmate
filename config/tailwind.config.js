@@ -8,7 +8,10 @@ module.exports = {
     "./src/**/*.{html,js}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'font-family': ['"Rubik Bubbles"', 'cursive'],
+    },
   },
   plugins: [
     require("@tailwindcss/forms"),
