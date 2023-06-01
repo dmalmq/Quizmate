@@ -48,7 +48,7 @@
           <% @interests.sort.reverse.each do |interest| %>
             <%= link_to interest_path(interest), class: "no-underline" do %>
               <div class="grow-0 relative bg-opacity-0 shrink-0">
-                <% if current_user.photo.attached? %>
+                <% if interest.photo.attached? %>
                   <%= cl_image_tag interest.photo.key, class: "w-24 ring-offset-1 ring-1 h-24 mr-0 rounded-full border border-teal-900 shadow-lg" %>
                 <% else %>
                   <%= image_tag "default-avatar.png", class: "inline-block object-cover w-8 h-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2" %>
@@ -68,7 +68,6 @@
           <% end %>
         </div>
       </div>
-
     </div>
     <div class="flex flex-col px-2 place-items-center">
       <div class="pb-8">
