@@ -35,7 +35,11 @@
       aria-expanded="false">
       <span class="sr-only">Open main m-2 menu</span>
       <div class="relative inline-block">
-        <%= cl_image_tag current_user.photo.key, class: "inline-block object-cover w-8 h-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2" %>
+        <% if current_user.photo.attached? %>
+          <%= cl_image_tag current_user.photo.key, class: "inline-block object-cover w-8 h-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2" %>
+        <% else %>
+          <%= image_tag "default-avatar.png", class: "inline-block object-cover w-8 h-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2" %>
+        <% end %>
         <span class="absolute top-0 right-0 inline-block w-3 h-3 bg-green-600 border-2 border-white rounded-full"></span>
       </div>
     </button>
