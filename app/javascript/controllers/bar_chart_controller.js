@@ -22,6 +22,7 @@ export default class extends Controller {
             backgroundColor: [
               createGradient("rgb(105, 255, 151)", "rgb(0, 228, 255)"),
             ],
+            borderColor: "rgb(255,255,255)",
             borderRadius: 10,
           },
         ],
@@ -41,7 +42,7 @@ export default class extends Controller {
             zeroLineBorderDashOffset: [2],
           },
           ticks: {
-            color: "rgba(0,0,0, 0.5)",
+            color: "rgba(255,255, 255)",
             callback: function (value) {
               // Example: Append '%' symbol to the tick value
               return value + "%";
@@ -54,7 +55,7 @@ export default class extends Controller {
             display: false,
           },
           ticks: {
-            color: "rgba(0,0,0, 0.5)",
+            color: "rgba(255,255, 255)",
           },
         },
       },
