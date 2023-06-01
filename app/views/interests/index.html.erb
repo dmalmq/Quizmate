@@ -10,7 +10,7 @@
       <% if Challenge.all.count == 0 %>
         <div class="stat-value py-2 text-white text-3xl font-bold font-suez ml-2">----</div>
       <% else %>
-        <p class="stat-value py-2 text-white w-72 truncate text-3xl font-bold font-suez ml-2"><%= @most_correct_interest.capitalize %>mndklsahdklhjask</p>
+        <p class="stat-value py-2 text-white w-72 truncate text-3xl font-bold font-suez ml-2"><%= @most_correct_interest.capitalize %></p>
         <p class="align-middle text-white text-sm ml-2"><%= ((Interest.find{ |item| item.name == @most_correct_interest }.challenges.where(corrected: true).count.to_f / Interest.find{ |item| item.name == @most_correct_interest }.challenges.count ) * 100 ).ceil%> % answered correctly</p>
       <% end %>
     </div>
