@@ -32,7 +32,7 @@ class Interest < ApplicationRecord
     return 0 if @total_challenges <= 0
 
     @answered = challenges.where(corrected: true).count
-    ((@answered.to_f / @total_challenges) * 100).round(2)
+    ((@answered.to_f / @total_challenges) * 100).ceil
   end
 end
 
