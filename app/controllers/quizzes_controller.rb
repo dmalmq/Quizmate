@@ -4,14 +4,14 @@ class QuizzesController < ApplicationController
     @interests = Interest.all
     @questions = Question.all
     @challenges = Challenge.all
-    @total_challenges = 0
-    @answered = 0
-    @title = @interests.pluck(:name)
-    @user = current_user
-    @result = @interests.map do |interest|
-      interest.corrected_percentage
-    end
     stats(@interests)
+    @user = current_user
+    @interests.sort_by { |interest| interest.challenges.count }.reverse!
+    sampled_interests = @interests.take(5)
+    @result = sampled_interests.map { |interest| interest.corrected_percentage }
+    @result.delete(0)
+    @title = []
+    @title.concat(sampled_interests)
   end
 
   def show
@@ -49,11 +49,13 @@ class QuizzesController < ApplicationController
     params.fetch(:quiz, {}).permit(:number_of_question) # Number of quizzes each day
   end
 
-  def stats(interest)
+  def stats(interests)
     corrected_percentage = []
-    interest.each do |interest|
-      percentage = ((interest.challenges.where(corrected: true).count.to_f / interest.challenges.count) * 100).ceil
-      corrected_percentage << { interest_name: interest.name, percentage: percentage }
+    interests.each do |interest|
+      if interest.challenges.count >= 1
+        percentage = ((interest.challenges.where(corrected: true).count.to_f / interest.challenges.count) * 100).ceil
+        corrected_percentage << { interest_name: interest.name, percentage: percentage }
+      end
     end
     corrected_percentage.sort_by! { |interest| interest[:percentage] }.reverse!
     @most_correct_interest = corrected_percentage.first[:interest_name]
@@ -63,27 +65,35 @@ class QuizzesController < ApplicationController
   end
 
   def question_create
+    not_asked = Interest.last.questions.where(last_asked: nil).count
     @questions = []
-    8.times do
-      interest_sample = Interest.where(user: current_user).sample
-      all_questions = interest_sample.questions.order(streak: :asc)
-      sampled_question = all_questions.sample
-      @questions << sampled_question
-    end
-    if @questions.uniq.length == @questions.length
-      nil
+    if not_asked == 10
+      4.times do
+        last_interest = Interest.last
+        all_questions = last_interest.questions.order(streak: :asc)
+        sampled_question = all_questions.sample
+        @questions << sampled_question
+      end
+      4.times { take_question }
     else
+      8.times { take_question }
+    end
+    if @questions.uniq.length != @questions.length
       @questions.uniq!
-      interest_sample = Interest.all.sample
-      all_questions = interest_sample.questions.order(streak: :asc)
-      sampled_question = all_questions.sample
-      @questions << sampled_question
+      take_question
     end
     n = 0
-    @questions.each do |question|
+    @questions.shuffle.each do |question|
       n += 1
       challenge = Challenge.new(quiz: @quiz, question:, index_in_quiz: n)
       challenge.save
     end
+  end
+
+  def take_question
+    interest_sample = Interest.all.sample
+    all_questions = interest_sample.questions.order(streak: :asc)
+    sampled_question = all_questions.sample
+    @questions << sampled_question
   end
 end

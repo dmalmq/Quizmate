@@ -8,7 +8,7 @@
         <div class="bg-slate-800  h-2.5 rounded-full" style="width: <%= @challenge.index_in_quiz * 100 / @quiz.number_of_question %>%"></div>
       </div>
       <div class="group h-80 w-96 [perspective:1000px] px-4 mx-4 my-auto bg-indigo-700 rounded-lg mb-32">
-        <div class="relative h-full w-full rounded-xl shadow-xl transition-all duration-500 [transform-style:preserve-3d] <%= @challenge.user_option ? "group-active:[transform:rotateY(180deg)]" : "" %>">
+        <div class="relative h-full w-full rounded-xl shadow-xl transition-all duration-1000 [transform-style:preserve-3d] <%= @challenge.user_option ? "group-active:[transform:rotateY(180deg)]" : "" %>">
           <div class="absolute inset-0">
             <div class="px-4 mx-4 my-auto p-2 bg-white rounded-lg mb-32">
               <div class="bg-gray-200 my-4 rounded-full dark:bg-gray-700">
