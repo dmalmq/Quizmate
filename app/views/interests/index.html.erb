@@ -1,20 +1,19 @@
 <%= render "shared/navbar2" %>
 <%= render "shared/navbar3" %>
 
-<div class="bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-slate-200 to-indigo-700 h-screen flex flex-col">
-  <h2 class="pt-2 pb-0 font-suez text-center bg-gradient-to-r from-emerald-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text text-md font-extrabold text-transparent sm:text-3xl">
-
+<div class="bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-slate-700 to-indigo-900 h-screen flex flex-col">
+  <h2 class="pb-3 pt-12 font-suez text-center bg-gradient-to-r from-emerald-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text text-md font-extrabold text-transparent sm:text-3xl">
     Welcome <%= current_user.name %>
   </h2>
-  <h1 class="text-2xl font-bold  pl-2 mt-2 py-2 text-center">Your Interests:</h1>
   <div class="pt-1 rounded-t-2xl overflow-x-auto flex justify-center">
     <div class="grid grid-rows-2 grid-flow-col gap-2 grow-0 w-96 overflow-x-auto px-2 justify-content">
-      <div class="grow-0  border border-gray-200  w-36 shrink-0 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <div class="grow-0  w-36 shrink-0 rounded-lg dark:bg-gray-800 dark:border-gray-700">
         <div class="w-full h-full" %>
           <div class="text-center" data-controller="menu">
-            <button data-action="menu#removeHide" class="text-slate-800 h-40 w-full bg-slate-300 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 rounded-lg text-blue-700 text-6xl font-bold dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800" type="button" data-drawer-target="drawer-bottom-example" data-drawer-show="drawer-bottom-example" data-drawer-placement="bottom" aria-controls="drawer-bottom-example">
+            <button data-action="menu#removeHide" class="text-slate-800 h-36 h-36 w-full bg-slate-300 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 rounded-full text-blue-700 text-6xl font-bold dark:bg-indigo-600 dark:hover:bg-indigo-700 focus:outline-none dark:focus:ring-indigo-800" type="button" data-drawer-target="drawer-bottom-example" data-drawer-show="drawer-bottom-example" data-drawer-placement="bottom" aria-controls="drawer-bottom-example">
               <p class="text-blue-500 m-0">+</p>
             </button>
+            <h5 class="grow-0 text-center mb-0 pb-0 pt-2 text-md font-bold tracking-tight text-slate-400 dark:text-white">Add more</h5>
             <!-- drawer component -->
             <div data-menu-target="dropdown" id="drawer-bottom-example" class="hidden fixed bottom-0 left-0 right-0 z-40 w-full p-4 overflow-y-auto transition-transform bg-white dark:bg-gray-800 transform-none" tabindex="-1" aria-labelledby="drawer-bottom-label">
               <h5 id="drawer-bottom-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"><svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>Add a new interest</h5>
@@ -22,34 +21,26 @@
                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 <span class="sr-only">Close menu</span>
               </button>
-              <p class="font-bold text-left">Explore specific topics in our quiz app for a more tailored experience! </p>
-              <ul class="list-disc pl-4">
-                <li>
-                  <p class="text-left">Instead of just "books," try entering a book title like "Pride and Prejudice." </p>
-                </li>
-                <li>
-                  <p class="text-left">Similarly, go beyond "art" by searching for specific artists or styles, such as "Vincent van Gogh" or "Impressionism." </p>
-                </li>
-              </ul>
-              <p class="text-left">Challenge yourself with personalized quizzes!</p>
+              <p class="font-bold text-left">From broad to specific, explore add topics for a tailored experience! </p>
               <%= simple_form_for(@interest) do |f| %>
-                <div class="flex gap-2 pt-2 pb-10 ">
-                  <%= f.input :name, placeholder: "music..", class: "h-10", label: false %>
+                <div class="flex gap-2 pt-2 pb-3 ">
+                  <%= f.input :name, placeholder: "Impressionism or Monet...", class: "h-10", label: false %>
                   <%= f.submit 'Add', class: "focus:outline-none text-slate-50 h-10 bg-indigo-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-md px-4 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
                 </div>
               <% end %>
+              <div class="mb-5 mt-0"><p class="text-left italic text-sm">Challenge yourself with personalized quizzes!</p></div>
             </div>
           </div>
         </div>
       </div>
       <% @interests.sort.reverse.each do |interest| %>
         <%= link_to interest_path(interest), class: "no-underline" do %>
-          <div class="grow-0 relative rounded-md border bg-slate-100 border-gray-500 w-36 shrink-0 border-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
-            <img src="http://source.unsplash.com/featured/?<%= interest.name.split.join("%20") %>/800x333", class="w-36 h-24 rounded-md" %>
-            <div class="absolute text-slate-200 bg-blue-500 w-8 h-8 rounded-full text-center m-1 p-1 top-0 right-0"><p><%= interest.questions.count %></p></div>
-            <div class="h-16 bg-slate-100 rounded-md flex flex-col justify-center grow-0 items-center">
-              <h5 class="grow-0 text-center mb-0 pb-0 pt-2 text-md font-bold tracking-tight text-gray-900 dark:text-white"><%= interest.name.capitalize %></h5>
-              <p class ="italic text-grey-900 pt-0"><%= interest.questions.count %> questions</p>
+          <div class="grow-0 relative bg-opacity-0 w-36 shrink-0">
+            <img src="http://source.unsplash.com/featured/?<%= interest.name.split.join("%20") %>/800x333", class="w-32 h-32 rounded-full border border-teal-900 shadow-lg" %>
+            <div class="absolute text-slate-200 bg-blue-500 w-8 h-8 rounded-full text-center m-1 p-1 top-1 right-3"><p><%= interest.questions.count %></p></div>
+            <div class="h-16 bg-opacity-0 flex flex-col justify-center grow-0 items-center">
+              <h5 class="grow-0 text-center mb-0 pb-0 pt-2 text-md font-bold tracking-tight text-slate-100 dark:text-white"><%= interest.name.capitalize %></h5>
+              <p class ="italic text-slate-400 pt-0"><%= interest.questions.count %> questions</p>
             </div>
           </div>
         <% end %>
