@@ -17,14 +17,11 @@ export default class extends Controller {
         labels: JSON.parse(this.titleValue),
         datasets: [
           {
-            label: "Top Interest",
+
             data: JSON.parse(this.percentageValue),
-            color: "white !important",
-            opacity: 1,
             backgroundColor: [
               createGradient("rgb(105, 255, 151)", "rgb(0, 228, 255)"),
             ],
-            borderColor: "rgb(255,255,255)",
             borderRadius: 10,
           },
         ],
@@ -34,11 +31,13 @@ export default class extends Controller {
     this.optionsBarHorizontal = {
       plugins: {
         legend: {
+          display: false,
           labels: {
             color: 'white',
           }
         },
       },
+
       indexAxis: "y",
       scales: {
         x: {
@@ -51,12 +50,15 @@ export default class extends Controller {
             zeroLineBorderDashOffset: [2],
           },
           // ticks: {
-          //   color: "rgba(255,255, 255)",
-          //   callback: function (value) {
-          //     // Example: Append '%' symbol to the tick value
-          //     return value;
-          //   },
+          //   color: "#581FAF",
           // },
+          ticks: {
+            // color: "rgba(255,255, 255)",
+            display: false,
+            // callback: function (value, index, ticks) {
+            //   return "";
+            // },
+          },
         },
         y: {
           stacked: true,
@@ -65,6 +67,7 @@ export default class extends Controller {
           },
           ticks: {
             color: "rgba(255,255, 255)",
+            // display: false,
           },
         },
       },
