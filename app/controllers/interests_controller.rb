@@ -1,5 +1,4 @@
 class InterestsController < ApplicationController
-
   def index
     @interests = policy_scope(Interest)
     @interest = Interest.new
@@ -35,6 +34,6 @@ class InterestsController < ApplicationController
   private
 
   def interest_params
-    params.require(:interest).permit(:user, :name, :priority)
+    params.require(:interest).permit(:user, :name, :priority, :photo)
   end
 end
