@@ -38,14 +38,17 @@
                     <p class="text-left italic text-sm">Challenge yourself with personalized quizzes!</p>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
           <% @interests.sort.reverse.each do |interest| %>
             <%= link_to interest_path(interest), class: "no-underline" do %>
               <div class="grow-0 relative bg-opacity-0 shrink-0">
-                <img src="http://source.unsplash.com/featured/?<%= interest.name.split.join("%20") %>/800x333", class="w-24 ring-offset-1 ring-1 h-24 mr-0 rounded-full border border-teal-900 shadow-lg" %>
+                <% if current_user.photo.attached? %>
+                  <%= cl_image_tag interest.photo.key, class: "w-24 ring-offset-1 ring-1 h-24 mr-0 rounded-full border border-teal-900 shadow-lg" %>
+                <% else %>
+                  <%= image_tag "default-avatar.png", class: "inline-block object-cover w-8 h-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2" %>
+                <% end %>
                 <div class="absolute bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-rose-500 to-indigo-700 w-6 h-6 rounded-full text-white text-center m-1 p-1 top-0 right-0 ring-offset-1 shadow-2xl">
                   <p class="flex items-center justify-center h-full font-suez"><%= interest.questions.count %></p>
                 </div>
