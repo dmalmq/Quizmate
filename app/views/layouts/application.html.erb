@@ -2,12 +2,17 @@
 <html>
   <head>
     <title>Quizmate</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
+    <%= render 'shared/ios_pwa_links' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= favicon_link_tag "favicon.png", rel: "icon", type: "image/png" %>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css">
     <script src="https://kit.fontawesome.com/d9c17ccc37.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.turbo.min.js"></script>
