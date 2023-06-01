@@ -39,7 +39,7 @@
         <p class="align-middle text-white">21% more than last month</p>
       </div>
       <div class="bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-rose-500 to-indigo-700 p-2 rounded-lg mr-3 drop-shadow-2xl">
-        <div class="stat-title text-white inline-block align-middle">Total Corrected</div>
+        <div class="stat-title text-white inline-block align-middle">Total Correct</div>
         <div class="stat-value py-2 text-white text-4xl font-bold"><%= Challenge.where(corrected: true).count %></div>
         <p class="align-middle text-white"><%= ((Challenge.where(corrected: true).count.to_f / Challenge.all.count) * 100).to_i %>% answered correctly</p>
       </div>
