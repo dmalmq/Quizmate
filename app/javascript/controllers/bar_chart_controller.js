@@ -50,13 +50,13 @@ export default class extends Controller {
             zeroLineBorderDash: [2],
             zeroLineBorderDashOffset: [2],
           },
-          ticks: {
-            color: "rgba(255,255, 255)",
-            callback: function (value) {
-              // Example: Append '%' symbol to the tick value
-              return value + "%";
-            },
-          },
+          // ticks: {
+          //   color: "rgba(255,255, 255)",
+          //   callback: function (value) {
+          //     // Example: Append '%' symbol to the tick value
+          //     return value;
+          //   },
+          // },
         },
         y: {
           stacked: true,
