@@ -24,16 +24,19 @@
         <svg class="h-5 w-5 " viewBox="0 -0.5 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>plus_circle [#1427]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-179.000000, -600.000000)" fill="#E2E8F0"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M137.7,450 C137.7,450.552 137.2296,451 136.65,451 L134.55,451 L134.55,453 C134.55,453.552 134.0796,454 133.5,454 C132.9204,454 132.45,453.552 132.45,453 L132.45,451 L130.35,451 C129.7704,451 129.3,450.552 129.3,450 C129.3,449.448 129.7704,449 130.35,449 L132.45,449 L132.45,447 C132.45,446.448 132.9204,446 133.5,446 C134.0796,446 134.55,446.448 134.55,447 L134.55,449 L136.65,449 C137.2296,449 137.7,449.448 137.7,450 M133.5,458 C128.86845,458 125.1,454.411 125.1,450 C125.1,445.589 128.86845,442 133.5,442 C138.13155,442 141.9,445.589 141.9,450 C141.9,454.411 138.13155,458 133.5,458 M133.5,440 C127.70085,440 123,444.477 123,450 C123,455.523 127.70085,460 133.5,460 C139.29915,460 144,455.523 144,450 C144,444.477 139.29915,440 133.5,440" id="plus_circle-[#1427]"> </path> </g> </g> </g> </g></svg>
       </button>
       <!-- drawer component -->
-      <div data-menu-target="dropdown" id="drawer-bottom-example" class="hidden fixed bottom-0 left-0 right-0 z-40 w-full p-4 overflow-y-auto transition-transform bg-slate-100 drop-shadow-xl dark:bg-gray-800 transform-none" tabindex="-1" aria-labelledby="drawer-bottom-label">
-        <h3 id="drawer-bottom-label" class="inline-flex items-center mb-2 text-base font-semibold text-gray-700 dark:text-gray-400"><svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></svg>Add Questions</h3>
-        <h5 id="drawer-bottom-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"><svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></svg>Add up to 10 additional questions for your interest in <%= @interest.name %></h5>
+      <div data-menu-target="dropdown" id="drawer-bottom-example" class="hidden fixed bottom-0 left-0 right-0 z-40 w-full p-4 overflow-y-auto transition-transform bg-slate-100 rounded-xl drop-shadow-xl dark:bg-gray-800 transform-none" tabindex="-1" aria-labelledby="drawer-bottom-label">
+        <h3 id="drawer-bottom-label" class="inline-flex items-center mb-2 text-base font-semibold text-gray-700 dark:text-gray-400"><svg class="w-5 h-5 mr-3" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></svg>Add Questions</h3>
+        <h5 id="drawer-bottom-label" class="inline-flex items-center mb-2 text-base font-semibold text-gray-500 dark:text-gray-400"><svg class="w-5 h-5 mr-3" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></svg>Add up to 10 additional questions for your interest in <%= @interest.name %></h5>
         <button type="button" data-drawer-hide="drawer-bottom-example" aria-controls="drawer-bottom-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
           <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
           <span class="sr-only">Close menu</span>
         </button>
         <%= form_tag interest_questions_path(@interest), method: :post do %>
-          <%= label_tag :amount, ""%>
-          <%= number_field_tag :amount, nil, in: 1..10, id: "amount" %>
+          <div class="pb-3" data-controller="counter">
+            <span class="minus font-bold bg-slate-300 text-slate-50 rounded-md py-1 px-2 shadow-sm" data-action="click->counter#decrease">-</span>
+            <%= number_field_tag :amount, nil, in: 1..10, id: "amount", class:"rounded-md border-indigo-100 text-center", data: {counter_target: "input"} %>
+            <span class="plus font-bold bg-slate-300 text-slate-50 rounded-md py-1 px-2 shadow-sm" data-action="click->counter#increase">+</span>
+          </div>
           <div><%= submit_tag "Submit", name: "commit", value:"Create!", class:"mx-3 focus:outline-none text-slate-50 no-underline h-10 bg-violet-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %></div>
         <% end %>
         <div class="pb-16"></div>
@@ -78,4 +81,3 @@
   <%= f.input :photo, as: :file %>
   <%= f.button :submit %>
 <% end %>
-
