@@ -2,72 +2,65 @@
 <%= render "shared/navbar3" %>
 
 
- <div>
-<%= link_to interest_path(@interest), data:{turbo_method: :delete, turbo_confirm: "Delete #{@interest.name} ?"} do%>
-  <svg class="h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M4.99997 8H6.5M6.5 8V18C6.5 19.1046 7.39543 20 8.5 20H15.5C16.6046 20 17.5 19.1046 17.5 18V8M6.5 8H17.5M17.5 8H19M9 5H15M9.99997 11.5V16.5M14 11.5V16.5" stroke="#ff0000" stroke-linecap="round" stroke-linejoin="round"></path></g></svg>
-<% end %>
-</div>
-<div class="m-2">
-  <h1 class="text-2xl font-bold uppercase text-blue-700"><%= @interest.name %></h1>
-</div>
-<div class="text-center" data-controller="menu">
+<div class="bg-gradient-to-b from-stone-900 via-violet-900 to-violet-800">
   <div>
-    <p class="mb-2 font-bold text-blue-700 dark:text-gray-400"><%= @interest.questions.count %> Questions</p>
+    <h3 class="pb-0 pt-4 font-suez text-center bg-gradient-to-r from-emerald-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text text-2xl font-extrabold text-transparent"><%= @interest.name %></h3>
   </div>
-  <button data-action="menu#removeHide" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button" data-drawer-target="drawer-bottom-example" data-drawer-show="drawer-bottom-example" data-drawer-placement="bottom" aria-controls="drawer-bottom-example">
-    Add more!
-  </button>
-  <!-- drawer component -->
-  <div data-menu-target="dropdown" id="drawer-bottom-example" class="hidden fixed bottom-0 left-0 right-0 z-40 w-full p-4 overflow-y-auto transition-transform bg-slate-100 drop-shadow-xl dark:bg-gray-800 transform-none" tabindex="-1" aria-labelledby="drawer-bottom-label">
-
-    <h3 id="drawer-bottom-label" class="inline-flex items-center mb-2 text-base font-semibold text-gray-700 dark:text-gray-400"><svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></svg>Add Questions</h3>
-    <h5 id="drawer-bottom-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"><svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></svg>Add up to 10 additional questions for your interest in <%= @interest.name %></h5>
-    <button type="button" data-drawer-hide="drawer-bottom-example" aria-controls="drawer-bottom-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
-      <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-      <span class="sr-only">Close menu</span>
-    </button>
-    <%= form_tag interest_questions_path(@interest), method: :post do %>
-      <%= label_tag :amount, ""%>
-      <%= number_field_tag :amount, nil, in: 1..10, id: "amount" %>
-      <div><%= submit_tag "Submit", name: "commit", value:"Create!", class:"mx-3 focus:outline-none text-slate-50 no-underline h-10 bg-violet-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %></div>
-    <% end %>
-    <div class="pb-16"></div>
-  </div>
-</div>
-<% @questions.each_with_index do |question, index| %>
-<div class="bg-">
-  <div class="h-42 mx-3 pb-0">
-    <div id="accordion-color" data-accordion="collapse" data-active-classes="bg-blue-100 dark:bg-gray-800 text-blue-600 dark:text-white">
-      <h6 id="accordion-color-heading-1-<%= question.id%>" class="mb-0">
-        <p class="flex items-center justify-between mb-2 w-full p-2 font-bold text-left text-slate-50 border border-b-0 border-gray-200 rounded-t-xl bg-indigo-700"><%= @questions.size - index %> ) <%= question.title %><%= link_to "x", question_path(question), data:{turbo_method: :delete, turbo_confirm: "Delete #{question.title} ?"} %></p>
-      </h6>
-      <div id="accordion-color-body-1-<%= question.id%>" class="hidden" aria-labelledby="accordion-color-heading-1-<%= question.id%>">
-      </div>
-      <h6 id="accordion-color-heading-2-<%= question.id%>">
-        <button type="button" class="flex items-center justify-between w-full p-2 font-bold text-left text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-800 dark:border-gray-700 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-color-body-2-<%= question.id%>" aria-expanded="false" aria-controls="accordion-color-body-2-<%= question.id%>">
-          <span>Answer</span>
-          <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+  <div class="flex items-center justify-between mx-3 mb-3">
+    <div class="text-center" data-controller="menu">
+      <div class="flex gap-2">
+      <p class="mb-0 font-bold text-slate-200 dark:text-gray-400"><%= @interest.questions.count %> Questions</p>
+      <button data-action="menu#removeHide" type="button" data-drawer-target="drawer-bottom-example" data-drawer-show="drawer-bottom-example" data-drawer-placement="bottom" aria-controls="drawer-bottom-example">
+        <svg class="h-5 w-5 " viewBox="0 -0.5 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>plus_circle [#1427]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-179.000000, -600.000000)" fill="#E2E8F0"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M137.7,450 C137.7,450.552 137.2296,451 136.65,451 L134.55,451 L134.55,453 C134.55,453.552 134.0796,454 133.5,454 C132.9204,454 132.45,453.552 132.45,453 L132.45,451 L130.35,451 C129.7704,451 129.3,450.552 129.3,450 C129.3,449.448 129.7704,449 130.35,449 L132.45,449 L132.45,447 C132.45,446.448 132.9204,446 133.5,446 C134.0796,446 134.55,446.448 134.55,447 L134.55,449 L136.65,449 C137.2296,449 137.7,449.448 137.7,450 M133.5,458 C128.86845,458 125.1,454.411 125.1,450 C125.1,445.589 128.86845,442 133.5,442 C138.13155,442 141.9,445.589 141.9,450 C141.9,454.411 138.13155,458 133.5,458 M133.5,440 C127.70085,440 123,444.477 123,450 C123,455.523 127.70085,460 133.5,460 C139.29915,460 144,455.523 144,450 C144,444.477 139.29915,440 133.5,440" id="plus_circle-[#1427]"> </path> </g> </g> </g> </g></svg>
+      </button>
+      <!-- drawer component -->
+      <div data-menu-target="dropdown" id="drawer-bottom-example" class="hidden fixed bottom-0 left-0 right-0 z-40 w-full p-4 overflow-y-auto transition-transform bg-slate-100 drop-shadow-xl dark:bg-gray-800 transform-none" tabindex="-1" aria-labelledby="drawer-bottom-label">
+        <h3 id="drawer-bottom-label" class="inline-flex items-center mb-2 text-base font-semibold text-gray-700 dark:text-gray-400"><svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></svg>Add Questions</h3>
+        <h5 id="drawer-bottom-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"><svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></svg>Add up to 10 additional questions for your interest in <%= @interest.name %></h5>
+        <button type="button" data-drawer-hide="drawer-bottom-example" aria-controls="drawer-bottom-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+          <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          <span class="sr-only">Close menu</span>
         </button>
-      </h6>
-      <div id="accordion-color-body-2-<%= question.id%>" class="hidden" aria-labelledby="accordion-color-heading-2-<%= question.id%>">
-        <div class="p-2 border border-b-0 border-gray-200 dark:border-gray-700">
-          <p class="mb-2 text-gray-500 dark:text-gray-400"><%= question.correct_option.content %></p>
-        </div>
+        <%= form_tag interest_questions_path(@interest), method: :post do %>
+          <%= label_tag :amount, ""%>
+          <%= number_field_tag :amount, nil, in: 1..10, id: "amount" %>
+          <div><%= submit_tag "Submit", name: "commit", value:"Create!", class:"mx-3 focus:outline-none text-slate-50 no-underline h-10 bg-violet-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %></div>
+        <% end %>
+        <div class="pb-16"></div>
       </div>
-      <h6 id="accordion-color-heading-3-<%= question.id%>">
-        <button type="button" class="flex items-center justify-between w-full p-2 font-bold text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-800 dark:border-gray-700 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-color-body-3-<%= question.id%>" aria-expanded="false" aria-controls="accordion-color-body-3-<%= question.id%>">
-          <span>Description</span>
-          <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-        </button>
-      </h6>
-      <div id="accordion-color-body-3-<%= question.id%>" class="hidden" aria-labelledby="accordion-color-heading-3-<%= question.id%>">
-        <div class="p-2 border border-t-0 border-gray-200 dark:border-gray-700">
-          <p class="mb-2 text-gray-500 dark:text-gray-400"><%= question.content %></p>
-        </div>
       </div>
-      <hr style="height:0.5px">
+    </div>
+    <div>
+      <%= link_to interest_path(@interest), data:{turbo_method: :delete, turbo_confirm: "Delete #{@interest.name} ?"} do%>
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Settings"> <g id="Vector"> <path d="M20.3499 8.92293L19.9837 8.7192C19.9269 8.68756 19.8989 8.67169 19.8714 8.65524C19.5983 8.49165 19.3682 8.26564 19.2002 7.99523C19.1833 7.96802 19.1674 7.93949 19.1348 7.8831C19.1023 7.82677 19.0858 7.79823 19.0706 7.76998C18.92 7.48866 18.8385 7.17515 18.8336 6.85606C18.8331 6.82398 18.8332 6.79121 18.8343 6.72604L18.8415 6.30078C18.8529 5.62025 18.8587 5.27894 18.763 4.97262C18.6781 4.70053 18.536 4.44993 18.3462 4.23725C18.1317 3.99685 17.8347 3.82534 17.2402 3.48276L16.7464 3.1982C16.1536 2.85658 15.8571 2.68571 15.5423 2.62057C15.2639 2.56294 14.9765 2.56561 14.6991 2.62789C14.3859 2.69819 14.0931 2.87351 13.5079 3.22396L13.5045 3.22555L13.1507 3.43741C13.0948 3.47091 13.0665 3.48779 13.0384 3.50338C12.7601 3.6581 12.4495 3.74365 12.1312 3.75387C12.0992 3.7549 12.0665 3.7549 12.0013 3.7549C11.9365 3.7549 11.9024 3.7549 11.8704 3.75387C11.5515 3.74361 11.2402 3.65759 10.9615 3.50224C10.9334 3.48658 10.9056 3.46956 10.8496 3.4359L10.4935 3.22213C9.90422 2.86836 9.60915 2.69121 9.29427 2.62057C9.0157 2.55807 8.72737 2.55634 8.44791 2.61471C8.13236 2.68062 7.83577 2.85276 7.24258 3.19703L7.23994 3.1982L6.75228 3.48124L6.74688 3.48454C6.15904 3.82572 5.86441 3.99672 5.6517 4.23614C5.46294 4.4486 5.32185 4.69881 5.2374 4.97018C5.14194 5.27691 5.14703 5.61896 5.15853 6.3027L5.16568 6.72736C5.16676 6.79166 5.16864 6.82362 5.16817 6.85525C5.16343 7.17499 5.08086 7.48914 4.92974 7.77096C4.9148 7.79883 4.8987 7.8267 4.86654 7.88237C4.83436 7.93809 4.81877 7.96579 4.80209 7.99268C4.63336 8.26452 4.40214 8.49186 4.12733 8.65572C4.10015 8.67193 4.0715 8.68752 4.01521 8.71871L3.65365 8.91908C3.05208 9.25245 2.75137 9.41928 2.53256 9.65669C2.33898 9.86672 2.19275 10.1158 2.10349 10.3872C2.00259 10.6939 2.00267 11.0378 2.00424 11.7255L2.00551 12.2877C2.00706 12.9708 2.00919 13.3122 2.11032 13.6168C2.19979 13.8863 2.34495 14.134 2.53744 14.3427C2.75502 14.5787 3.05274 14.7445 3.64974 15.0766L4.00808 15.276C4.06907 15.3099 4.09976 15.3266 4.12917 15.3444C4.40148 15.5083 4.63089 15.735 4.79818 16.0053C4.81625 16.0345 4.8336 16.0648 4.8683 16.1255C4.90256 16.1853 4.92009 16.2152 4.93594 16.2452C5.08261 16.5229 5.16114 16.8315 5.16649 17.1455C5.16707 17.1794 5.16658 17.2137 5.16541 17.2827L5.15853 17.6902C5.14695 18.3763 5.1419 18.7197 5.23792 19.0273C5.32287 19.2994 5.46484 19.55 5.65463 19.7627C5.86915 20.0031 6.16655 20.1745 6.76107 20.5171L7.25478 20.8015C7.84763 21.1432 8.14395 21.3138 8.45869 21.379C8.73714 21.4366 9.02464 21.4344 9.30209 21.3721C9.61567 21.3017 9.90948 21.1258 10.4964 20.7743L10.8502 20.5625C10.9062 20.5289 10.9346 20.5121 10.9626 20.4965C11.2409 20.3418 11.5512 20.2558 11.8695 20.2456C11.9015 20.2446 11.9342 20.2446 11.9994 20.2446C12.0648 20.2446 12.0974 20.2446 12.1295 20.2456C12.4484 20.2559 12.7607 20.3422 13.0394 20.4975C13.0639 20.5112 13.0885 20.526 13.1316 20.5519L13.5078 20.7777C14.0971 21.1315 14.3916 21.3081 14.7065 21.3788C14.985 21.4413 15.2736 21.4438 15.5531 21.3855C15.8685 21.3196 16.1657 21.1471 16.7586 20.803L17.2536 20.5157C17.8418 20.1743 18.1367 20.0031 18.3495 19.7636C18.5383 19.5512 18.6796 19.3011 18.764 19.0297C18.8588 18.7252 18.8531 18.3858 18.8417 17.7119L18.8343 17.2724C18.8332 17.2081 18.8331 17.1761 18.8336 17.1445C18.8383 16.8247 18.9195 16.5104 19.0706 16.2286C19.0856 16.2007 19.1018 16.1726 19.1338 16.1171C19.166 16.0615 19.1827 16.0337 19.1994 16.0068C19.3681 15.7349 19.5995 15.5074 19.8744 15.3435C19.9012 15.3275 19.9289 15.3122 19.9838 15.2818L19.9857 15.2809L20.3472 15.0805C20.9488 14.7472 21.2501 14.5801 21.4689 14.3427C21.6625 14.1327 21.8085 13.8839 21.8978 13.6126C21.9981 13.3077 21.9973 12.9658 21.9958 12.2861L21.9945 11.7119C21.9929 11.0287 21.9921 10.6874 21.891 10.3828C21.8015 10.1133 21.6555 9.86561 21.463 9.65685C21.2457 9.42111 20.9475 9.25526 20.3517 8.92378L20.3499 8.92293Z" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8.00033 12C8.00033 14.2091 9.79119 16 12.0003 16C14.2095 16 16.0003 14.2091 16.0003 12C16.0003 9.79082 14.2095 7.99996 12.0003 7.99996C9.79119 7.99996 8.00033 9.79082 8.00033 12Z" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g> </g></svg>
+      <% end %>
     </div>
   </div>
-  </div>
-<% end %>
-<div class="pb-20"></div>
+  <% @questions.each_with_index do |question, index| %>
+    <div class="h-42 mx-3 pb-0 bg-slate-200 bg-opacity-80 shadow-md rounded-lg">
+      <div id="accordion-color" data-accordion="collapse" data-active-classes="dark:bg-gray-800 text-blue-600 dark:text-white">
+        <h6 id="accordion-color-heading-1-<%= question.id%>" class="mb-0">
+          <p class="flex items-center justify-between mb-0 w-full px-2 pt-3 font-bold text-left text-slate-900 rounded-t-xl bg-opacity-0"><%= question.title %><%= link_to question_path(question), data:{turbo_method: :delete, turbo_confirm: "Delete #{question.title} ?"} do %>
+          <svg class="w-5 h-5 pr-1" fill="#0f172a" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style> .cls-1 { fill-rule: evenodd; } </style> </defs> <path id="cancel" class="cls-1" d="M936,120a12,12,0,1,1,12-12A12,12,0,0,1,936,120Zm0-22a10,10,0,1,0,10,10A10,10,0,0,0,936,98Zm4.706,14.706a0.951,0.951,0,0,1-1.345,0l-3.376-3.376-3.376,3.376a0.949,0.949,0,1,1-1.341-1.342l3.376-3.376-3.376-3.376a0.949,0.949,0,1,1,1.341-1.342l3.376,3.376,3.376-3.376a0.949,0.949,0,1,1,1.342,1.342l-3.376,3.376,3.376,3.376A0.95,0.95,0,0,1,940.706,112.706Z" transform="translate(-924 -96)"></path> </g></svg>
+          <% end %>
+        </h6>
+        <div id="accordion-color-body-1-<%= question.id%>" class="hidden" aria-labelledby="accordion-color-heading-1-<%= question.id%>">
+        </div>
+        <h6 id="accordion-color-heading-2-<%= question.id%>">
+          <button type="button" class="flex items-center justify-center w-full pt-0 px-2 font-bold text-left text-slate-900" data-accordion-target="#accordion-color-body-2-<%= question.id%>" aria-expanded="false" aria-controls="accordion-color-body-2-<%= question.id%>">
+            <svg data-accordion-icon class="w-5 h-5 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+        </h6>
+        <div id="accordion-color-body-2-<%= question.id%>" class="hidden" aria-labelledby="accordion-color-heading-2-<%= question.id%>">
+          <p class="mb-1 text-center text-gray-900 dark:text-green-800">Answer</p>
+          <div class="p-2 bg-slate-100 rounded-lg mb-3 mx-3">
+            <p class="mb-2 font-semibold text-gray-800 dark:text-green-800"><%= question.correct_option.content %></p>
+            <p class="mb-2 text-gray-800 dark:text-gray-800"><%= question.content %></p>
+          </div>
+        </div>
+        <hr style="height:0.5px">
+      </div>
+    </div>
+  <% end %>
+  <div class="pb-20"></div>
+</div>
