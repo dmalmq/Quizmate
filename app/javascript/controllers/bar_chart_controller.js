@@ -19,6 +19,8 @@ export default class extends Controller {
           {
             label: "Top Interest",
             data: JSON.parse(this.percentageValue),
+            color: "white !important",
+            opacity: 1,
             backgroundColor: [
               createGradient("rgb(105, 255, 151)", "rgb(0, 228, 255)"),
             ],
@@ -30,6 +32,13 @@ export default class extends Controller {
     };
 
     this.optionsBarHorizontal = {
+      plugins: {
+        legend: {
+          labels: {
+            color: 'white',
+          }
+        },
+      },
       indexAxis: "y",
       scales: {
         x: {
