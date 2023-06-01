@@ -19,7 +19,7 @@ class InterestPolicy < ApplicationPolicy
     # NOTE: Be explicit about which records you allow access to!
 
     def resolve
-      scope.where(user:)
+      scope.where(user: user)
     end
   end
 end
