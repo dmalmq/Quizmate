@@ -11,11 +11,11 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :users, only: %i[show index update]
-  resources :interests, only: [:index, :show, :create, :destroy] do
+  resources :interests, only: %i[index show create update destroy] do
     resources :questions, only: [:create]
   end
-  resources :quizzes, only: [:index, :show, :create, :new] do
-    resources :challenges, only: [:create, :new, :show]
+  resources :quizzes, only: %i[index show create new] do
+    resources :challenges, only: %i[create new show]
 
     resources :questions, only: [:show], controller: "quizzes/questions"
   end
@@ -25,10 +25,6 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount Blazer::Engine, at: "blazer"
   end
-
-
-
-
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Defines the root path route ("/")
