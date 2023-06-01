@@ -9,7 +9,11 @@
 <div class="bg-gradient-to-b from-stone-900 via-violet-900 to-violet-800">
   <div class="flex flex-col white pt-3">
     <div class="flex flex-col items-center content-center mx-auto pb-3 mt-2">
-      <%= cl_image_tag current_user.photo.key, class: " object-cover w-32 h-32 rounded-full bg-white ring ring-primary ring-offset-base-100 ring-offset-2" %>
+    <% if current_user.photo.attached? %>
+      <%= cl_image_tag current_user.photo.key, class: "object-cover w-32 h-32 rounded-full bg-white ring ring-primary ring-offset-base-100 ring-offset-2" %>
+    <% else %>
+      <%= image_tag "default-avatar.png", class: "object-cover w-32 h-32 rounded-full bg-white ring ring-primary ring-offset-base-100 ring-offset-2" %>
+    <% end %>
       <div class="flex flex-row justify-end">
         <div class = "text-4xl align-middle text-white text-center font-bold font-suez mt-3"><%= @user.name %></div>
       </div>
@@ -30,13 +34,12 @@
         <div class=" grid grid-cols-2 gap-2 h-1/6 ">
           <div class="bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-rose-500 to-indigo-700 p-2  rounded-2xl drop-shadow-2xl">
             <div class="stat-title text-white inline-block align-middle">Top performance</div>
-            <div class="stat-value py-2 text-white text-2xl font-bold font-suez"><%= @most_correct_interest.capitalize %></div>
+            <div class="stat-value py-2 text-white truncate w-38 text-xl font-bold font-suez"><%= @most_correct_interest.capitalize %></div>
             <p class="align-middle text-white"><%= @most_correct_percentage %>% answered correctly</p>
           </div>
           <div class="bg-gradient-to-r from-green-400 to-blue-500 p-2 rounded-2xl  drop-shadow-2xl">
             <div class="stat-title text-white inline-block align-middle">Improving</div>
-            yo
-            <div class="stat-value py-2 text-white text-2xl font-bold font-suez"><%= @least_correct_interest.capitalize %></div>
+            <p class="stat-value py-2 text-white truncate w-38 text-xl font-bold font-suez"><%= @least_correct_interest.capitalize %></p>
             <p class="align-middle text-white"><%= @least_correct_percentage %>% answered correctly</p>
           </div>
           <div class="bg-gradient-to-r from-green-400 to-blue-500 p-2 rounded-2xl  drop-shadow-2xl">

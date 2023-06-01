@@ -1,7 +1,7 @@
 <%= render "shared/navbar2" %>
 <%= render "shared/navbar3" %>
 <div class="text-center" data-controller="menu">
-  <div class="bg-gradient-to-b from-stone-900 via-violet-900 to-violet-800">
+  <div class="bg-gradient-to-b h-full from-stone-900 via-violet-900 to-violet-800 pb-16">
     <h3 class="pb-0 pt-4 font-suez text-center bg-gradient-to-r from-emerald-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text text-2xl font-extrabold text-transparent"><%= @interest.name %></h3>
     <div class="flex items-center justify-between mx-3 mb-3">
       <div class="text-center" data-controller="menu">
@@ -63,10 +63,5 @@
             <hr style="height:0.5px">
           </div>
         </div>
+        <% end %>
       </div>
-    <% end %>
-    <div class="pb-20"></div>
-    <%= simple_form_for(@interest) do |f| %>
-      <%= f.input :photo, as: :file %>
-      <%= f.button :submit %>
-    <% end %>
