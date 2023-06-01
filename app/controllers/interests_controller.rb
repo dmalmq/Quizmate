@@ -1,3 +1,5 @@
+require "open-uri"
+
 class InterestsController < ApplicationController
   def index
     @interests = policy_scope(Interest)
@@ -13,6 +15,8 @@ class InterestsController < ApplicationController
 
   def create
     @interest = Interest.new(interest_params)
+    file = URI.open("https://source.unsplash.com/1600x900/?#{interest_params[:name]}")
+    @interest.photo.attach(io: file, filename: "#{interest_params[:name]}.jpg", content_type: 'image/jpg')
     authorize @interest
     @interest.user = current_user
     if @interest.save
