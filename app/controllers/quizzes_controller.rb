@@ -100,7 +100,7 @@ class QuizzesController < ApplicationController
   # end
 
   def take_presentation_question
-    Interest.all.each do |interest|
+    Interest.where(user: current_user).each do |interest|
       interest_question = interest.questions.order(streak: :asc).limit(1)
       @questions << interest_question.first
     end
