@@ -6,11 +6,11 @@
   </h2>
   <div class=" bg-opacity-70 pl-2 pr-2 pt-3 pb-1 rounded-t-3xl mr-2 mt-1 ml-2 grid grid-rows-1 gap-3">
     <div class="bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-rose-500 to-indigo-700 p-2 mb-3 rounded-2xl drop-shadow-2xl shadow-xl h-full space-y-2">
-      <div class="stat-title text-white inline-block text-sm align-middle mt-1 ml-2">Top performance</div>
+      <p class="stat-title text-white inline-block text-sm align-middle mt-1 ml-2">Top Interest</p>
       <% if Challenge.all.count == 0 %>
         <div class="stat-value py-2 text-white text-3xl font-bold font-suez ml-2">----</div>
       <% else %>
-        <div class="stat-value py-2 text-white text-3xl font-bold font-suez ml-2"><%= @most_correct_interest.capitalize %></div>
+        <p class="stat-value py-2 text-white w-72 truncate text-3xl font-bold font-suez ml-2"><%= @most_correct_interest.capitalize %>mndklsahdklhjask</p>
         <p class="align-middle text-white text-sm ml-2"><%= ((Interest.find{ |item| item.name == @most_correct_interest }.challenges.where(corrected: true).count.to_f / Interest.find{ |item| item.name == @most_correct_interest }.challenges.count ) * 100 ).ceil%> % answered correctly</p>
       <% end %>
     </div>
@@ -49,7 +49,7 @@
             <%= link_to interest_path(interest), class: "no-underline" do %>
               <div class="grow-0 relative bg-opacity-0 shrink-0">
                 <% if interest.photo.attached? %>
-                  <%= cl_image_tag interest.photo.key, class: "w-24 ring-offset-1 ring-1 h-24 mr-0 rounded-full border border-teal-900 shadow-lg" %>
+                  <%= cl_image_tag interest.photo.key, class: "w-24 ring-offset-1 ring-1 h-24 mr-0 rounded-full shadow-lg" %>
                 <% else %>
                   <%= image_tag "default-avatar.png", class: "inline-block object-cover w-8 h-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2" %>
                 <% end %>
@@ -73,7 +73,7 @@
       <div class="pb-8">
         <div class="pb-10 flex justify-center pt-4">
           <%= simple_form_for(@quiz) do |f| %>
-            <%= f.submit 'Start Quiz', class: "mx-2 text-slate-50 focus:outline-none text-purple-800 bg-gradient-to-r from-emerald-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% fixed bottom-24 left-16 right-16 hover:bg-purple-800 shadow-2xl focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-xl px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 border-b-4 border-b-emerald-400" %>
+            <%= f.submit 'Start Quiz', class: "mx-2 text-slate-50 focus:outline-none font-suez text-purple-800 bg-gradient-to-r from-emerald-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% fixed bottom-24 left-16 right-16 hover:bg-purple-800 shadow-2xl focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-2xl  px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 border-b-4 border-b-emerald-400" %>
           <% end %>
         </div>
       </div>
