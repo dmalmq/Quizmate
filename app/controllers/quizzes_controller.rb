@@ -35,7 +35,7 @@ class QuizzesController < ApplicationController
   def create
     @quiz = Quiz.new(quiz_params)
     authorize @quiz
-    @quiz.number_of_question = 8
+    @quiz.number_of_question = 4
     @quiz.corrected_times = 0
     @quiz.user = current_user
     @quiz.save
@@ -65,19 +65,20 @@ class QuizzesController < ApplicationController
   end
 
   def question_create
-    not_asked = Interest.last.questions.where(last_asked: nil).count
+    # not_asked = Interest.last.questions.where(last_asked: nil).count
     @questions = []
-    if not_asked == 10
-      4.times do
-        last_interest = Interest.last
-        all_questions = last_interest.questions.order(streak: :asc)
-        sampled_question = all_questions.sample
-        @questions << sampled_question
-      end
-      4.times { take_question }
-    else
-      8.times { take_question }
-    end
+    # if not_asked == 10
+    #   4.times do
+    #     last_interest = Interest.last
+    #     all_questions = last_interest.questions.order(streak: :asc)
+    #     sampled_question = all_questions.sample
+    #     @questions << sampled_question
+    #   end
+    #   4.times { take_question }
+    # else
+    #   8.times { take_question }
+    # end
+    take_presentation_question
     if @questions.uniq.length != @questions.length
       @questions.uniq!
       take_question
@@ -90,10 +91,17 @@ class QuizzesController < ApplicationController
     end
   end
 
-  def take_question
-    interest_sample = Interest.all.sample
-    all_questions = interest_sample.questions.order(streak: :asc)
-    sampled_question = all_questions.sample
-    @questions << sampled_question
+  # def take_question
+  #   interest_sample = Interest.all.sample
+  #   all_questions = interest_sample.questions.order(streak: :asc)
+  #   sampled_question = all_questions.sample
+  #   @questions << sampled_question
+  # end
+
+  def take_presentation_question
+    Interest.all.each do |interest|
+      interest_question = interest.questions.order(streak: :asc).limit(1)
+      @questions << interest_question.first
+    end
   end
 end

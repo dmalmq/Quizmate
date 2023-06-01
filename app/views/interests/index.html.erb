@@ -1,11 +1,12 @@
 <%= render "shared/navbar2" %>
 <%= render "shared/navbar3" %>
 
+
 <div class="bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-slate-700 to-indigo-900 h-screen flex flex-col">
   <h2 class="pb-3 pt-12 font-suez text-center bg-gradient-to-r from-emerald-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text text-md font-extrabold text-transparent sm:text-3xl">
     Welcome <%= current_user.name %>
   </h2>
-  <div class="pt-1 rounded-t-2xl overflow-x-auto flex justify-center">
+  <div class="pt-5 rounded-t-2xl overflow-x-auto flex justify-center">
     <div class="grid grid-rows-2 grid-flow-col gap-2 grow-0 w-96 overflow-x-auto px-2 justify-content">
       <div class="grow-0  w-36 shrink-0 rounded-lg dark:bg-gray-800 dark:border-gray-700">
         <div class="w-full h-full" %>
@@ -35,12 +36,14 @@
       </div>
       <% @interests.sort.reverse.each do |interest| %>
         <%= link_to interest_path(interest), class: "no-underline" do %>
+
           <div class="grow-0 relative bg-opacity-0 w-36 shrink-0">
             <img src="http://source.unsplash.com/featured/?<%= interest.name.split.join("%20") %>/800x333", class="w-32 h-32 rounded-full border border-teal-900 shadow-lg" %>
             <div class="absolute text-slate-200 bg-blue-500 w-8 h-8 rounded-full text-center m-1 p-1 top-1 right-3"><p><%= interest.questions.count %></p></div>
             <div class="h-16 bg-opacity-0 flex flex-col justify-center grow-0 items-center">
               <h5 class="grow-0 text-center mb-0 pb-0 pt-2 text-md font-bold tracking-tight text-slate-100 dark:text-white"><%= interest.name.capitalize %></h5>
               <p class ="italic text-slate-400 pt-0"><%= interest.questions.count %> questions</p>
+
             </div>
           </div>
         <% end %>
