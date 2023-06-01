@@ -57,6 +57,7 @@ class QuizzesController < ApplicationController
         corrected_percentage << { interest_name: interest.name, percentage: percentage }
       end
     end
+    @index_percentage = corrected_percentage.first
     corrected_percentage.sort_by! { |interest| interest[:percentage] }.reverse!
     @most_correct_interest = corrected_percentage.first[:interest_name]
     @least_correct_interest = corrected_percentage.last[:interest_name]
@@ -79,10 +80,10 @@ class QuizzesController < ApplicationController
     #   8.times { take_question }
     # end
     take_presentation_question
-    if @questions.uniq.length != @questions.length
-      @questions.uniq!
-      take_question
-    end
+    # if @questions.uniq.length != @questions.length
+    #   @questions.uniq!
+    #   take_question
+    # end
     n = 0
     @questions.shuffle.each do |question|
       n += 1
