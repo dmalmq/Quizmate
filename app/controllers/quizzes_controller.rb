@@ -54,7 +54,7 @@ class QuizzesController < ApplicationController
     interests.each do |interest|
       if interest.challenges.count >= 1
         percentage = ((interest.challenges.where(corrected: true).count.to_f / interest.challenges.count) * 100).ceil
-        corrected_percentage << { interest_name: interest.name, percentage: percentage }
+        corrected_percentage << { interest_name: interest.name, percentage: }
       end
     end
     @index_percentage = corrected_percentage.first
