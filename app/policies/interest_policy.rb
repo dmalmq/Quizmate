@@ -1,11 +1,14 @@
 class InterestPolicy < ApplicationPolicy
-
   def show?
     record.user == user
   end
 
   def create?
     user
+  end
+
+  def update?
+    record.user == user
   end
 
   def destroy?
@@ -16,7 +19,7 @@ class InterestPolicy < ApplicationPolicy
     # NOTE: Be explicit about which records you allow access to!
 
     def resolve
-      scope.where(user: user)
+      scope.where(user:)
     end
   end
 end

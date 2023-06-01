@@ -13,6 +13,13 @@ class InterestsController < ApplicationController
     @questions = @interest.questions.includes([:options]).reverse
   end
 
+  def update
+    @interest = Interest.find(params[:id])
+    authorize @interest
+    @interest.update(interest_params)
+    redirect_to interest_path(@interest)
+  end
+
   def create
     @interest = Interest.new(interest_params)
     file = URI.open("https://source.unsplash.com/1600x900/?#{interest_params[:name]}")
