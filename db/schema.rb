@@ -14,6 +14,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_012351) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "achievements", force: :cascade do |t|
+    t.string "title"
+    t.string "text"
+    t.string "deliverable"
+    t.integer "target"
+    t.string "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -113,6 +123,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_012351) do
     t.index ["user_option_id"], name: "index_challenges_on_user_option_id"
   end
 
+  create_table "events", force: :cascade do |t|
+    t.bigint "achievement_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["achievement_id"], name: "index_events_on_achievement_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
   create_table "interests", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id", null: false
@@ -163,6 +182,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_012351) do
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false, null: false
     t.string "name"
+    t.integer "day_streak", default: 0
+    t.integer "completed_quizzes", default: 0
+    t.integer "correct_questions", default: 0
     t.integer "level", default: 0
     t.integer "experience", default: 0
     t.integer "total_exp", default: 100
@@ -175,6 +197,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_012351) do
   add_foreign_key "challenges", "options", column: "user_option_id"
   add_foreign_key "challenges", "questions"
   add_foreign_key "challenges", "quizzes"
+  add_foreign_key "events", "achievements"
+  add_foreign_key "events", "users"
   add_foreign_key "interests", "users"
   add_foreign_key "options", "questions"
   add_foreign_key "questions", "interests"
