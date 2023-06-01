@@ -6,7 +6,9 @@ class InterestsController < ApplicationController
     @interest = Interest.new
     @all_interest = Interest.all
     @quiz = Quiz.new
-    stats(@all_interest)
+    if Challenge.all.count >= 1
+      stats(@all_interest)
+    end
   end
 
   def show
