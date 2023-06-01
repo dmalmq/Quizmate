@@ -1,5 +1,5 @@
-<div class="grid h-screen w-screen bg-gradient-to-b from-stone-900 via-violet-900 to-violet-800 gradient color">
-  <div class="place-items-center mx-4 flex flex-col">
+<div class="grid h-full w-screen bg-gradient-to-b from-stone-900 via-violet-900 to-violet-800 gradient color">
+  <div class="place-items-center mx-4 flex flex-col pb-48">
     <div class="flex flex-col gap-4">
       <div class="flex pt-16 justify-center w-full">
         <span class="text-2xl font-bold text-slate-200">Question <%= @challenge.index_in_quiz %> / <%= @quiz.number_of_question %> </span>
@@ -7,10 +7,10 @@
       <div class="w-full mb-2 bg-slate-200 rounded-full h-3 dark:bg-gray-700">
         <div class="bg-gradient-to-r from-green-400 to-blue-500 h-3 rounded-full" style="width: <%= @challenge.index_in_quiz * 100 / @quiz.number_of_question %>%"></div>
       </div>
-      <div class="px-4 my-auto bg-slate-200 bg-opacity-10 rounded-lg mb-32">
-      <div>
-        <h4 class="pb-0 pt-4 font-suez text-center bg-gradient-to-r from-emerald-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text text-2xl font-extrabold text-transparent"><%= @challenge.question.interest.name %></h4>
-      </div>
+      <div class="px-4 my-auto bg-slate-200 bg-opacity-10 rounded-lg pb-10">
+        <div>
+          <h4 class="pb-0 pt-4 font-suez text-center bg-gradient-to-r from-emerald-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text text-2xl font-extrabold text-transparent"><%= @challenge.question.interest.name %></h4>
+        </div>
         <h5 class="pt-4 text-slate-200 font-bold"><%= @challenge.question.title %></h5>
         <%= simple_form_for @challenge, wrapper: :default do |f| %>
           <ul class="w-86 mx-0 px-0 gap-8 flex flex-col mt-8">
@@ -55,18 +55,18 @@
         <% end %>
       </ul>
       <% if @next_question && @challenge.user_option %>
-        <div class="mt-14 mb-8">
-          <%= link_to 'Next question', quiz_challenge_path(@quiz, @next_question), class: "items-center text-xl no-underline font-bold px-8 py-3 focus:outline-none text-slate-200 h-10 bg-indigo-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
+        <div class="flex justify-center">
+          <%= link_to 'Next question', quiz_challenge_path(@quiz, @next_question), class: "items-center mt-8 flex justify-center drop-shadow-md text-md no-underline w-full  py-3 focus:outline-none text-slate-200 h-10 bg-gradient-to-r from-green-400 to-blue-500 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 rounded-lg dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
           <div class="flex flex-col gap-4">
-            <div class="flex pt-4 justify-center w-full">
+            <div class="flex justify-center w-full">
             </div>
           <% elsif @challenge.user_option %>
             <p>
-              <%= link_to 'end quiz', quiz_path(@quiz), class:"items-center text-xl no-underline font-bold px-8 py-3 focus:outline-none text-slate-200 h-10 bg-indigo-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
+              <%= link_to 'end quiz', quiz_path(@quiz), class:"items-center mt-12 flex drop-shadow-md justify-center text-md no-underline px-8 py-3 focus:outline-none text-slate-200 h-10 bg-gradient-to-r from-green-400 to-blue-500 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 rounded-lg dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
             </p>
           <% else %>
-            <div class="mb-3">
-              <%= f.button :submit, "See Answer", class:"items-center text-xl no-underline font-bold px-8 py-3 focus:outline-none text-slate-200 h-10 bg-indigo-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-8 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
+            <div class="items-center mt-12 flex justify-center text-xl drop-shadow-md no-underline px-8 py-3 focus:outline-none text-slate-200 h-10 bg-gradient-to-r from-green-400 to-blue-500 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300  rounded-lg   dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+              <%= f.button :submit, "See Answer", class:"font-weight-bold text-white" %>
               <div>
               <% end %>
             <% end %>
