@@ -6,11 +6,11 @@
   <% count += 1 if won_quiz %>
 <% end %>
 <% percentage = (count.to_f / 30) * 100 %>
-<div class="bg-indigo-700">
+<div class="bg-gradient-to-b from-stone-900 via-violet-900 to-violet-800">
   <div class="text-left flex flex-col white pt-6">
-    <div class="mx-auto pb-6">
+    <div class="mx-auto pb-6 mt-2">
       <%= cl_image_tag current_user.photo.key, class: "inline-block object-cover w-32 h-32 rounded-full bg-white ring ring-primary ring-offset-base-100 ring-offset-2" %>
-      <div class = "text-4xl text-white text-center font-bold font-suez"><%= @user.name %></div>
+      <div class = "text-4xl text-white text-center font-bold font-suez mt-2"><%= @user.name %></div>
     </div>
     <div class="ml-3 ">
       <div class="text-3xl text-indigo-600 justify-left">
@@ -28,7 +28,7 @@
         <div class="h-4 bg-gradient-to-r from-green-400 to-blue-500 rounded-full dark:bg-blue-500" style="width: <%= (@user.experience.to_f/@user.total_exp) * 100 %>%"></div>
       </div>
     </div>
-    <div class="bg-white flex justify-center pl-2 pr-2 pt-3 pb-1 rounded-t-3xl mr-2 mt-2 ml-2 grid grid-rows-2">
+    <div class=" bg-opacity-70 flex justify-center pl-2 pr-2 pt-3 pb-1 rounded-t-3xl mr-2 mt-2 ml-2 grid grid-rows-2">
       <div class=" grid grid-cols-2 gap-2 h-1/6 ">
         <div class="bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-rose-500 to-indigo-700 p-2  rounded-2xl drop-shadow-2xl">
           <div class="stat-title text-white inline-block align-middle">Top performance</div>
@@ -51,8 +51,8 @@
           <p class="align-middle text-white"><%= ((Challenge.where(corrected: true).count.to_f / Challenge.all.count) * 100).to_i %>% answered correctly</p>
         </div>
       </div>
-      <div class="w-full h-48 bg-white mt-4">
-        <div class="w-5/5 rounded-xl">
+      <div class="w-full h-48 bg-opacity-50 mt-4 shadow-2xl rounded-lg ">
+        <div class="w-5/5 rounded-xl pr-1 pl-1">
           <canvas id="bar-chart-horizontal" data-controller= "bar-chart" data-bar-chart-percentage-value="<%= @result %>" data-bar-chart-title-value="<%= @title.pluck(:name) %>"></canvas>
         </div>
       </div>
