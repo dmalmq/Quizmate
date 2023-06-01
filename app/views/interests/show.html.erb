@@ -1,11 +1,13 @@
 <%= render "shared/navbar2" %>
 <%= render "shared/navbar3" %>
-
-
- <div>
-<%= link_to interest_path(@interest), data:{turbo_method: :delete, turbo_confirm: "Delete #{@interest.name} ?"} do%>
-  <svg class="h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M4.99997 8H6.5M6.5 8V18C6.5 19.1046 7.39543 20 8.5 20H15.5C16.6046 20 17.5 19.1046 17.5 18V8M6.5 8H17.5M17.5 8H19M9 5H15M9.99997 11.5V16.5M14 11.5V16.5" stroke="#ff0000" stroke-linecap="round" stroke-linejoin="round"></path></g></svg>
+<%= simple_form_for(@interest) do |f| %>
+  <%= f.input :photo, as: :file %>
+  <%= f.button :submit %>
 <% end %>
+<div>
+  <%= link_to interest_path(@interest), data:{turbo_method: :delete, turbo_confirm: "Delete #{@interest.name} ?"} do%>
+    <svg class="h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M4.99997 8H6.5M6.5 8V18C6.5 19.1046 7.39543 20 8.5 20H15.5C16.6046 20 17.5 19.1046 17.5 18V8M6.5 8H17.5M17.5 8H19M9 5H15M9.99997 11.5V16.5M14 11.5V16.5" stroke="#ff0000" stroke-linecap="round" stroke-linejoin="round"></path></g></svg>
+  <% end %>
 </div>
 <div class="m-2">
   <h1 class="text-2xl font-bold uppercase text-blue-700"><%= @interest.name %></h1>
@@ -19,7 +21,6 @@
   </button>
   <!-- drawer component -->
   <div data-menu-target="dropdown" id="drawer-bottom-example" class="hidden fixed bottom-0 left-0 right-0 z-40 w-full p-4 overflow-y-auto transition-transform bg-slate-100 drop-shadow-xl dark:bg-gray-800 transform-none" tabindex="-1" aria-labelledby="drawer-bottom-label">
-
     <h3 id="drawer-bottom-label" class="inline-flex items-center mb-2 text-base font-semibold text-gray-700 dark:text-gray-400"><svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></svg>Add Questions</h3>
     <h5 id="drawer-bottom-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400"><svg class="w-5 h-5 mr-2" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"></svg>Add up to 10 additional questions for your interest in <%= @interest.name %></h5>
     <button type="button" data-drawer-hide="drawer-bottom-example" aria-controls="drawer-bottom-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" >
@@ -35,39 +36,39 @@
   </div>
 </div>
 <% @questions.each_with_index do |question, index| %>
-<div class="bg-">
-  <div class="h-42 mx-3 pb-0">
-    <div id="accordion-color" data-accordion="collapse" data-active-classes="bg-blue-100 dark:bg-gray-800 text-blue-600 dark:text-white">
-      <h6 id="accordion-color-heading-1-<%= question.id%>" class="mb-0">
-        <p class="flex items-center justify-between mb-2 w-full p-2 font-bold text-left text-slate-50 border border-b-0 border-gray-200 rounded-t-xl bg-indigo-700"><%= @questions.size - index %> ) <%= question.title %><%= link_to "x", question_path(question), data:{turbo_method: :delete, turbo_confirm: "Delete #{question.title} ?"} %></p>
-      </h6>
-      <div id="accordion-color-body-1-<%= question.id%>" class="hidden" aria-labelledby="accordion-color-heading-1-<%= question.id%>">
-      </div>
-      <h6 id="accordion-color-heading-2-<%= question.id%>">
-        <button type="button" class="flex items-center justify-between w-full p-2 font-bold text-left text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-800 dark:border-gray-700 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-color-body-2-<%= question.id%>" aria-expanded="false" aria-controls="accordion-color-body-2-<%= question.id%>">
-          <span>Answer</span>
-          <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-        </button>
-      </h6>
-      <div id="accordion-color-body-2-<%= question.id%>" class="hidden" aria-labelledby="accordion-color-heading-2-<%= question.id%>">
-        <div class="p-2 border border-b-0 border-gray-200 dark:border-gray-700">
-          <p class="mb-2 text-gray-500 dark:text-gray-400"><%= question.correct_option.content %></p>
+  <div class="bg-">
+    <div class="h-42 mx-3 pb-0">
+      <div id="accordion-color" data-accordion="collapse" data-active-classes="bg-blue-100 dark:bg-gray-800 text-blue-600 dark:text-white">
+        <h6 id="accordion-color-heading-1-<%= question.id%>" class="mb-0">
+          <p class="flex items-center justify-between mb-2 w-full p-2 font-bold text-left text-slate-50 border border-b-0 border-gray-200 rounded-t-xl bg-indigo-700"><%= @questions.size - index %> ) <%= question.title %><%= link_to "x", question_path(question), data:{turbo_method: :delete, turbo_confirm: "Delete #{question.title} ?"} %></p>
+        </h6>
+        <div id="accordion-color-body-1-<%= question.id%>" class="hidden" aria-labelledby="accordion-color-heading-1-<%= question.id%>">
         </div>
-      </div>
-      <h6 id="accordion-color-heading-3-<%= question.id%>">
-        <button type="button" class="flex items-center justify-between w-full p-2 font-bold text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-800 dark:border-gray-700 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-color-body-3-<%= question.id%>" aria-expanded="false" aria-controls="accordion-color-body-3-<%= question.id%>">
-          <span>Description</span>
-          <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-        </button>
-      </h6>
-      <div id="accordion-color-body-3-<%= question.id%>" class="hidden" aria-labelledby="accordion-color-heading-3-<%= question.id%>">
-        <div class="p-2 border border-t-0 border-gray-200 dark:border-gray-700">
-          <p class="mb-2 text-gray-500 dark:text-gray-400"><%= question.content %></p>
+        <h6 id="accordion-color-heading-2-<%= question.id%>">
+          <button type="button" class="flex items-center justify-between w-full p-2 font-bold text-left text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-800 dark:border-gray-700 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-color-body-2-<%= question.id%>" aria-expanded="false" aria-controls="accordion-color-body-2-<%= question.id%>">
+            <span>Answer</span>
+            <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+        </h6>
+        <div id="accordion-color-body-2-<%= question.id%>" class="hidden" aria-labelledby="accordion-color-heading-2-<%= question.id%>">
+          <div class="p-2 border border-b-0 border-gray-200 dark:border-gray-700">
+            <p class="mb-2 text-gray-500 dark:text-gray-400"><%= question.correct_option.content %></p>
+          </div>
         </div>
+        <h6 id="accordion-color-heading-3-<%= question.id%>">
+          <button type="button" class="flex items-center justify-between w-full p-2 font-bold text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-800 dark:border-gray-700 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-color-body-3-<%= question.id%>" aria-expanded="false" aria-controls="accordion-color-body-3-<%= question.id%>">
+            <span>Description</span>
+            <svg data-accordion-icon class="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+          </button>
+        </h6>
+        <div id="accordion-color-body-3-<%= question.id%>" class="hidden" aria-labelledby="accordion-color-heading-3-<%= question.id%>">
+          <div class="p-2 border border-t-0 border-gray-200 dark:border-gray-700">
+            <p class="mb-2 text-gray-500 dark:text-gray-400"><%= question.content %></p>
+          </div>
+        </div>
+        <hr style="height:0.5px">
       </div>
-      <hr style="height:0.5px">
     </div>
-  </div>
   </div>
 <% end %>
 <div class="pb-20"></div>
