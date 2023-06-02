@@ -58,12 +58,14 @@ class QuizzesController < ApplicationController
     corrected_percentage = []
     interests.each do |interest|
       if interest.challenges.count >= 1
+        @least_correct_interest_number = interest.challenges.where(corrected: true).count
         percentage = ((interest.challenges.where(corrected: true).count.to_f / interest.challenges.count) * 100).ceil
         corrected_percentage << { interest_name: interest.name, percentage: }
       end
     end
     # @index_percentage = corrected_percentage.first
     corrected_percentage.sort_by! { |interest| interest[:percentage] }.reverse!
+    @least_correct_interest_number
     @most_correct_interest = corrected_percentage.first[:interest_name]
     @least_correct_interest = corrected_percentage.last[:interest_name]
     @most_correct_percentage = corrected_percentage.first[:percentage]
