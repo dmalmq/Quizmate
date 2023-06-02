@@ -4,10 +4,10 @@ class InterestsController < ApplicationController
   def index
     @interests = policy_scope(Interest)
     @interest = Interest.new
-    @all_interest = Interest.all
+    # @all_interest = Interest.all
     @quiz = Quiz.new
-    if Challenge.all.count >= 1
-      stats(@all_interest)
+    if current_user.quizzes.count >= 1
+      stats
     end
   end
 
@@ -52,12 +52,14 @@ class InterestsController < ApplicationController
     params.require(:interest).permit(:user, :name, :priority, :photo)
   end
 
-  def stats(all_interest)
+  def stats
+    @interests = policy_scope(Interest)
+
     corrected_percentage = []
-    if all_interest == []
+    if @interests.empty?
       return
     else
-      all_interest.each do |interest|
+      @interests.each do |interest|
         if interest.challenges.count >= 1
           percentage = ((interest.challenges.where(corrected: true).count.to_f / interest.challenges.count) * 100).ceil
           corrected_percentage << { interest_name: interest.name, percentage: percentage }
