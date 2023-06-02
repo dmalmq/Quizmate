@@ -1,24 +1,27 @@
-<h2>Sign up</h2>
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
-  <%= f.error_notification %>
-  <div>
-    <%= f.input :name,
+<div class="h-screen flex flex-col justify-center w-screen bg-gradient-to-b from-stone-900 via-violet-900 to-violet-800 gradient color">
+  <div class="container h-2/3 bg-slate-50 flex flex-col justify-center p-4 rounded-xl">
+    <h2>Sign up</h2>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
+      <%= f.error_notification %>
+      <div>
+        <%= f.input :name,
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "name" }%>
-    <%= f.input :email,
+        <%= f.input :email,
                 required: true,
                 input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
+        <%= f.input :password,
                 required: true,
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                 input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
+        <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
-  </div>
-  <div>
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
-<%= render "devise/shared/links" %>
+      </div>
+      <div>
+        <%= f.button :submit, "Sign up", class: "items-center flex justify-center text-xl mb-4 drop-shadow-md no-underline px-8 focus:outline-none text-slate-200 h-10 bg-gradient-to-r from-green-400 to-blue-500 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300  rounded-lg  text-white  dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900" %>
+      </div>
+    <% end %>
+    <%= render "devise/shared/links" %>  </div>
+</div>
