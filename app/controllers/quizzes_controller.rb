@@ -5,14 +5,18 @@ class QuizzesController < ApplicationController
     @questions = Question.all
     @challenges = Challenge.all
     stats(@interests)
-    @user = current_user
-    @interests = @interests.sort_by { |interest| interest.corrected_percentage }.reverse
-    sampled_interests = @interests.take(5)
-    @result = sampled_interests.map { |interest| interest.corrected_percentage }
-    # @result.sort!.reverse!
-    @result.delete(0)
-    @title = []
-    @title.concat(sampled_interests)
+    if Quiz.where(user: current_user).empty?
+      render interests_path
+    else
+      @user = current_user
+      @interests = @interests.sort_by { |interest| interest.corrected_percentage }.reverse
+      sampled_interests = @interests.take(5)
+      @result = sampled_interests.map { |interest| interest.corrected_percentage }
+      # @result.sort!.reverse!
+      @result.delete(0)
+      @title = []
+      @title.concat(sampled_interests)
+    end
   end
 
   def show

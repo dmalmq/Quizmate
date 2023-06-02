@@ -4,10 +4,10 @@ class InterestsController < ApplicationController
   def index
     @interests = policy_scope(Interest)
     @interest = Interest.new
-    @all_interest = Interest.all
+    # @all_interest = Interest.all
     @quiz = Quiz.new
-    if Challenge.all.count >= 1
-      stats(@all_interest)
+    if Quiz.where(user: current_user).count >= 1
+      stats(@interests)
     end
   end
 

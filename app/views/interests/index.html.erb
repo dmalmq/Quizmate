@@ -7,7 +7,7 @@
   <div class=" bg-opacity-70 pl-2 pr-2 pt-3 pb-1 rounded-t-3xl mr-2 mt-1 ml-2 grid grid-rows-1 gap-3">
     <div class="bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-rose-500 to-indigo-700 p-2 mb-3 rounded-2xl drop-shadow-2xl shadow-xl h-full space-y-2">
       <p class="stat-title text-white inline-block text-sm align-middle mt-1 ml-2">Top Interest</p>
-      <% if Challenge.all.count == 0 %>
+      <% if Quiz.where(user: current_user).count == 0 %>
         <div class="stat-value py-2 text-white text-3xl font-bold font-suez ml-2">----</div>
       <% else %>
         <p class="stat-value py-2 text-white w-72 truncate text-3xl font-bold font-suez ml-2"><%= @most_correct_interest.capitalize %></p>
