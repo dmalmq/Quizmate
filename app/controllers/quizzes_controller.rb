@@ -6,9 +6,10 @@ class QuizzesController < ApplicationController
     @challenges = Challenge.all
     stats(@interests)
     @user = current_user
-    @interests.sort_by { |interest| interest.challenges.count }.reverse!
+    @interests = @interests.sort_by { |interest| interest.corrected_percentage }.reverse
     sampled_interests = @interests.take(5)
     @result = sampled_interests.map { |interest| interest.corrected_percentage }
+    # @result.sort!.reverse!
     @result.delete(0)
     @title = []
     @title.concat(sampled_interests)
@@ -57,7 +58,7 @@ class QuizzesController < ApplicationController
         corrected_percentage << { interest_name: interest.name, percentage: }
       end
     end
-    @index_percentage = corrected_percentage.first
+    # @index_percentage = corrected_percentage.first
     corrected_percentage.sort_by! { |interest| interest[:percentage] }.reverse!
     @most_correct_interest = corrected_percentage.first[:interest_name]
     @least_correct_interest = corrected_percentage.last[:interest_name]
