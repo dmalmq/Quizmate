@@ -4,15 +4,19 @@ class QuizzesController < ApplicationController
     @interests = Interest.where(user: current_user)
     @questions = Question.where(user: current_user)
     @challenges = current_user.quizzes.all
-    stats(@interests)
-    @user = current_user
-    @interests = @interests.sort_by { |interest| interest.corrected_percentage }.reverse
-    sampled_interests = @interests.take(5)
-    @result = sampled_interests.map { |interest| interest.corrected_percentage }
-    # @result.sort!.reverse!
-    @result.delete(0)
-    @title = []
-    @title.concat(sampled_interests)
+    if @quizzes.empty?
+      redirect_to interests_path
+    else
+      stats(@interests)
+      @user = current_user
+      @interests = @interests.sort_by { |interest| interest.corrected_percentage }.reverse
+      sampled_interests = @interests.take(5)
+      @result = sampled_interests.map { |interest| interest.corrected_percentage }
+      # @result.sort!.reverse!
+      @result.delete(0)
+      @title = []
+      @title.concat(sampled_interests)
+    end
   end
 
   def show
