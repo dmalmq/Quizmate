@@ -1,7 +1,7 @@
 class QuizzesController < ApplicationController
   def index
     @quizzes = policy_scope(Quiz)
-    @interests = Interest.all
+    @interests = Interest.where(user: current_user)
     @questions = Question.all
     @challenges = Challenge.all
     stats(@interests)
