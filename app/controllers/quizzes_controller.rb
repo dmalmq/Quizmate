@@ -2,12 +2,12 @@ class QuizzesController < ApplicationController
   def index
     @quizzes = policy_scope(Quiz)
     @interests = Interest.where(user: current_user)
-    @questions = Question.all
-    @challenges = Challenge.all
-    stats(@interests)
-    if Quiz.where(user: current_user).empty?
-      render interests_path
+    @questions = Question.where(user: current_user)
+    @challenges = current_user.quizzes.all
+    if @quizzes.empty?
+      redirect_to interests_path
     else
+      stats(@interests)
       @user = current_user
       @interests = @interests.sort_by { |interest| interest.corrected_percentage }.reverse
       sampled_interests = @interests.take(5)
