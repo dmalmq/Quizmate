@@ -10,7 +10,7 @@
       <% if current_user.quizzes.empty? %>
         <div class="stat-value py-2 text-white text-3xl font-bold font-suez ml-2">No quizzes yet</div>
       <% else %>
-        <p class="stat-value py-2 text-white w-72 truncate text-3xl font-bold font-suez ml-2"><%= @most_correct_interest.capitalize %></p>
+        <p class="stat-value py-2 text-white w-72 truncate text-3xl font-bold font-suez ml-2"><%= @most_correct_interest %></p>
         <p class="align-middle text-white text-sm ml-2"><%= ((Interest.find{ |item| item.name == @most_correct_interest }.challenges.where(corrected: true).count.to_f / Interest.find{ |item| item.name == @most_correct_interest }.challenges.count ) * 100 ).ceil%> % answered correctly</p>
       <% end %>
     </div>
@@ -58,9 +58,9 @@
                 </div>
                 <div class="h-10 bg-opacity-0 flex flex-col justify-center grow-0 items-center">
                   <% if interest.name.length >=15 %>
-                    <h5 class="grow-0 text-center text-xs font-bold tracking-tight text-slate-100 dark:text-white mb-0"><%= interest.name.capitalize %></h5>
+                    <h5 class="grow-0 text-center text-xs font-bold tracking-tight text-slate-100 dark:text-white mb-0"><%= interest.name %></h5>
                   <% else %>
-                    <h5 class="grow-0 text-center text-base font-bold tracking-tight text-slate-100 dark:text-white mb-0"><%= interest.name.capitalize %></h5>
+                    <h5 class="grow-0 text-center text-base font-bold tracking-tight text-slate-100 dark:text-white mb-0"><%= interest.name %></h5>
                   <% end %>
                 </div>
               </div>
