@@ -6,54 +6,58 @@
   <% count += 1 if won_quiz %>
 <% end %>
 <% percentage = (count.to_f / 30) * 100 %>
-<div class="bg-gradient-to-b from-stone-900 via-violet-900 to-violet-800">
-  <div class="text-left flex flex-col white pt-6">
-    <div class="mx-auto pb-6 mt-2">
-      <%= cl_image_tag current_user.photo.key, class: "inline-block object-cover w-32 h-32 rounded-full bg-white ring ring-primary ring-offset-base-100 ring-offset-2" %>
-      <div class = "text-4xl text-white text-center font-bold font-suez mt-2"><%= @user.name %></div>
-    </div>
-    <div class="ml-3 ">
-      <div class="text-3xl text-indigo-600 justify-left">
-        <%#= current_user.name %>
+<div class="bg-gradient-to-b from-stone-900 via-violet-900 to-violet-800 pb-16">
+  <div class="flex flex-col white pt-3">
+    <div class="flex flex-col items-center content-center mx-auto pb-3 mt-2">
+      <% if current_user.photo.attached? %>
+        <%= cl_image_tag current_user.photo.key, class: "object-cover w-32 h-32 rounded-full bg-white ring ring-primary ring-offset-base-100 ring-offset-2" %>
+      <% else %>
+        <%= image_tag "default-avatar.png", class: "object-cover w-32 h-32 rounded-full bg-white ring ring-primary ring-offset-base-100 ring-offset-2" %>
+      <% end %>
+      <div class="flex flex-row justify-end">
+        <div class = "text-4xl align-middle text-white text-center font-bold font-suez mt-3"><%= @user.name %></div>
       </div>
-      <div class="flex flex-auto inline-block align-middle">
-        <div class="text-4xl text-white font-suez" style="display: flex; align-items: center; justify-content: center;">
+    </div>
+    <div class=" ">
+      <div class="flex flex-row justify-center items-center pb-2">
+        <div class="text-2xl text-white font-suez pr-2" style="display: flex; align-items: center; justify-content: center;">
           Lv.<%= @user.level %>
         </div>
-        <div class="w-16 h-16 animate-bounce">
+        <div class="w-64 h-4 bg-gray-200 rounded-full dark:bg-gray-700">
+          <div class="h-4 bg-gradient-to-r from-green-400 to-blue-500 rounded-full dark:bg-blue-500" style="width: <%= (@user.experience.to_f/@user.total_exp) * 100 %>%"></div>
+        </div>
+        <div class="w-12 h-12 animate-bounce">
           <%= image_tag "stat.png" %>
         </div>
       </div>
-      <div class="w-64 h-4 mb-6 mt-2 bg-gray-200 rounded-full dark:bg-gray-700">
-        <div class="h-4 bg-gradient-to-r from-green-400 to-blue-500 rounded-full dark:bg-blue-500" style="width: <%= (@user.experience.to_f/@user.total_exp) * 100 %>%"></div>
-      </div>
-    </div>
-    <div class=" bg-opacity-70 flex justify-center pl-2 pr-2 pt-3 pb-1 rounded-t-3xl mr-2 mt-2 ml-2 grid grid-rows-2">
-      <div class=" grid grid-cols-2 gap-2 h-1/6 ">
-        <div class="bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-rose-500 to-indigo-700 p-2  rounded-2xl drop-shadow-2xl">
-          <div class="stat-title text-white inline-block align-middle">Top performance</div>
-          <div class="stat-value py-2 text-white text-2xl font-bold font-suez"><%= @most_correct_interest.capitalize %></div>
-          <p class="align-middle text-white"><%= @most_correct_percentage %>% answered correctly</p>
+      <div class=" bg-opacity-70 flex justify-center pl-2 pr-2 pt-2 pb-1 rounded-t-3xl mr-2 mt-2 ml-2 grid grid-rows-2">
+        <div class=" grid grid-cols-2 gap-2 h-1/6 ">
+          <div class="bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-rose-500 to-indigo-700 p-2  rounded-2xl drop-shadow-2xl">
+            <div class="stat-title text-white inline-block align-middle">Top performance</div>
+            <div class="stat-value py-2 text-white truncate w-38 text-xl font-bold font-suez"><%= @most_correct_interest.capitalize %></div>
+            <p class="align-middle text-white"><%= @most_correct_percentage %>% answered correctly</p>
+          </div>
+          <div class="bg-gradient-to-r from-green-400 to-blue-500 p-2 rounded-2xl  drop-shadow-2xl">
+            <div class="stat-title text-white inline-block align-middle">Improving</div>
+            <p class="stat-value py-2 text-white truncate w-38 text-xl font-bold font-suez"><%= @least_correct_interest.capitalize %></p>
+            <p class="align-middle text-white"><%= @least_correct_percentage %>% answered correctly</p>
+          </div>
+          <div class="bg-gradient-to-r from-green-400 to-blue-500 p-2 rounded-2xl  drop-shadow-2xl">
+            <div class="stat-title text-white inline-block align-middle">Completion</div>
+            <div class="stat-value py-2 text-white text-4xl font-bold font-suez"><%= Challenge.all.count %></div>
+            <p class="align-middle text-white">21% more than last month</p>
+          </div>
+          <div class="bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-rose-500 to-indigo-700 p-2 rounded-2xl  drop-shadow-2xl">
+            <div class="stat-title text-white inline-block align-middle">Total Correct</div>
+            <div class="stat-value py-2 text-white text-4xl font-bold font-suez"><%= Challenge.where(corrected: true).count %></div>
+            <p class="align-middle text-white"><%= ((Challenge.where(corrected: true).count.to_f / Challenge.all.count) * 100).to_i %>% answered correctly</p>
+          </div>
         </div>
-        <div class="bg-gradient-to-r from-green-400 to-blue-500 p-2 rounded-2xl  drop-shadow-2xl">
-          <div class="stat-title text-white inline-block align-middle">Improving</div>
-          <div class="stat-value py-2 text-white text-2xl font-bold font-suez"><%= @least_correct_interest.capitalize %></div>
-          <p class="align-middle text-white"><%= @least_correct_percentage %>% answered correctly</p>
-        </div>
-        <div class="bg-gradient-to-r from-green-400 to-blue-500 p-2 rounded-2xl  drop-shadow-2xl">
-          <div class="stat-title text-white inline-block align-middle">Completion</div>
-          <div class="stat-value py-2 text-white text-4xl font-bold font-suez"><%= Challenge.all.count %></div>
-          <p class="align-middle text-white">21% more than last month</p>
-        </div>
-        <div class="bg-[conic-gradient(at_left,_var(--tw-gradient-stops))] from-rose-500 to-indigo-700 p-2 rounded-2xl  drop-shadow-2xl">
-          <div class="stat-title text-white inline-block align-middle">Total Correct</div>
-          <div class="stat-value py-2 text-white text-4xl font-bold font-suez"><%= Challenge.where(corrected: true).count %></div>
-          <p class="align-middle text-white"><%= ((Challenge.where(corrected: true).count.to_f / Challenge.all.count) * 100).to_i %>% answered correctly</p>
-        </div>
-      </div>
-      <div class="w-full h-48 bg-opacity-50 mt-4 shadow-2xl rounded-lg ">
-        <div class="w-5/5 rounded-xl pr-1 pl-1">
-          <canvas id="bar-chart-horizontal" data-controller= "bar-chart" data-bar-chart-percentage-value="<%= @result %>" data-bar-chart-title-value="<%= @title.pluck(:name) %>"></canvas>
+        <div class="w-full h-56 bg-opacity-50 mt-4 shadow-2xl rounded-lg ">
+          <div class="flex flex-col items-center w-5/5 rounded-xl pr-1 pl-1 pt-2">
+            <h4 class="text-slate-300 mb-0 font-bold"> Your Performance </h4>
+            <canvas id="bar-chart-horizontal" data-controller= "bar-chart" data-bar-chart-percentage-value="<%= @result %>" data-bar-chart-title-value="<%= @title.pluck(:name) %>"></canvas>
+          </div>
         </div>
       </div>
     </div>

@@ -43,24 +43,4 @@
         <span class="absolute top-0 right-0 inline-block w-3 h-3 bg-green-600 border-2 border-white rounded-full"></span>
       </div>
     </button>
-    <div class="w-full mx-2" id="navbar-hamburger">
-      <div data-menu-target="dropdown" class="hidden w-88 pb-0" id="navbar-hamburger">
-        <ul class="flex flex-col font-medium mt-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-          <li>
-            <a href="#" class="no-underline hover:underline block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text:gray-400 dark:hover:bg-gray-700 dark:text-gray-400 dark:hover:text-white">Home</a>
-          </li>
-          <li>
-            <a href="#" class="no-underline hover:underline block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Services</a>
-          </li>
-          <li>
-            <a href="#" class="no-underline hover:underline block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white">Pricing</a>
-          </li>
-          <li>
-            <%= link_to destroy_user_session_path, data: {turbo_method: :delete}, class: "no-underline" do %>
-              <p class="no-underline hover:underline block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Log Out</p>
-            <% end %>
-          </li>
-        </ul>
-      </div>
-    </div>
   </nav>

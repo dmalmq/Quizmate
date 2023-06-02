@@ -1,66 +1,73 @@
 <%= render "shared/navbar2" %>
 <%= render "shared/navbar3" %>
-<h3 class="text-center font-bold mt-4 text-slate-900">Quiz Summary</h3>
-<div class="flex flex-col items-center h-300 pt-2 m-3 max-w-sm border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 bg-indigo-500">
-  <div class="m-2 items-center block max-w-sm p-3 rounded-lg dark:bg-gray-800 dark:border-gray-700 bg-indigo-500">
-    <div class="grid grid-col-1 gap-1 justify-center">
-      <h4 class ="text-center mx-auto text-white mt-2"> <%= @correct/@total.to_f > 0.6 ? "Well done" : "Keep practicing!"%> </h4>
-      <div class="relative mx-auto h-52 w-48 mr-0 basis-2/5 overflow-hidden" data-controller="chart">
-        <div class="radial-progress text-white text-3xl mt-2" style="--value:<%=(@correct/@total.to_f)* 100%>; --size:12rem; --thickness: 1.5rem;"><%= @correct %>/<%= @total %></div>
-      </div>
-      <div>
-        <p class="mb-0 mt-2 basis-3/5 pb-0 text-base text-white text-center"><%= "You answered #{@correct} out of #{@total} questions correctly." %></p>
+<div class="bg-gradient-to-b from-stone-900 pb-48 h-full via-violet-900 to-violet-800">
+  <div>
+    <h4 class="pb-0 mb-0 pt-8 font-suez text-center bg-gradient-to-r from-emerald-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% bg-clip-text text-3xl font-extrabold text-transparent">Quiz Summary</h4>
+  </div>
+  <div class="flex flex-col pb-16 items-center h-300 pt-0 mx-3 max-w-sm rounded-lg dark:bg-gray-800 dark:border-gray-700 bg-opacity-0">
+    <div class="m-2 items-center block max-w-sm px-3 rounded-lg dark:bg-gray-800 dark:border-gray-700 bg-opacity-0">
+      <div class="grid grid-col-1 gap-1 justify-center">
+        <h4 class ="text-center mx-auto text-slate-200 my-0"> <%= @correct/@total.to_f > 0.6 ? "Well done!" : "Keep practicing!"%> </h4>
+        <div class="relative mx-auto h-52 w-48 mr-0 basis-2/5 overflow-hidden" data-controller="chart">
+          <div class="radial-progress text-slate-200 text-3xl mt-2 z-50" style="--value:<%=(@correct/@total.to_f)* 100%>; --size:12rem; --thickness: 1.5rem;"><%= @correct %>/<%= @total %></div>
+          <div class="h-48 w-48 m-0 p-0 bg-gray-500 rounded-full absolute top-2 left-0 opacity-10 z-10"> </div>
+          <div class="h-36 w-36 m-0 p-0 bg-gray-900 rounded-full absolute top-8 left-6 opacity-30 z-0"> </div>
+        </div>
+        <div>
+          <p class="mb-0 mt-2 basis-3/5 pb-3 font-sm text-base text-slate-200 text-center"><%= "You answered #{@correct} out of #{@total} questions correctly." %></p>
+        </div>
       </div>
     </div>
-  </div>
-  <% @quiz.challenges.each_with_index do |challenge, index| %>
-    <div class="bg-slate-100 mb-2 rounded-lg h-full w-11/12">
-      <div class="flex flex-col items-center w-full h-full ">
-        <div class="h-42 mx-3 pb-0 w-full h-full">
-          <div id="accordion-color" data-accordion="collapse" data-active-classes="w-full h-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-white">
-            <h2 id="accordion-color-heading-1<%= index %>" class="mb-0 w-full">
-              <button type="button" class="flex  items-center justify-between w-full h-full pr-0 pl-2 font-medium text-left text-gray-500 rounded-xl shadow-sm border-b-1 border-gray-50 " data-accordion-target="#accordion-color-body-1<%= index %>" aria-expanded="false" aria-controls="accordion-color-body-1<%= index %>" style="width: 100%">
-                <div class="flex w-full">
-                  <div class="flex flex-col flex-grow">
-                    <div>
-                      <p class="text-base font-black leading-snug m-2 mb-0"><%= challenge.question.title %></p>
-                    </div>
-                    <div class="flex flex-row">
+    <% @quiz.challenges.each_with_index do |challenge, index| %>
+      <div class="bg-slate-200 mb-2 bg-opacity-80 shadow-lg rounded-lg h-full w-11/12">
+        <div class="flex flex-col items-center w-full h-full ">
+          <div class="h-42 mx-3 pb-0 w-full h-full">
+            <div id="accordion-color" data-accordion="collapse" data-active-classes="w-full h-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-white">
+              <h2 id="accordion-color-heading-1<%= index %>" class="mb-0 w-full">
+                <button type="button" class="flex  items-center justify-between w-full h-full pr-0 pl-2 font-medium text-left text-gray-500 rounded-xl shadow-sm border-b-1 border-gray-50 " data-accordion-target="#accordion-color-body-1<%= index %>" aria-expanded="false" aria-controls="accordion-color-body-1<%= index %>" style="width: 100%">
+                  <div class="flex w-full">
+                    <div class="flex flex-col flex-grow">
                       <div>
-                        <% if challenge.user_option.content == challenge.question.correct_option.content %>
-                          <p class="text-sm text-green-600 font-bold m-2 mb-2 pr-3"> ✅ <%= challenge.user_option.content %>  </p>
-                        <% else %>
-                          <p class="text-sm text-red-600 italic m-2 mb-0 pr-3"> ✏️ <%= challenge.user_option.content %>  </p>
-                          <p class="text-sm text-green-600 m-2 mb-2 mt-0 font-bold dark:text-gray-400"> ✅ <%= challenge.question.correct_option.content %>  </p>
-                        <% end %>
+                        <p class="text-base text-gray-900 leading-snug m-2 mb-0"><%= challenge.question.title %></p>
+                      </div>
+                      <div class="flex flex-row">
+                        <div>
+                          <% if challenge.user_option.content == challenge.question.correct_option.content %>
+                            <p class="text-sm text-green-600 font-bold m-2 mb-2 pr-3"> ✅ <%= challenge.user_option.content %>  </p>
+                          <% else %>
+                            <p class="text-sm text-red-600 italic m-2 mb-0 pr-3"> ✏️ <%= challenge.user_option.content %>  </p>
+                            <p class="text-sm text-green-600 m-2 mb-2 mt-0 font-bold dark:text-gray-400"> ✅ <%= challenge.question.correct_option.content %>  </p>
+                          <% end %>
+                        </div>
                       </div>
                     </div>
+                    <% if challenge.user_option.content == challenge.question.correct_option.content %>
+                      <div class="flex align items-center max-w-full content-cen px-6 pr-0 pl-0 bg-green-400  rounded-r-lg  ">
+                        <div class="w-9 h-9 shrink-0">
+                          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 5C14 6.10457 13.1046 7 12 7C10.8954 7 10 6.10457 10 5C10 3.89543 10.8954 3 12 3C13.1046 3 14 3.89543 14 5Z" fill="#000000"></path> <path d="M14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12Z" fill="#000000"></path> <path d="M12 21C13.1046 21 14 20.1046 14 19C14 17.8954 13.1046 17 12 17C10.8954 17 10 17.8954 10 19C10 20.1046 10.8954 21 12 21Z" fill="#000000"></path> </g></svg>                      </div>
+                      </div>
+                    <% else %>
+                      <div class="flex align items-center max-w-full px-6 pr-0 pl-0 bg-red-400  rounded-r-lg  ">
+                        <div class="w-9 h-9 shrink-0">
+                          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 5C14 6.10457 13.1046 7 12 7C10.8954 7 10 6.10457 10 5C10 3.89543 10.8954 3 12 3C13.1046 3 14 3.89543 14 5Z" fill="#000000"></path> <path d="M14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12Z" fill="#000000"></path> <path d="M12 21C13.1046 21 14 20.1046 14 19C14 17.8954 13.1046 17 12 17C10.8954 17 10 17.8954 10 19C10 20.1046 10.8954 21 12 21Z" fill="#000000"></path> </g></svg>                      </div>
+                      </div>
+                    <% end %>
                   </div>
-                  <% if challenge.user_option.content == challenge.question.correct_option.content %>
-                    <div class="flex align items-center max-w-full content-cen px-6 pr-0 pl-0 bg-green-300  rounded-r-lg  ">
-                      <div class="w-9 h-9 shrink-0">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 5C14 6.10457 13.1046 7 12 7C10.8954 7 10 6.10457 10 5C10 3.89543 10.8954 3 12 3C13.1046 3 14 3.89543 14 5Z" fill="#000000"></path> <path d="M14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12Z" fill="#000000"></path> <path d="M12 21C13.1046 21 14 20.1046 14 19C14 17.8954 13.1046 17 12 17C10.8954 17 10 17.8954 10 19C10 20.1046 10.8954 21 12 21Z" fill="#000000"></path> </g></svg>                      </div>
-                    </div>
-                  <% else %>
-                    <div class="flex align items-center max-w-full px-6 pr-0 pl-0 bg-red-300  rounded-r-lg  ">
-                      <div class="w-9 h-9 shrink-0">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14 5C14 6.10457 13.1046 7 12 7C10.8954 7 10 6.10457 10 5C10 3.89543 10.8954 3 12 3C13.1046 3 14 3.89543 14 5Z" fill="#000000"></path> <path d="M14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12Z" fill="#000000"></path> <path d="M12 21C13.1046 21 14 20.1046 14 19C14 17.8954 13.1046 17 12 17C10.8954 17 10 17.8954 10 19C10 20.1046 10.8954 21 12 21Z" fill="#000000"></path> </g></svg>                      </div>
-                    </div>
-                  <% end %>
-                </div>
-              </button>
-            </h2>
-            <div id="accordion-color-body-1<%= index %>" class="hidden" aria-labelledby="accordion-color-heading-1<%= index %>">
-              <div class="flex flex-col p-3 mb-0">
-                <div class="flex flex-row">
-                </div>
-                <div>
-                  <p class="text-gray-500  font-semi-bold dark:text-gray-400 mb-0"> Description: <%= challenge.question.content %> </p>
+                </button>
+              </h2>
+              <div id="accordion-color-body-1<%= index %>" class="hidden" aria-labelledby="accordion-color-heading-1<%= index %>">
+                <div class="flex flex-col p-3 mb-0">
+                  <div class="flex flex-row">
+                  </div>
+                  <div>
+                    <p class="text-gray-500  font-semi-bold dark:text-gray-400 mb-0"> Description: <%= challenge.question.content %> </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
+</div>

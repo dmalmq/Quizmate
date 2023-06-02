@@ -12,3 +12,6 @@ application.register("menu", MenuController)
 
 import BarChartController from "./bar_chart_controller"
 application.register("bar-chart", BarChartController)
+
+import CounterController from "./counter_controller"
+application.register("counter", CounterController)

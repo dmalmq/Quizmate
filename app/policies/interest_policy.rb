@@ -1,11 +1,14 @@
 class InterestPolicy < ApplicationPolicy
-
   def show?
     record.user == user
   end
 
   def create?
     user
+  end
+
+  def update?
+    record.user == user
   end
 
   def destroy?
