@@ -1,9 +1,9 @@
 class QuizzesController < ApplicationController
   def index
     @quizzes = policy_scope(Quiz)
-    @interests = Interest.all
-    @questions = Question.all
-    @challenges = Challenge.all
+    @interests = Interest.where(user: current_user)
+    @questions = Question.where(user: current_user)
+    @challenges = current_user.quizzes.all
     stats(@interests)
     @user = current_user
     @interests = @interests.sort_by { |interest| interest.corrected_percentage }.reverse
