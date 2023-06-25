@@ -23,4 +23,4 @@ After the quiz there is a summary showing how well the user did and each questio
 
 The user can access their stats by pressing the "book" icon furthest to the rightin the menu.
 The app was made as a mobile first web application and therefor the experience on a mobile is preferable.
-If you would like to try out this application feel free to create an account.
+If you would like to try out this application feel free to create an account here: [Quizmate](https://www.quizmate.tech)
