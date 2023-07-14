@@ -1,6 +1,6 @@
 # Quizmate
 
-A Ruby on Rails app that lets you generate quizzes based on your interests, the app uses the GPT-3 API to generate questions in the background using sidekiq. This was the final project at Le Wagoh, Tokyo and it was made over the course of two weeks.
+A Ruby on Rails app that lets you generate quizzes based on your interests, the app uses the GPT-3 API to generate questions in the background using sidekiq. This was the final project at Le Wagon, Tokyo and it was made over the course of two weeks.
 
 ## Dashboard:
 ![dashboard](https://github.com/dmalmq/Quizmate/assets/1062376/158c88af-f2cb-4da8-90b9-476f42eac4f6)
